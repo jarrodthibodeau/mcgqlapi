@@ -17,6 +17,7 @@
     "graphql": "^14.5.7"
   },
   "devDependencies": {
+    "apollo-server-testing": "^2.9.6",
     "nodemon": "^1.19.2"
   }
 }
