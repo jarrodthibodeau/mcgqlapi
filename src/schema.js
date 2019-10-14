@@ -8,7 +8,7 @@ module.exports = gql`
         albums(input: [Album!]): [AlbumInfo]
         movie(input: Movie!): MovieInfo,
         movies(input: [Movie!]): [MovieInfo],
-        tv(input: TVShow!): TVShowInfo,
+        tvshow(input: TVShow!): TVShowInfo,
         tvshows(input: [TVShow!]): [TVShowInfo]
     }
 

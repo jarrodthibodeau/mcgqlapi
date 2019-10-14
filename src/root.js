@@ -44,7 +44,7 @@ module.exports = {
 
             return metaMovies;
         },
-        tv: (_, { input }) => {
+        tvshow: (_, { input }) => {
             return getTVInfo(input);
         },
         tvshows: async (_, { input }) => {
