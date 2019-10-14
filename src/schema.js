@@ -9,9 +9,7 @@ module.exports = gql`
         movie(input: Movie!): MovieInfo,
         movies(input: [Movie!]): [MovieInfo],
         tv(input: TVShow!): TVShowInfo,
-        tvshows(input: [TVShow!]): [TVShowInfo],
-        person(inpupt: [Person!]) PersonInfo,
-        company(input: Company): CompanyInfo!
+        tvshows(input: [TVShow!]): [TVShowInfo]
     }
 
     type GameInfo {
@@ -49,10 +47,10 @@ module.exports = gql`
         numOfPositiveCriticReviews: Int,
         numOfMixedCriticReviews: Int
         numOfNegativeCriticReviews: Int,
-        numOfUserReviews: Int,
-        numOfPositiveUserReviews: Int,
-        numOfMixedUserReviews: Int,
-        numOfNegativeUserReviews: Int
+        numOfWrittenUserReviews: Int,
+        numOfWrittenPositiveUserReviews: Int,
+        numOfWrittenMixedUserReviews: Int,
+        numOfWrittenNegativeUserReviews: Int
     }
 
     input Album {
@@ -103,37 +101,6 @@ module.exports = gql`
 
     input TVShow {
         title: String!,
-        season: String,
+        season: String
     }
-
-    // type PersonInfo {
-    //     name: String,
-    //     bio: String,
-    //     averageCareerScore: Int,
-    //     numOfPositiveProjects: Int,
-    //     numOfAverageProjects: Int
-    //     numOfNegativeProjects, Int,
-    //     highestRatedProject: String,
-    //     lowestRatedProject: String
-    // }
-
-    // input Person {
-    //     name: String!,
-    //     mediaType: String
-    // }
-
-    // type CompanyInfo {
-    //     name: String
-    //     averageCareerScore: Int,
-    //     numOfPositiveProjects: Int,
-    //     numOfAverageProjects: Int
-    //     numOfNegativeProjects, Int,
-    //     highestRatedProject: String,
-    //     lowestRatedProject: String
-    // }
-
-    // input Company {
-    //     name: String!,
-    //     mediaType: String
-    // }
 `;

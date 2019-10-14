@@ -50,10 +50,10 @@ module.exports = function getAlbumInfo({artist, album}) {
                     numOfPositiveCriticReviews: reviewCount[0],
                     numOfMixedCriticReviews: reviewCount[1],
                     numOfNegativeCriticReviews: reviewCount[2],
-                    numOfUserReviews: reviewCount[3] + reviewCount[4] + reviewCount[5],
-                    numOfPositiveUserReviews: reviewCount[3],
-                    numOfMixedUserReviews: reviewCount[4],
-                    numOfNegativeUserReviews: reviewCount[5]
+                    numOfWrittenUserReviews: reviewCount[3] + reviewCount[4] + reviewCount[5],
+                    numOfWrittenPositiveUserReviews: reviewCount[3],
+                    numOfWrittenMixedUserReviews: reviewCount[4],
+                    numOfWrittenNegativeUserReviews: reviewCount[5]
                 });
             });
         });
