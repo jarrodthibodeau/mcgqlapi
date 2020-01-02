@@ -6,6 +6,8 @@ const getAlbumInfo = require('./actions/get-album-info');
 const getMovieInfo = require('./actions/get-movie-info');
 const getTVInfo = require('./actions/get-tv-info');
 
+
+//TODO: condense into spreading the arrays
 module.exports = {
     Query: {
         game: (_, { input }) => {

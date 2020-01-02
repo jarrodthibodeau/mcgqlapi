@@ -89,8 +89,6 @@ describe('Game', () => {
             game
         } = gameQueryResult.data;
 
-        console.log(game);
-
         game.title.should.equal('Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition');
         game.console.should.equal('Switch');
         game.criticScore.should.be.a('number');
