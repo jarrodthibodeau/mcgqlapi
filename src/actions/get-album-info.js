@@ -4,7 +4,6 @@ const cheerio = require('cheerio');
 module.exports = function getAlbumInfo({artist, album}) {
     return new Promise((resolve, reject) => {
         const metaAlbum = album.replace(/:|'|!|"|¿/g, '');
-
         const url = `https://www.metacritic.com/music/${metaAlbum.split(' ').join('-').toLowerCase()}/${artist.split(' ').join('-').toLowerCase()}`;
 
         https.get(url, (res) => {
@@ -16,7 +15,7 @@ module.exports = function getAlbumInfo({artist, album}) {
 
             res.on('end', () => {
                 const $ = cheerio.load(html);
-                const criticScore = parseInt($('[itemprop=ratingValue]').text());
+                const criticScore = parseInt($('.metascore_w.album > span').text());
                 const genres = $('.product_genre > .data');
                 const userScore = parseFloat($('.metascore_w.user').text()).toFixed(1);
                 const developer = $('.developer > .data').text().trim();

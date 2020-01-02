@@ -16,7 +16,7 @@ module.exports = function getGameInfo({ title, console }) {
 
             res.on('end', () => {
                 const $ = cheerio.load(html);
-                const criticScore = parseInt($('[itemprop=ratingValue]').text());
+                const criticScore = parseInt($('.metascore_w.game > span').text());
                 const genres = $('.product_genre > .data');
                 const userScore = parseFloat($('.metascore_w.user').text()).toFixed(1);
                 const developer = $('.developer > .data').text().trim();

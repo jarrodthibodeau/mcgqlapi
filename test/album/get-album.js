@@ -40,6 +40,8 @@ describe(('Album'), () => {
             album
         } = albumQueryResult.data;
 
+        console.log(albumQueryResult.data);
+
         album.artist.should.equal('Danny Brown');
         album.album.should.equal('uknowhatimsayin¿');
         album.genres.should.equal('Rap'); 
