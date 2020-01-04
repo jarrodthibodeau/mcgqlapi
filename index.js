@@ -7,3 +7,5 @@ const server = new ApolloServer({ typeDefs: schema, resolvers: root });
 server.listen().then(() => {
     console.log('Metacritic GraphQL API running on port 4000');
 });
+
+module.exports = server;

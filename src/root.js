@@ -1,6 +1,3 @@
-const https = require('https');
-const cheerio = require('cheerio');
-
 const getGameInfo = require('./actions/get-game-info');
 const getAlbumInfo = require('./actions/get-album-info');
 const getMovieInfo = require('./actions/get-movie-info');
@@ -12,49 +9,25 @@ module.exports = {
             return getGameInfo(input);
         },
         games: async (_, { input } ) => {
-            const metaGames = [];
-
-            for (const game of input) {
-                metaGames.push(await getGameInfo(game));
-            }
-
-            return metaGames;
+            return Promise.all(input.map(game => getGameInfo(game)));
         },
         album: (_, { input } ) => {
-           return getAlbumInfo(input);
+            return getAlbumInfo(input);
         },
         albums: async (_, { input } ) => {
-            const metaAlbums = [];
-
-            for (const album of input) {
-                metaAlbums.push(await getAlbumInfo(album));
-            }
-
-            return metaAlbums;
+            return Promise.all(input.map(album => getAlbumInfo(album)));
         },
         movie: (_, { input }) => {
             return getMovieInfo(input);
         },
         movies: async (_, { input }) => {
-            const metaMovies = [];
-
-            for (const movie of input) {
-                metaMovies.push(await getMovieInfo(movie));
-            }
-
-            return metaMovies;
+            return Promise.all(input.map(movie => getMovieInfo(movie)));
         },
-        tv: (_, { input }) => {
+        tvshow: (_, { input }) => {
             return getTVInfo(input);
         },
         tvshows: async (_, { input }) => {
-            const metaShows = [];
-
-            for (const show of input) {
-                metaShows.push(await getTVInfo(show));
-            }
-
-            return metaShows;
+            return Promise.all(input.map(tvshow => getTVInfo(tvshow)));
         }
     }  
 };

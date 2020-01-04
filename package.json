@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx nodemon ./index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx mocha --opts .mocharc ./test"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,9 @@
     "graphql": "^14.5.7"
   },
   "devDependencies": {
+    "apollo-server-testing": "^2.9.6",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.1",
     "nodemon": "^1.19.2"
   }
 }

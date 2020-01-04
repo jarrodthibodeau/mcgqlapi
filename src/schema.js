@@ -8,7 +8,7 @@ module.exports = gql`
         albums(input: [Album!]): [AlbumInfo]
         movie(input: Movie!): MovieInfo,
         movies(input: [Movie!]): [MovieInfo],
-        tv(input: TVShow!): TVShowInfo,
+        tvshow(input: TVShow!): TVShowInfo,
         tvshows(input: [TVShow!]): [TVShowInfo]
     }
 
@@ -47,10 +47,10 @@ module.exports = gql`
         numOfPositiveCriticReviews: Int,
         numOfMixedCriticReviews: Int
         numOfNegativeCriticReviews: Int,
-        numOfUserReviews: Int,
-        numOfPositiveUserReviews: Int,
-        numOfMixedUserReviews: Int,
-        numOfNegativeUserReviews: Int
+        numOfWrittenUserReviews: Int,
+        numOfWrittenPositiveUserReviews: Int,
+        numOfWrittenMixedUserReviews: Int,
+        numOfWrittenNegativeUserReviews: Int
     }
 
     input Album {
@@ -101,6 +101,6 @@ module.exports = gql`
 
     input TVShow {
         title: String!,
-        season: String,
+        season: String
     }
 `;
