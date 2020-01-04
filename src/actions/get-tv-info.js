@@ -1,44 +1,84 @@
 const https = require('https');
 const cheerio = require('cheerio');
 
-module.exports = function getTVInfo({ title, season }) {
-    return new Promise((resolve, reject) => {
-        const metaTitle = title.replace(/:|'|!|"|¿/g, '');
-        let url = `https://www.metacritic.com/tv/${metaTitle.split(' ').join('-').toLowerCase()}`;
+const {
+  isTitleSafeToWrite, 
+  stripTitle 
+} = require('../helpers/helpers');
 
-        if (season) {
-            url += `/season-${season}`; 
+const {
+  getItem,
+  saveItem
+} = require('../helpers/mongo');
+
+module.exports = function getTVInfo({ title, season }) {
+  return new Promise(async (resolve, reject) => {
+    let url = `https://www.metacritic.com/tv/${stripTitle(title)
+      .split(' ')
+      .join('-')
+      .toLowerCase()}`;
+
+    if (season) {
+      url += `/season-${season}`;
+    }
+
+    if (process.env.SAVE_TO_DB) {
+      // Will need to fix to include season
+      const tvshow = await getItem({ title, season }, 'tvshows');
+
+      if (tvshow) {
+        return resolve(tvshow);
+      }
+    }
+
+
+    https.get(url, res => {
+      let html = '';
+
+      res.on('data', chunk => {
+        html += chunk;
+      });
+
+      res.on('end', async () => {
+        const $ = cheerio.load(html);
+        const genres = $('.genres span:last-child');
+        const numOfEachReview = $('.count.fr');
+        const reviewCount = [];
+        const releaseDate = $('.release_date span:last-child').text();
+
+        for (let i = 0; i < numOfEachReview.length; i++) {
+          reviewCount.push(
+            parseInt(numOfEachReview[i].children[0].data.replace(',', ''))
+          );
         }
 
-        https.get(url, (res) => {
-            let html = '';
+        const tvShowInfo = {
+          title: title,
+          season: season ? season : 'all',
+          criticScore: parseInt(
+            $('.metascore_w.larger.tvshow')
+              .text()
+              .substr(0, 2)
+          ),
+          releaseDate,
+          genres: genres.text().trim(),
+          summary: $('.summary_deck span:last-child')
+            .text()
+            .trim(),
+          numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
+          numOfPositiveCriticReviews: reviewCount[0],
+          numOfMixedCriticReviews: reviewCount[1],
+          numOfNegativeCriticReviews: reviewCount[2]
+        }
 
-            res.on('data', (chunk) => {
-                html += chunk;
-            });
+        if (process.env.SAVE_TO_DB) {
+          if (isTitleSafeToWrite(releaseDate)) {
+            await saveItem(tvShowInfo, 'tvshows');
+          }
+        }
 
-            res.on('end', () => {
-                const $ = cheerio.load(html);
-                const genres = $('.genres span:last-child');
-                const numOfEachReview = $('.count.fr');
-                const reviewCount = [];
-
-                for (let i = 0; i < numOfEachReview.length; i++) {
-                    reviewCount.push(parseInt(numOfEachReview[i].children[0].data.replace(',', '')));
-                }
-
-                resolve({
-                    title: title,
-                    season: season ? season : 'all',
-                    criticScore: parseInt($('.metascore_w.larger.tvshow').text().substr(0 , 2)),
-                    genres: genres.text().trim(),
-                    summary: $('.summary_deck span:last-child').text().trim(),
-                    numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
-                    numOfPositiveCriticReviews: reviewCount[0],
-                    numOfMixedCriticReviews: reviewCount[1],
-                    numOfNegativeCriticReviews: reviewCount[2]
-                });
-            });
-        });
+        return resolve(tvShowInfo);
+      });
     });
-}
+  });
+};

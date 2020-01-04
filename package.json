@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx nodemon ./index.js",
-    "test": "npx mocha --opts .mocharc ./test"
+    "start": "ENVIRONMENT=prod npx nodemon ./index.js",
+    "test": "ENVIRONMENT=test npx mocha --opts .mocharc ./test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.9.4",
     "cheerio": "^1.0.0-rc.3",
+    "date-fns": "^2.8.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
-    "graphql": "^14.5.7"
+    "graphql": "^14.5.7",
+    "mongodb": "^3.4.1"
   },
   "devDependencies": {
     "apollo-server-testing": "^2.9.6",
