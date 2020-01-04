@@ -26,7 +26,6 @@ module.exports = function getMovieInfo({ title }) {
                 resolve({
                     title: title,
                     criticScore: parseInt($('.metascore_w.larger.movie').text().substr(0 , 2)),
-                    userScore: parseFloat($('.metascore_w.larger.user').text()).toFixed(1),
                     director: $('.director > a').text(),
                     runtime: $('.runtime span:last-child').text(),
                     rating: $('.rating span:last-child').text().trim(),
@@ -36,11 +35,7 @@ module.exports = function getMovieInfo({ title }) {
                     numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
                     numOfPositiveCriticReviews: reviewCount[0],
                     numOfMixedCriticReviews: reviewCount[1],
-                    numOfNegativeCriticReviews: reviewCount[2],
-                    numOfWrittenUserReviews: reviewCount[3] + reviewCount[4] + reviewCount[5],
-                    numOfWrittenPositiveUserReviews: reviewCount[3],
-                    numOfWrittenMixedUserReviews: reviewCount[4],
-                    numOfWrittenNegativeUserReviews: reviewCount[5]
+                    numOfNegativeCriticReviews: reviewCount[2]
                 });
             });
         });

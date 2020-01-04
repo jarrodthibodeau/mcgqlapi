@@ -12,8 +12,7 @@ describe('Movie', () => {
                     title,
                     director,
                     runtime
-                    criticScore,
-                    userScore
+                    criticScore
                 }
             }
         `;
@@ -33,6 +32,5 @@ describe('Movie', () => {
         movie.director.should.equal('Joon-ho Bong');
         movie.runtime.should.equal('132 min');
         movie.criticScore.should.be.a('number');
-        movie.userScore.should.be.a('number');
     });
 });

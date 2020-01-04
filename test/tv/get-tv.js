@@ -11,8 +11,7 @@ describe('TV Show', () => {
                 tvshow(input: $input) {
                     title,
                     season,
-                    criticScore,
-                    userScore
+                    criticScore
                 }
             }
         `;
@@ -32,6 +31,5 @@ describe('TV Show', () => {
         tvshow.title.should.equal('Genndy Tartakovsky\'s Primal');
         tvshow.season.should.equal('1');
         tvshow.criticScore.should.be.a('number');
-        tvshow.userScore.should.be.a('number');
     });
 });

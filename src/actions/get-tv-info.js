@@ -31,17 +31,12 @@ module.exports = function getTVInfo({ title, season }) {
                     title: title,
                     season: season ? season : 'all',
                     criticScore: parseInt($('.metascore_w.larger.tvshow').text().substr(0 , 2)),
-                    userScore: parseFloat($('.metascore_w.larger.user').text()).toFixed(1),
                     genres: genres.text().trim(),
                     summary: $('.summary_deck span:last-child').text().trim(),
                     numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
                     numOfPositiveCriticReviews: reviewCount[0],
                     numOfMixedCriticReviews: reviewCount[1],
-                    numOfNegativeCriticReviews: reviewCount[2],
-                    numOfWrittenUserReviews: reviewCount[3] + reviewCount[4] + reviewCount[5],
-                    numOfWrittenPositiveUserReviews: reviewCount[3],
-                    numOfWrittenMixedUserReviews: reviewCount[4],
-                    numOfWrittenNegativeUserReviews: reviewCount[5]
+                    numOfNegativeCriticReviews: reviewCount[2]
                 });
             });
         });

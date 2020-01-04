@@ -12,18 +12,13 @@ describe('Game', () => {
                     title,
                     console,
                     criticScore,
-                    userScore,
                     developer,
                     publisher,
                     genres,
                     numOfCriticReviews,
                     numOfPositiveCriticReviews,
                     numOfMixedCriticReviews,
-                    numOfNegativeCriticReviews,
-                    numOfWrittenUserReviews,
-                    numOfWrittenPositiveUserReviews,
-                    numOfWrittenMixedUserReviews,
-                    numOfWrittenNegativeUserReviews
+                    numOfNegativeCriticReviews
                 }
             }
         `;
@@ -46,7 +41,6 @@ describe('Game', () => {
         game.title.should.equal('Gears 5');
         game.console.should.equal('Xbox One');
         game.criticScore.should.be.a('number');
-        game.userScore.should.be.a('number');
         game.developer.should.equal('The Coalition');
         game.publisher.should.equal('Microsoft Game Studios, Xbox Game Studios');
         game.genres.should.equal('Action, Shooter, Third-Person, Arcade'); 
@@ -54,10 +48,6 @@ describe('Game', () => {
         game.numOfPositiveCriticReviews.should.be.a('number');
         game.numOfMixedCriticReviews.should.be.a('number');
         game.numOfNegativeCriticReviews.should.be.a('number');
-        game.numOfWrittenUserReviews.should.be.a('number');
-        game.numOfWrittenPositiveUserReviews.should.be.a('number');
-        game.numOfWrittenMixedUserReviews.should.be.a('number');
-        game.numOfWrittenNegativeUserReviews.should.be.a('number');
     });
 
     it ('should retrieve the information for a game with a weird title', async () => {
@@ -67,7 +57,6 @@ describe('Game', () => {
                     title,
                     console,
                     criticScore,
-                    userScore,
                     developer,
                     publisher,
                     genres
@@ -92,7 +81,6 @@ describe('Game', () => {
         game.title.should.equal('Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition');
         game.console.should.equal('Switch');
         game.criticScore.should.be.a('number');
-        game.userScore.should.be.a('number');
         game.developer.should.equal('Square Enix');
         game.publisher.should.equal('Square Enix, Nintendo');
         game.genres.should.equal('Role-Playing, Japanese-Style');

@@ -12,16 +12,11 @@ describe(('Album'), () => {
                     album
                     artist
                     criticScore
-                    userScore
                     genres
                     numOfCriticReviews
                     numOfPositiveCriticReviews
                     numOfMixedCriticReviews
                     numOfNegativeCriticReviews
-                    numOfWrittenUserReviews
-                    numOfWrittenPositiveUserReviews
-                    numOfWrittenMixedUserReviews
-                    numOfWrittenNegativeUserReviews
                 }
             }
         `;
@@ -44,14 +39,9 @@ describe(('Album'), () => {
         album.album.should.equal('uknowhatimsayin¿');
         album.genres.should.equal('Rap'); 
         album.criticScore.should.be.a('number');
-        album.userScore.should.be.a('number');
         album.numOfCriticReviews.should.be.a('number');
         album.numOfPositiveCriticReviews.should.be.a('number');
         album.numOfMixedCriticReviews.should.be.a('number');
         album.numOfNegativeCriticReviews.should.be.a('number');
-        album.numOfWrittenUserReviews.should.be.a('number');
-        album.numOfWrittenPositiveUserReviews.should.be.a('number');
-        album.numOfWrittenMixedUserReviews.should.be.a('number');
-        album.numOfWrittenNegativeUserReviews.should.be.a('number');
     });
 });

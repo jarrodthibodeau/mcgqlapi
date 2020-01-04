@@ -17,7 +17,6 @@ module.exports = function getAlbumInfo({artist, album}) {
                 const $ = cheerio.load(html);
                 const criticScore = parseInt($('.metascore_w.album > span').text());
                 const genres = $('.product_genre > .data');
-                const userScore = parseFloat($('.metascore_w.user').text()).toFixed(1);
                 const developer = $('.developer > .data').text().trim();
                 const publisher = $('.publisher > .data > a');
                 const numOfEachReview = $('.total > .count');
@@ -41,18 +40,13 @@ module.exports = function getAlbumInfo({artist, album}) {
                     artist: artist,
                     album: album,
                     criticScore,
-                    userScore,
                     developer,
                     publisher: publishers.join(', '),
                     genres: newGenres.join(', '),
                     numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
                     numOfPositiveCriticReviews: reviewCount[0],
                     numOfMixedCriticReviews: reviewCount[1],
-                    numOfNegativeCriticReviews: reviewCount[2],
-                    numOfWrittenUserReviews: reviewCount[3] + reviewCount[4] + reviewCount[5],
-                    numOfWrittenPositiveUserReviews: reviewCount[3],
-                    numOfWrittenMixedUserReviews: reviewCount[4],
-                    numOfWrittenNegativeUserReviews: reviewCount[5]
+                    numOfNegativeCriticReviews: reviewCount[2]
                 });
             });
         });
