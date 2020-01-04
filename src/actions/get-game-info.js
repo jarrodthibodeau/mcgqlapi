@@ -18,7 +18,6 @@ module.exports = function getGameInfo({ title, console }) {
                 const $ = cheerio.load(html);
                 const criticScore = parseInt($('.metascore_w.game > span').text());
                 const genres = $('.product_genre > .data');
-                const userScore = parseFloat($('.metascore_w.user').text()).toFixed(1);
                 const developer = $('.developer > .data').text().trim();
                 const publisher = $('.publisher > .data > a');
                 const numOfEachReview = $('.total > .count');
@@ -42,7 +41,6 @@ module.exports = function getGameInfo({ title, console }) {
                     title: title,
                     console: console,
                     criticScore,
-                    userScore,
                     developer,
                     publisher: publishers.join(', '),
                     genres: newGenres.join(', '),
@@ -50,10 +48,6 @@ module.exports = function getGameInfo({ title, console }) {
                     numOfPositiveCriticReviews: reviewCount[0],
                     numOfMixedCriticReviews: reviewCount[1],
                     numOfNegativeCriticReviews: reviewCount[2],
-                    numOfWrittenUserReviews: reviewCount[3] + reviewCount[4] + reviewCount[5],
-                    numOfWrittenPositiveUserReviews: reviewCount[3],
-                    numOfWrittenMixedUserReviews: reviewCount[4],
-                    numOfWrittenNegativeUserReviews: reviewCount[5]
                 });
             });
         });

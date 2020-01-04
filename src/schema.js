@@ -16,18 +16,13 @@ module.exports = gql`
         title: String,
         console: String,
         criticScore: Int,
-        userScore: Float,
         developer: String,
         publisher: String,
         genres: String,
         numOfCriticReviews: Int,
         numOfPositiveCriticReviews: Int,
         numOfMixedCriticReviews: Int
-        numOfNegativeCriticReviews: Int,
-        numOfWrittenUserReviews: Int,
-        numOfWrittenPositiveUserReviews: Int,
-        numOfWrittenMixedUserReviews: Int,
-        numOfWrittenNegativeUserReviews: Int
+        numOfNegativeCriticReviews: Int
     }
 
     input Game {
@@ -39,18 +34,13 @@ module.exports = gql`
         album: String,
         artist: String,
         criticScore: Int,
-        userScore: Float,
         developer: String,
         publisher: String,
         genres: String,
         numOfCriticReviews: Int,
         numOfPositiveCriticReviews: Int,
         numOfMixedCriticReviews: Int
-        numOfNegativeCriticReviews: Int,
-        numOfWrittenUserReviews: Int,
-        numOfWrittenPositiveUserReviews: Int,
-        numOfWrittenMixedUserReviews: Int,
-        numOfWrittenNegativeUserReviews: Int
+        numOfNegativeCriticReviews: Int
     }
 
     input Album {
@@ -61,7 +51,6 @@ module.exports = gql`
     type MovieInfo {
         title: String,
         criticScore: Int,
-        userScore: Float,
         director: String,
         genres: String,
         cast: String,
@@ -71,11 +60,7 @@ module.exports = gql`
         numOfCriticReviews: Int,
         numOfPositiveCriticReviews: Int,
         numOfMixedCriticReviews: Int
-        numOfNegativeCriticReviews: Int,
-        numOfWrittenUserReviews: Int,
-        numOfWrittenPositiveUserReviews: Int,
-        numOfWrittenMixedUserReviews: Int,
-        numOfWrittenNegativeUserReviews: Int
+        numOfNegativeCriticReviews: Int
     }
 
     input Movie {
@@ -86,17 +71,12 @@ module.exports = gql`
         title: String,
         season: String,
         criticScore: Int,
-        userScore: Float,
         genres: String,
         summary: String,
         numOfCriticReviews: Int,
         numOfPositiveCriticReviews: Int,
         numOfMixedCriticReviews: Int
-        numOfNegativeCriticReviews: Int,
-        numOfWrittenUserReviews: Int,
-        numOfWrittenPositiveUserReviews: Int,
-        numOfWrittenMixedUserReviews: Int,
-        numOfWrittenNegativeUserReviews: Int
+        numOfNegativeCriticReviews: Int
     }
 
     input TVShow {
