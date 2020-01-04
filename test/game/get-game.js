@@ -57,7 +57,6 @@ describe('Game', () => {
                     title,
                     console,
                     criticScore,
-                    userScore,
                     developer,
                     publisher,
                     genres
@@ -82,7 +81,6 @@ describe('Game', () => {
         game.title.should.equal('Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition');
         game.console.should.equal('Switch');
         game.criticScore.should.be.a('number');
-        game.userScore.should.be.a('number');
         game.developer.should.equal('Square Enix');
         game.publisher.should.equal('Square Enix, Nintendo');
         game.genres.should.equal('Role-Playing, Japanese-Style');

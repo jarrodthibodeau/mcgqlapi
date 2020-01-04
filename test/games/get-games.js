@@ -12,15 +12,10 @@ describe('Games', () => {
                     title,
                     console,
                     criticScore,
-                    userScore,
                     numOfCriticReviews,
                     numOfPositiveCriticReviews,
                     numOfMixedCriticReviews,
-                    numOfNegativeCriticReviews,
-                    numOfWrittenUserReviews,
-                    numOfWrittenPositiveUserReviews,
-                    numOfWrittenMixedUserReviews,
-                    numOfWrittenNegativeUserReviews
+                    numOfNegativeCriticReviews
                 }
             }
         `;
@@ -61,15 +56,10 @@ describe('Games', () => {
             game.title.should.equal(testGames[index].title);
             game.console.should.equal(testGames[index].console);
             game.criticScore.should.be.a('number');
-            game.userScore.should.be.a('number');
             game.numOfCriticReviews.should.be.a('number');
             game.numOfPositiveCriticReviews.should.be.a('number');
             game.numOfMixedCriticReviews.should.be.a('number');
             game.numOfNegativeCriticReviews.should.be.a('number');
-            game.numOfWrittenUserReviews.should.be.a('number');
-            game.numOfWrittenPositiveUserReviews.should.be.a('number');
-            game.numOfWrittenMixedUserReviews.should.be.a('number');
-            game.numOfWrittenNegativeUserReviews.should.be.a('number');
         });
     });
 });

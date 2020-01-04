@@ -12,15 +12,10 @@ describe('Albums', () => {
                     album
                     artist
                     criticScore
-                    userScore
                     numOfCriticReviews
                     numOfPositiveCriticReviews
                     numOfMixedCriticReviews
                     numOfNegativeCriticReviews
-                    numOfWrittenUserReviews
-                    numOfWrittenPositiveUserReviews
-                    numOfWrittenMixedUserReviews
-                    numOfWrittenNegativeUserReviews
                 }
             }
         `;
@@ -61,15 +56,10 @@ describe('Albums', () => {
             album.artist.should.equal(testAlbums[index].artist);
             album.album.should.equal(testAlbums[index].album);
             album.criticScore.should.be.a('number');
-            album.userScore.should.be.a('number');
             album.numOfCriticReviews.should.be.a('number');
             album.numOfPositiveCriticReviews.should.be.a('number');
             album.numOfMixedCriticReviews.should.be.a('number');
             album.numOfNegativeCriticReviews.should.be.a('number');
-            album.numOfWrittenUserReviews.should.be.a('number');
-            album.numOfWrittenPositiveUserReviews.should.be.a('number');
-            album.numOfWrittenMixedUserReviews.should.be.a('number');
-            album.numOfWrittenNegativeUserReviews.should.be.a('number');
         });
     });
 });
