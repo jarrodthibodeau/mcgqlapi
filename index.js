@@ -9,8 +9,8 @@ require('dotenv').config({
     path: path.resolve(__dirname, `./${process.env.ENVIRONMENT}.env`)
 });
 
-server.listen().then(() => {
-    console.log('Metacritic GraphQL API running on port 4000');
+server.listen({ port: 8081 }).then(() => {
+    console.log('Metacritic GraphQL API running on port 8081');
 });
 
 module.exports = server;
