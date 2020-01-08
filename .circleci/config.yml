@@ -20,7 +20,7 @@ jobs:
       - cli/install
       - run:
           name: Deploying
-          command: eb deploy metacritic-graphql-api 
+          command: eb deploy metacritic-graphql
 
 workflows:
   version: 2
