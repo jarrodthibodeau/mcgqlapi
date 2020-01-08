@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: metacritic-graphql-api
+    environment: MetacriticGraphql-env 
 global:
   application_name: metacritic-graphql-api
   default_ec2_keyname: XXXXXX
