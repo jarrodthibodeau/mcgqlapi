@@ -1,5 +1,10 @@
 # TODO
 
+## Fixes for this branch
+- Make tests better, not really sure how
+- Fix formatting issues with movies cast and genres
+- Find more bugs eventually
+
 ## Needed for MVP 
 - Hook up some sort of database to store information when necessary (to improve performance and reduce times requesting to website)
 - Figure out a way to ensure that tests also work and not give false positives

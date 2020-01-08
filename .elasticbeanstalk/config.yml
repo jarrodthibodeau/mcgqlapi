@@ -1,0 +1,9 @@
+branch-defaults:
+  master:
+    environment: metacritic-graphql-api
+global:
+  application_name: metacritic-graphql-api
+  default_ec2_keyname: XXXXXX
+  default_platform: Node.js running on 64bit Amazon Linux/4.12.0
+  default_region: us-east-1
+  sc: git
