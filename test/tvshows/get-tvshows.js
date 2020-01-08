@@ -4,7 +4,6 @@ const { should } = require('chai');
 
 should();
 
-// Running this is causing tests to fail, we will need to fix this
 describe('TV Shows', () => {
   it('should successfully retrieve information on multiple TV Shows', function (done) {
     const tvShowsQuery = gql`

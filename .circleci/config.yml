@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  cli: circleci/aws-cli@0.1.13
 jobs:
   build:
     docker:
@@ -11,3 +13,24 @@ jobs:
       - run:
           name: Run the tests
           command: npm test
+  deploy:
+    executor: cli/default
+    steps: 
+      - checkout 
+      - cli/install
+      - run:
+          name: Deploying
+          command: aws eb deploy metacritic-graphql-api 
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build 
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+    
