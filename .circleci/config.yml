@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  cli: sbc-orbs/awsebcli@0.0.3
+  awsebcli: sbc-orbs/awsebcli@0.0.3
 jobs:
   build:
     docker:
@@ -14,10 +14,10 @@ jobs:
           name: Run the tests
           command: npm test
   deploy:
-    executor: cli/default
+    executor: awsebcli/default
     steps: 
       - checkout 
-      - cli/install
+      - awsebcli/install
       - run:
           name: Deploying
           command: eb deploy metacritic-graphql-api 
