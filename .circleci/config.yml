@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  cli: circleci/aws-cli@0.1.13
+  cli: sbc-orbs/awsebcli@0.0.3
 jobs:
   build:
     docker:
@@ -20,7 +20,7 @@ jobs:
       - cli/install
       - run:
           name: Deploying
-          command: aws ebs deploy metacritic-graphql-api 
+          command: eb deploy metacritic-graphql-api 
 
 workflows:
   version: 2
