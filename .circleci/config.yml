@@ -10,9 +10,9 @@ jobs:
       - run:
           name: Installing Node Modules
           command: npm i
-      - run:
-          name: Run the tests
-          command: npm test
+      #- run:
+       #   name: Run the tests
+        #  command: npm test
   deploy:
     executor: cli/default
     steps: 
