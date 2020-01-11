@@ -11,8 +11,8 @@
 - Get HTTPS
 - Iron out business logic
 - Don't expose documentation site for apollo
-- Retry logic
-
+- Retry logic (done) (probably should run tests)
+ 
 ## Things that can be added afterwards
 - Supporting the various types
     - Publications
