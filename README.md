@@ -12,7 +12,7 @@
 - Iron out business logic (done)
 - Don't expose documentation site for apollo
 - Retry logic (done) (probably should make tests)
-- Figure out how to find configuration
+- Figure out how to find configuration (eb setenv seems like it shall work)
  
 ## Things that can be added afterwards
 - Supporting the various types
