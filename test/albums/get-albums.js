@@ -12,6 +12,7 @@ describe('Albums', () => {
           album
           artist
           criticScore
+          genres
           numOfCriticReviews
           numOfPositiveCriticReviews
           numOfMixedCriticReviews
@@ -56,6 +57,7 @@ describe('Albums', () => {
       album.artist.should.equal(testAlbums[index].artist);
       album.album.should.equal(testAlbums[index].album);
       album.criticScore.should.be.a('number');
+      album.genres.should.be.a('array');
       album.numOfCriticReviews.should.be.a('number');
       album.numOfPositiveCriticReviews.should.be.a('number');
       album.numOfMixedCriticReviews.should.be.a('number');

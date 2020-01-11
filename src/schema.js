@@ -18,7 +18,7 @@ module.exports = gql`
     criticScore: Int
     developer: String
     publisher: String
-    genres: String
+    genres: [String]
     numOfCriticReviews: Int
     numOfPositiveCriticReviews: Int
     numOfMixedCriticReviews: Int
@@ -36,7 +36,7 @@ module.exports = gql`
     criticScore: Int
     developer: String
     publisher: String
-    genres: String
+    genres: [String]
     numOfCriticReviews: Int
     numOfPositiveCriticReviews: Int
     numOfMixedCriticReviews: Int
@@ -52,8 +52,8 @@ module.exports = gql`
     title: String
     criticScore: Int
     director: String
-    genres: String
-    cast: String
+    genres: [String]
+    cast: [String]
     rating: String
     runtime: String
     summary: String
@@ -71,7 +71,7 @@ module.exports = gql`
     title: String
     season: String
     criticScore: Int
-    genres: String
+    genres: [String]
     summary: String
     numOfCriticReviews: Int
     numOfPositiveCriticReviews: Int

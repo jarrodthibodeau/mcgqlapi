@@ -10,7 +10,9 @@ describe('Movies', () => {
       query($input: [Movie!]) {
         movies(input: $input) {
           title
-          criticScore
+          criticScore,
+          cast,
+          genres
         }
       }
     `;
@@ -35,6 +37,8 @@ describe('Movies', () => {
     movies.forEach((movie, index) => {
       movie.title.should.equal(testMovies[index].title);
       movie.criticScore.should.be.a('number');
+      movie.cast.should.be.a('array');
+      movie.genres.should.be.a('array');
     });
   });
 });

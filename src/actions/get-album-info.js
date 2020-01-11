@@ -35,7 +35,8 @@ module.exports = function getAlbumInfo({ artist, album }) {
 
       const $ = cheerio.load(html);
       const criticScore = parseInt($('.metascore_w.album > span').text());
-      const genres = $('.product_genre > .data');
+      const genreList = $('.product_genre > .data');
+      const genres = [];
       const developer = $('.developer > .data')
         .text()
         .trim();
@@ -43,7 +44,6 @@ module.exports = function getAlbumInfo({ artist, album }) {
       const numOfEachReview = $('.total > .count');
       const releaseDate = $('.release > .data').text();
       const reviewCount = [];
-      const newGenres = [];
       const publishers = [];
 
       for (let i = 0; i < numOfEachReview.length; i++) {
@@ -52,8 +52,8 @@ module.exports = function getAlbumInfo({ artist, album }) {
         );
       }
 
-      for (let i = 0; i < genres.length; i++) {
-        newGenres.push(genres[i].children[0].data);
+      for (let i = 0; i < genreList.length; i++) {
+        genres.push(genreList[i].children[0].data);
       }
 
       for (let i = 0; i < publisher.length; i++) {
@@ -66,7 +66,7 @@ module.exports = function getAlbumInfo({ artist, album }) {
         criticScore,
         developer,
         publisher: publishers.join(', '),
-        genres: newGenres.join(', '),
+        genres,
         releaseDate,
         numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
         numOfPositiveCriticReviews: reviewCount[0],

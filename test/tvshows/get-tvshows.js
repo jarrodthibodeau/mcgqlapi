@@ -12,6 +12,7 @@ describe('TV Shows', () => {
           title
           season
           criticScore
+          genres
         }
       }
     `;
@@ -52,6 +53,7 @@ describe('TV Shows', () => {
       tvShow.title.should.equal(testTVShows[index].title);
       tvShow.season.should.equal(testTVShows[index].season);
       tvShow.criticScore.should.be.a('number');
+      tvShow.genres.should.be.a('array');
     });
   });
 });

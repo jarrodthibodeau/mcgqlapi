@@ -12,6 +12,7 @@ describe('Games', () => {
           title
           console
           criticScore
+          genres
           numOfCriticReviews
           numOfPositiveCriticReviews
           numOfMixedCriticReviews
@@ -56,6 +57,7 @@ describe('Games', () => {
       game.title.should.equal(testGames[index].title);
       game.console.should.equal(testGames[index].console);
       game.criticScore.should.be.a('number');
+      game.genres.should.be.a('array');
       game.numOfCriticReviews.should.be.a('number');
       game.numOfPositiveCriticReviews.should.be.a('number');
       game.numOfMixedCriticReviews.should.be.a('number');

@@ -35,7 +35,7 @@ describe('Album', () => {
 
     album.artist.should.equal('Danny Brown');
     album.album.should.equal('uknowhatimsayin¿');
-    album.genres.should.equal('Rap');
+    album.genres.should.be.a('array');
     album.criticScore.should.be.a('number');
     album.numOfCriticReviews.should.be.a('number');
     album.numOfPositiveCriticReviews.should.be.a('number');
