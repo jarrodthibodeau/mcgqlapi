@@ -4,14 +4,14 @@ async function get(url, attemptNumber = 1) {
   try {
     const response = await fetch(url);
     return response.text();
-} catch (err) {
+  } catch (err) {
     console.warn(`Attempt #${attemptNumber} failed. Reason: `, err);
 
     if (attemptNumber === 3) {
       throw new Error('Attempt to get information failed');
     }
 
-    this.get(url, attemptNumber += 1);
+    return get(url, attemptNumber += 1);
   }
 }
 
