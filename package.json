@@ -7,7 +7,7 @@
     "start": "ENVIRONMENT=prod npx nodemon ./index.js",
     "test": "ENVIRONMENT=test npx mocha --opts .mocharc ./test"
   },
-  "author": "",
+  "author": "Jarrod Thibodeau",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.9.4",

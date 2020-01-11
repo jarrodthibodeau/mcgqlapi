@@ -7,7 +7,7 @@ function isTitleSafeToSave(titleReleaseDate) {
     Date.now(),
     new Date(titleReleaseDate)
   );
-  return daysSinceRelease >= process.env.DAYS_TIL_WRITE_TO_DB;
+  return daysSinceRelease >= process.env.DAYS_TIL_SAVE_TO_DB;
 }
 
 function stripTitle(title) {
