@@ -5,7 +5,7 @@ const { should } = require('chai');
 should();
 
 describe('Games', () => {
-  it('should successfully retrieve information on multiple games', (done) => {
+  it('should successfully retrieve information on multiple games', async () => {
     const gamesQuery = gql`
       query($input: [Game!]) {
         games(input: $input) {
@@ -42,29 +42,24 @@ describe('Games', () => {
         console: 'iOS'
       }
     ];
+    
+    const gamesQueryResult = await query({
+      query: gamesQuery,
+      variables: {
+        input: testGames
+      }
+    });
 
-    setTimeout(async () => {
-      const gamesQueryResult = await query({
-        query: gamesQuery,
-        variables: {
-          input: testGames
-        }
-      });
-  
-      const { games } = gamesQueryResult.data;
-  
-      games.forEach((game, index) => {
-        game.title.should.equal(testGames[index].title);
-        game.console.should.equal(testGames[index].console);
-        game.criticScore.should.be.a('number');
-        game.numOfCriticReviews.should.be.a('number');
-        game.numOfPositiveCriticReviews.should.be.a('number');
-        game.numOfMixedCriticReviews.should.be.a('number');
-        game.numOfNegativeCriticReviews.should.be.a('number');
-      });
+    const { games } = gamesQueryResult.data;
 
-      done();
-    }, 15000);
-
+    games.forEach((game, index) => {
+      game.title.should.equal(testGames[index].title);
+      game.console.should.equal(testGames[index].console);
+      game.criticScore.should.be.a('number');
+      game.numOfCriticReviews.should.be.a('number');
+      game.numOfPositiveCriticReviews.should.be.a('number');
+      game.numOfMixedCriticReviews.should.be.a('number');
+      game.numOfNegativeCriticReviews.should.be.a('number');
+    });
   });
 });

@@ -5,7 +5,7 @@ const { should } = require('chai');
 should();
 
 describe('Movies', () => {
-  it('should successfully retrieve information on multiple movies', (done) => {
+  it('should successfully retrieve information on multiple movies', async () => {
     const moviesQuery = gql`
       query($input: [Movie!]) {
         movies(input: $input) {
@@ -23,23 +23,18 @@ describe('Movies', () => {
       { title: 'Toy Story 2' }
     ];
 
-    setTimeout(async () => {
-      const moviesQueryResult = await query({
-        query: moviesQuery,
-        variables: {
-          input: testMovies
-        }
-      });
-  
-      const { movies } = moviesQueryResult.data;
-  
-      movies.forEach((movie, index) => {
-        movie.title.should.equal(testMovies[index].title);
-        movie.criticScore.should.be.a('number');
-      });
+    const moviesQueryResult = await query({
+      query: moviesQuery,
+      variables: {
+        input: testMovies
+      }
+    });
 
-      done();
-    }, 15000)
+    const { movies } = moviesQueryResult.data;
 
+    movies.forEach((movie, index) => {
+      movie.title.should.equal(testMovies[index].title);
+      movie.criticScore.should.be.a('number');
+    });
   });
 });

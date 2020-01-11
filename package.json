@@ -17,7 +17,8 @@
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.7",
-    "mongodb": "^3.4.1"
+    "mongodb": "^3.4.1",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "apollo-server-testing": "^2.9.6",

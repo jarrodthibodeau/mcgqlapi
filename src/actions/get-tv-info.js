@@ -1,4 +1,3 @@
-const https = require('https');
 const cheerio = require('cheerio');
 
 const {
@@ -10,6 +9,8 @@ const {
   getItem,
   saveItem
 } = require('../helpers/mongo');
+
+const { get } = require('../helpers/request');
 
 module.exports = function getTVInfo({ title, season }) {
   return new Promise(async (resolve, reject) => {
@@ -23,7 +24,6 @@ module.exports = function getTVInfo({ title, season }) {
     }
 
     if (process.env.SAVE_TO_DB) {
-      // Will need to fix to include season
       const tvshow = await getItem({ title, season }, 'tvshows');
 
       if (tvshow) {
@@ -31,54 +31,49 @@ module.exports = function getTVInfo({ title, season }) {
       }
     }
 
+    try {
+      const html = await get(url, 1);
 
-    https.get(url, res => {
-      let html = '';
+      const $ = cheerio.load(html);
+      const genres = $('.genres span:last-child');
+      const numOfEachReview = $('.count.fr');
+      const reviewCount = [];
+      const releaseDate = $('.release_date span:last-child').text();
 
-      res.on('data', chunk => {
-        html += chunk;
-      });
+      for (let i = 0; i < numOfEachReview.length; i++) {
+        reviewCount.push(
+          parseInt(numOfEachReview[i].children[0].data.replace(',', ''))
+        );
+      }
 
-      res.on('end', async () => {
-        const $ = cheerio.load(html);
-        const genres = $('.genres span:last-child');
-        const numOfEachReview = $('.count.fr');
-        const reviewCount = [];
-        const releaseDate = $('.release_date span:last-child').text();
-
-        for (let i = 0; i < numOfEachReview.length; i++) {
-          reviewCount.push(
-            parseInt(numOfEachReview[i].children[0].data.replace(',', ''))
-          );
-        }
-
-        const tvShowInfo = {
-          title: title,
-          season: season ? season : 'all',
-          criticScore: parseInt(
-            $('.metascore_w.larger.tvshow')
-              .text()
-              .substr(0, 2)
-          ),
-          releaseDate,
-          genres: genres.text().trim(),
-          summary: $('.summary_deck span:last-child')
+      const tvShowInfo = {
+        title: title,
+        season: season ? season : 'all',
+        criticScore: parseInt(
+          $('.metascore_w.larger.tvshow')
             .text()
-            .trim(),
-          numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
-          numOfPositiveCriticReviews: reviewCount[0],
-          numOfMixedCriticReviews: reviewCount[1],
-          numOfNegativeCriticReviews: reviewCount[2]
-        }
+            .substr(0, 2)
+        ),
+        releaseDate,
+        genres: genres.text().trim(),
+        summary: $('.summary_deck span:last-child')
+          .text()
+          .trim(),
+        numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
+        numOfPositiveCriticReviews: reviewCount[0],
+        numOfMixedCriticReviews: reviewCount[1],
+        numOfNegativeCriticReviews: reviewCount[2]
+      }
 
-        if (process.env.SAVE_TO_DB) {
-          if (isTitleSafeToWrite(releaseDate)) {
-            await saveItem(tvShowInfo, 'tvshows');
-          }
+      if (process.env.SAVE_TO_DB) {
+        if (isTitleSafeToWrite(releaseDate)) {
+          await saveItem(tvShowInfo, 'tvshows');
         }
+      }
 
-        return resolve(tvShowInfo);
-      });
-    });
+      return resolve(tvShowInfo)
+    } catch(err) {
+      return reject(err);
+    }
   });
 };
