@@ -1,14 +1,8 @@
 const cheerio = require('cheerio');
 
-const {
-  isTitleSafeToWrite, 
-  stripTitle 
-} = require('../helpers/helpers');
+const { isTitleSafeToWrite, stripTitle } = require('../helpers/helpers');
 
-const {
-  getItem,
-  saveItem
-} = require('../helpers/mongo');
+const { getItem, saveItem } = require('../helpers/mongo');
 
 const { get } = require('../helpers/request');
 
@@ -35,7 +29,8 @@ module.exports = function getTVInfo({ title, season }) {
       const html = await get(url, 1);
 
       const $ = cheerio.load(html);
-      const genres = $('.genres span:last-child');
+      const genreList = $('.genres span:last-child');
+      const genres = [];
       const numOfEachReview = $('.count.fr');
       const reviewCount = [];
       const releaseDate = $('.release_date span:last-child').text();
@@ -44,6 +39,11 @@ module.exports = function getTVInfo({ title, season }) {
         reviewCount.push(
           parseInt(numOfEachReview[i].children[0].data.replace(',', ''))
         );
+      }
+
+      // [0] is \n
+      for (let i = 1; i < genreList.length; i++) {
+        genres.push(genreList[i].children[0].data);
       }
 
       const tvShowInfo = {
@@ -55,7 +55,7 @@ module.exports = function getTVInfo({ title, season }) {
             .substr(0, 2)
         ),
         releaseDate,
-        genres: genres.text().trim(),
+        genres,
         summary: $('.summary_deck span:last-child')
           .text()
           .trim(),
@@ -63,7 +63,7 @@ module.exports = function getTVInfo({ title, season }) {
         numOfPositiveCriticReviews: reviewCount[0],
         numOfMixedCriticReviews: reviewCount[1],
         numOfNegativeCriticReviews: reviewCount[2]
-      }
+      };
 
       if (process.env.SAVE_TO_DB) {
         if (isTitleSafeToWrite(releaseDate)) {
@@ -71,8 +71,8 @@ module.exports = function getTVInfo({ title, season }) {
         }
       }
 
-      return resolve(tvShowInfo)
-    } catch(err) {
+      return resolve(tvShowInfo);
+    } catch (err) {
       return reject(err);
     }
   });

@@ -40,7 +40,7 @@ describe('Game', () => {
     game.criticScore.should.be.a('number');
     game.developer.should.equal('The Coalition');
     game.publisher.should.equal('Microsoft Game Studios, Xbox Game Studios');
-    game.genres.should.equal('Action, Shooter, Third-Person, Arcade');
+    game.genres.should.be.a('array');
     game.numOfCriticReviews.should.be.a('number');
     game.numOfPositiveCriticReviews.should.be.a('number');
     game.numOfMixedCriticReviews.should.be.a('number');
@@ -75,6 +75,8 @@ describe('Game', () => {
     
     const { game } = gameQueryResult.data;
 
+    console.log(game.genres);
+
     game.title.should.equal(
       'Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition'
     );
@@ -82,6 +84,6 @@ describe('Game', () => {
     game.criticScore.should.be.a('number');
     game.developer.should.equal('Square Enix');
     game.publisher.should.equal('Square Enix, Nintendo');
-    game.genres.should.equal('Role-Playing, Japanese-Style');
+    game.genres.should.be.a('array');
   });
 });
