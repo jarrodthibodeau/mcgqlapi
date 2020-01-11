@@ -5,7 +5,7 @@ const { should } = require('chai');
 should();
 
 describe('TV Shows', () => {
-  it('should successfully retrieve information on multiple TV Shows', function (done) {
+  it('should successfully retrieve information on multiple TV Shows', async () => {
     const tvShowsQuery = gql`
       query($input: [TVShow!]) {
         tvshows(input: $input) {
@@ -39,23 +39,19 @@ describe('TV Shows', () => {
       }
     ];
 
-    setTimeout(async () => {
-      const tvShowsQueryResult = await query({
-        query: tvShowsQuery,
-        variables: {
-          input: testTVShows
-        }
-      });
-  
-      const { tvshows: tvShows } = tvShowsQueryResult.data;
-  
-      tvShows.forEach((tvShow, index) => {
-        tvShow.title.should.equal(testTVShows[index].title);
-        tvShow.season.should.equal(testTVShows[index].season);
-        tvShow.criticScore.should.be.a('number');
-      });
+    const tvShowsQueryResult = await query({
+      query: tvShowsQuery,
+      variables: {
+        input: testTVShows
+      }
+    });
 
-      done();
-    }, 15000)
+    const { tvshows: tvShows } = tvShowsQueryResult.data;
+
+    tvShows.forEach((tvShow, index) => {
+      tvShow.title.should.equal(testTVShows[index].title);
+      tvShow.season.should.equal(testTVShows[index].season);
+      tvShow.criticScore.should.be.a('number');
+    });
   });
 });

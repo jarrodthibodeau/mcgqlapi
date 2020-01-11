@@ -1,4 +1,3 @@
-const https = require('https');
 const cheerio = require('cheerio');
 
 const {
@@ -11,6 +10,8 @@ const {
   saveItem
 } = require('../helpers/mongo');
 
+const { get } = require('../helpers/request'); 
+
 module.exports = function getAlbumInfo({ artist, album }) {
   return new Promise(async (resolve, reject) => {
     const url = `https://www.metacritic.com/music/${stripTitle(album)
@@ -22,72 +23,66 @@ module.exports = function getAlbumInfo({ artist, album }) {
       .toLowerCase()}`;
 
     if (process.env.SAVE_TO_DB) {
-      // Will need to update to include artist
-      const musicAlbum = await getItem({album, artist}, 'albums');
+      const musicAlbum = await getItem({ album, artist }, 'albums');
 
       if (musicAlbum) {
         return resolve(musicAlbum);
       }
-
     }
 
-    https.get(url, res => {
-      let html = '';
+    try {
+      const html = await get(url, 1);
 
-      res.on('data', chunk => {
-        html += chunk;
-      });
+      const $ = cheerio.load(html);
+      const criticScore = parseInt($('.metascore_w.album > span').text());
+      const genres = $('.product_genre > .data');
+      const developer = $('.developer > .data')
+        .text()
+        .trim();
+      const publisher = $('.publisher > .data > a');
+      const numOfEachReview = $('.total > .count');
+      const releaseDate = $('.release > .data').text();
+      const reviewCount = [];
+      const newGenres = [];
+      const publishers = [];
 
-      res.on('end', async () => {
-        const $ = cheerio.load(html);
-        const criticScore = parseInt($('.metascore_w.album > span').text());
-        const genres = $('.product_genre > .data');
-        const developer = $('.developer > .data')
-          .text()
-          .trim();
-        const publisher = $('.publisher > .data > a');
-        const numOfEachReview = $('.total > .count');
-        const releaseDate = $('.release > .data').text();
-        const reviewCount = [];
-        const newGenres = [];
-        const publishers = [];
+      for (let i = 0; i < numOfEachReview.length; i++) {
+        reviewCount.push(
+          parseInt(numOfEachReview[i].children[0].data.replace(',', ''))
+        );
+      }
 
-        for (let i = 0; i < numOfEachReview.length; i++) {
-          reviewCount.push(
-            parseInt(numOfEachReview[i].children[0].data.replace(',', ''))
-          );
+      for (let i = 0; i < genres.length; i++) {
+        newGenres.push(genres[i].children[0].data);
+      }
+
+      for (let i = 0; i < publisher.length; i++) {
+        publishers.push(publisher[i].children[0].data.trim());
+      }
+
+      const albumInfo = {
+        artist: artist,
+        album: album,
+        criticScore,
+        developer,
+        publisher: publishers.join(', '),
+        genres: newGenres.join(', '),
+        releaseDate,
+        numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
+        numOfPositiveCriticReviews: reviewCount[0],
+        numOfMixedCriticReviews: reviewCount[1],
+        numOfNegativeCriticReviews: reviewCount[2]
+      }
+
+      if (process.env.SAVE_TO_DB) {
+        if (isTitleSafeToWrite(releaseDate)) {
+          await saveItem(albumInfo, 'albums');
         }
+      }
 
-        for (let i = 0; i < genres.length; i++) {
-          newGenres.push(genres[i].children[0].data);
-        }
-
-        for (let i = 0; i < publisher.length; i++) {
-          publishers.push(publisher[i].children[0].data.trim());
-        }
-
-        const albumInfo = {
-          artist: artist,
-          album: album,
-          criticScore,
-          developer,
-          publisher: publishers.join(', '),
-          genres: newGenres.join(', '),
-          releaseDate,
-          numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
-          numOfPositiveCriticReviews: reviewCount[0],
-          numOfMixedCriticReviews: reviewCount[1],
-          numOfNegativeCriticReviews: reviewCount[2]
-        }
-
-        if (process.env.SAVE_TO_DB) {
-          if (isTitleSafeToWrite(releaseDate)) {
-            await saveItem(albumInfo, 'albums');
-          }
-        }
-
-        return resolve(albumInfo);
-      });
-    });
+      return resolve(albumInfo);
+    } catch(err) {
+      return reject(err);
+    }
   });
 };

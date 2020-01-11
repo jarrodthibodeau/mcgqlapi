@@ -72,6 +72,7 @@ describe('Game', () => {
       }
     });
 
+    
     const { game } = gameQueryResult.data;
 
     game.title.should.equal(
