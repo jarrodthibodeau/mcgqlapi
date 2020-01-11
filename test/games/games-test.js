@@ -10,7 +10,7 @@ describe('Games', () => {
       query($input: [Game!]) {
         games(input: $input) {
           title
-          console
+          platform
           criticScore
           genres
           numOfCriticReviews
@@ -24,23 +24,23 @@ describe('Games', () => {
     const testGames = [
       {
         title: 'Ape Out',
-        console: 'Switch'
+        platform: 'Switch'
       },
       {
         title: 'Outer Wilds',
-        console: 'Xbox One'
+        platform: 'Xbox One'
       },
       {
         title: 'Death Stranding',
-        console: 'PlayStation 4'
+        platform: 'PlayStation 4'
       },
       {
         title: 'Disco Elysium',
-        console: 'PC'
+        platform: 'PC'
       },
       {
         title: 'Sayonara Wild Hearts',
-        console: 'iOS'
+        platform: 'iOS'
       }
     ];
     
@@ -55,7 +55,7 @@ describe('Games', () => {
 
     games.forEach((game, index) => {
       game.title.should.equal(testGames[index].title);
-      game.console.should.equal(testGames[index].console);
+      game.platform.should.equal(testGames[index].platform);
       game.criticScore.should.be.a('number');
       game.genres.should.be.a('array');
       game.numOfCriticReviews.should.be.a('number');

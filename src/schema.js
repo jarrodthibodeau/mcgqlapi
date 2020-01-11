@@ -14,7 +14,7 @@ module.exports = gql`
 
   type GameInfo {
     title: String
-    console: String
+    platform: String
     criticScore: Int
     developer: String
     publisher: String
@@ -27,14 +27,13 @@ module.exports = gql`
 
   input Game {
     title: String!
-    console: String!
+    platform: String!
   }
 
   type AlbumInfo {
     album: String
     artist: String
     criticScore: Int
-    developer: String
     publisher: String
     genres: [String]
     numOfCriticReviews: Int
@@ -51,7 +50,8 @@ module.exports = gql`
   type MovieInfo {
     title: String
     criticScore: Int
-    director: String
+    year: String
+    director: [String]
     genres: [String]
     cast: [String]
     rating: String
@@ -64,7 +64,8 @@ module.exports = gql`
   }
 
   input Movie {
-    title: String!
+    title: String!,
+    year: String
   }
 
   type TVShowInfo {
