@@ -10,7 +10,7 @@ const TVShowDetails = require('../details/tvshow');
 
 module.exports = async function getInfo(url, input, type) {
   try {
-    if (process.env.SAVE_TO_DB) {
+    if (process.env.SAVE_TO_DB === true) {
       const item = await getItem(input, type);
 
       if (item) {
@@ -37,7 +37,7 @@ module.exports = async function getInfo(url, input, type) {
         break;
     }
 
-    if (process.env.SAVE_TO_DB) {
+    if (process.env.SAVE_TO_DB === true) {
       if (isTitleSafeToSave) {
         await saveItem(details, type);
       }
