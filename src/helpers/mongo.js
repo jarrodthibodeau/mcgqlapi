@@ -2,7 +2,9 @@ const { MongoClient } = require('mongodb');
 
 async function getItem(query, collectionName) {
   try {
-    const connection = await MongoClient.connect(process.env.MONGODB_URI);
+    const connection = await new MongoClient(process.env.MONGODB_URI, {
+      useUnifiedTopology: true
+    }).connect();
     const collection = await connection
       .db('metacritic-graphql-api')
       .collection(collectionName);
