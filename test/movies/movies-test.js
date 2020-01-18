@@ -19,7 +19,7 @@ describe('Movies', () => {
 
     const testMovies = [
       { title: 'Little Women' },
-      { title: 'Little Women 2019' },
+      { title: 'Little Women', year: '2019' },
       { title: 'Raging Bull' },
       { title: 'Good Time' },
       { title: 'Toy Story 2' }

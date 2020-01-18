@@ -1,33 +1,55 @@
-const getGameInfo = require('./actions/get-game-info');
-const getAlbumInfo = require('./actions/get-album-info');
-const getMovieInfo = require('./actions/get-movie-info');
-const getTVInfo = require('./actions/get-tv-info');
+const getInfo = require('./actions/get-info');
+const { setUrl } = require('./helpers/helpers');
 
 module.exports = {
   Query: {
     game: (_, { input }) => {
-      return getGameInfo(input);
+      const type = 'game';
+      const url = setUrl(type, input);
+
+      return getInfo(url, input, type);
     },
     games: async (_, { input }) => {
-      return Promise.all(input.map(game => getGameInfo(game)));
+      const type = 'game';
+      return Promise.all(
+        input.map(game => getInfo(setUrl(type, game), game, type))
+      );
     },
     album: (_, { input }) => {
-      return getAlbumInfo(input);
+      const type = 'album';
+      const url = setUrl(type, input);
+
+      return getInfo(url, input, type);
     },
     albums: async (_, { input }) => {
-      return Promise.all(input.map(album => getAlbumInfo(album)));
+      const type = 'album';
+      return Promise.all(
+        input.map(album => getInfo(setUrl(type, album), album, type))
+      );
     },
     movie: (_, { input }) => {
-      return getMovieInfo(input);
+      const type = 'movie';
+      const url = setUrl(type, input);
+
+      return getInfo(url, input, type);
     },
     movies: async (_, { input }) => {
-      return Promise.all(input.map(movie => getMovieInfo(movie)));
+      const type = 'movie';
+      return Promise.all(
+        input.map(movie => getInfo(setUrl(type, movie), movie, type))
+      );
     },
     tvshow: (_, { input }) => {
-      return getTVInfo(input);
+      const type = 'tvshow';
+      const url = setUrl(type, input);
+
+      return getInfo(url, input, type);
     },
     tvshows: async (_, { input }) => {
-      return Promise.all(input.map(tvshow => getTVInfo(tvshow)));
+      const type = 'tvshow';
+      return Promise.all(
+        input.map(tvshow => getInfo(setUrl(type, tvshow), tvshow, type))
+      );
     }
   }
 };

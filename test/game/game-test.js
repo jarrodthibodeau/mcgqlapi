@@ -10,7 +10,7 @@ describe('Game', () => {
       query($input: Game!) {
         game(input: $input) {
           title
-          console
+          platform
           criticScore
           developer
           publisher
@@ -28,7 +28,7 @@ describe('Game', () => {
       variables: {
         input: {
           title: 'Gears 5',
-          console: 'Xbox One'
+          platform: 'Xbox One'
         }
       }
     });
@@ -36,7 +36,7 @@ describe('Game', () => {
     const { game } = gameQueryResult.data;
 
     game.title.should.equal('Gears 5');
-    game.console.should.equal('Xbox One');
+    game.platform.should.equal('Xbox One');
     game.criticScore.should.be.a('number');
     game.developer.should.equal('The Coalition');
     game.publisher.should.equal('Microsoft Game Studios, Xbox Game Studios');
@@ -52,7 +52,7 @@ describe('Game', () => {
       query($input: Game!) {
         game(input: $input) {
           title
-          console
+          platform
           criticScore
           developer
           publisher
@@ -67,20 +67,17 @@ describe('Game', () => {
         input: {
           title:
             'Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition',
-          console: 'Switch'
+          platform: 'Switch'
         }
       }
     });
 
-    
     const { game } = gameQueryResult.data;
-
-    console.log(game.genres);
 
     game.title.should.equal(
       'Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition'
     );
-    game.console.should.equal('Switch');
+    game.platform.should.equal('Switch');
     game.criticScore.should.be.a('number');
     game.developer.should.equal('Square Enix');
     game.publisher.should.equal('Square Enix, Nintendo');

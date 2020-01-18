@@ -29,7 +29,7 @@ describe('Movie', () => {
     const { movie } = movieQueryResult.data;
 
     movie.title.should.equal('Parasite');
-    movie.director.should.equal('Joon-ho Bong');
+    movie.director.should.be.a('array');
     movie.runtime.should.equal('132 min');
     movie.criticScore.should.be.a('number');
   });

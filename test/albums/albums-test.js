@@ -24,11 +24,11 @@ describe('Albums', () => {
     const testAlbums = [
       {
         artist: 'Idles',
-        album: 'Joy as an act of resistance'
+        album: 'Joy As an Act of Resistance'
       },
       {
-        artist: 'The 1975',
-        album: 'A Brief Inquiry into online relationships'
+        artist: 'Carly Rae Jepsen',
+        album: 'E-MO-TION'
       },
       {
         artist: 'Lizzo',
@@ -39,8 +39,8 @@ describe('Albums', () => {
         album: 'Golden Hour'
       },
       {
-        artist: 'Run The Jewels',
-        album: 'Run The Jewels 3'
+        artist: 'Run the Jewels',
+        album: 'Run the Jewels 3'
       }
     ];
     
