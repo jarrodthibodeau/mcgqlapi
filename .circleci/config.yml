@@ -23,7 +23,7 @@ jobs:
           command: eb setenv SAVE_TO_DB=$SAVE_TO_DB MONGODB_URI=$MONGODB_URI DAYS_TIL_SAVE_TO_DB=$DAYS_TIL_SAVE_TO_DB
       - run:
           name: Deploying
-          command: eb deploy MetacriticGraphql-env
+          command: eb deploy mcgqlapi-prod
 
 workflows:
   version: 2
