@@ -1,15 +1,27 @@
 const path = require('path');
-const { ApolloServer } = require('apollo-server');
+const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
 const root = require('./src/root');
 const schema = require('./src/schema');
 
 const server = new ApolloServer({ typeDefs: schema, resolvers: root });
+const app = express();
+
+app.get('/', function (req, res) {
+  res.send('Currently under construction');
+});
+
+app.get('/_status', function(req, res)  {
+  res.send({ status : 'ok' });
+});
+
+server.applyMiddleware({ app });
 
 require('dotenv').config({
     path: path.resolve(__dirname, `./${process.env.ENVIRONMENT}.env`)
 });
 
-server.listen({ port: 8081 }).then(() => {
+app.listen({ port: 8081 }, () => {
     console.log('Metacritic GraphQL API running on port 8081');
 });
 

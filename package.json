@@ -10,10 +10,11 @@
   "author": "Jarrod Thibodeau",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.9.4",
+    "apollo-server-express": "^2.9.16",
     "cheerio": "^1.0.0-rc.3",
     "date-fns": "^2.8.1",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "graphql": "^14.5.7",
     "mongodb": "^3.4.1",
     "node-fetch": "^2.6.0"
