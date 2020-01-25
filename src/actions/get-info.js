@@ -40,6 +40,10 @@ module.exports = async function getInfo(url, input, type) {
         break;
     }
 
+    if (isNaN(details.criticScore)) {
+      throw new Error(`Product not found for: ${JSON.stringify(input, 2)}, ${type}`);
+    }
+
     if (process.env.SAVE_TO_DB == 'true') {
       if (isTitleSafeToSave) {
         await saveItem(details, type);
