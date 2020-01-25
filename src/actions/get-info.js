@@ -16,6 +16,7 @@ module.exports = async function getInfo(url, input, type) {
       const item = await getItem(input, type);
 
       if (item) {
+        console.log('Item found in db for: ', input, type);
         return item;
       }
     }
@@ -40,7 +41,7 @@ module.exports = async function getInfo(url, input, type) {
     }
 
     if (process.env.SAVE_TO_DB == 'true') {
-      if (isTitleSafeTo) {
+      if (isTitleSafeToSave) {
         await saveItem(details, type);
       }
     }
