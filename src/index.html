@@ -1,0 +1,141 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Metacritic GraphQL API</title>
+  </head><body>
+    <article id="b8c72a35-05fd-49f4-baaa-cd64a80cb638" class="page sans"><header><h1 class="page-title">Metacritic GraphQL API</h1></header><div class="page-body"><p id="bce5297c-f068-4a13-8855-89200a5ffb39" class="">An unofficial GraphQL API for <a href="https://www.metacritic.com">Metacritic!</a> 
+
+The API as of right now currently supports </p><ul id="15817837-979d-4094-9716-40fd62156d0c" class="bulleted-list"><li>Getting any game(s)</li></ul><ul id="5c7ded8c-3e65-4b7d-8811-af93e8eff98b" class="bulleted-list"><li>Getting any movie(s)</li></ul><ul id="6675a428-3f31-41dc-8f14-503861c02a9c" class="bulleted-list"><li>Getting any TV season(s)</li></ul><ul id="1950c487-3626-4f05-aae1-609a5334f117" class="bulleted-list"><li>Getting any album(s)</li></ul><p id="063eb361-d1b6-4e74-a77a-95059edab20b" class="">
+</p><p id="e5f651b9-4a42-4ebf-8794-5aad4f13e20c" class="">In the future, the API will support</p><ul id="3bf48824-2050-46ab-9e62-38183a4280aa" class="bulleted-list"><li>Person <ul id="3757c22b-9283-4c69-8a1a-f8b0debc191d" class="bulleted-list"><li>Any information regarding a person (actor, musician, etc)&#x27;s projects</li></ul></li></ul><ul id="0bb907eb-8917-4746-8dfa-98408f39d0a2" class="bulleted-list"><li>Company<ul id="f143c9c8-4ff5-4ed0-85b9-a6450000ce68" class="bulleted-list"><li>Any information regarding a company&#x27;s projects</li></ul></li></ul><ul id="61c93793-804f-4727-bafb-1103c5fe280c" class="bulleted-list"><li>Reviews<ul id="9b9a3dcb-760c-4fb7-a576-aba9b3c229d9" class="bulleted-list"><li>Being able to access the reviews on a particular product</li></ul></li></ul><h2 id="6f587549-97ae-4399-a85c-ff924c2506dd" class="">Endpoint</h2><p id="9041b760-8bc9-435d-a3ec-f7864a0b4a52" class="">All requests should go to the <code>/graphql</code> </p><h2 id="8d2ad182-99e1-4d4e-8d00-a87a48f6b4f3" class="">Schema </h2><p id="d1e88222-7dd4-4e2b-a65d-6b70111c5af9" class="">The schema is outlined as such.</p><pre id="e7c58fbf-ff6c-492d-af0f-06a6b3163133" class="code"><code>type Query {
+    game(input: Game!): GameInfo
+    games(input: [Game!]): [GameInfo]
+    album(input: Album!): AlbumInfo
+    albums(input: [Album!]): [AlbumInfo]
+    movie(input: Movie!): MovieInfo
+    movies(input: [Movie!]): [MovieInfo]
+    tvshow(input: TVShow!): TVShowInfo
+    tvshows(input: [TVShow!]): [TVShowInfo]
+  }
+
+  type GameInfo {
+    title: String
+    platform: String
+    criticScore: Int
+    developer: String
+    publisher: String
+    genres: [String]
+    numOfCriticReviews: Int
+    numOfPositiveCriticReviews: Int
+    numOfMixedCriticReviews: Int
+    numOfNegativeCriticReviews: Int
+  }
+
+  input Game {
+    title: String!
+    platform: String!
+  }
+
+  type AlbumInfo {
+    album: String
+    artist: String
+    criticScore: Int
+    publisher: String
+    genres: [String]
+    numOfCriticReviews: Int
+    numOfPositiveCriticReviews: Int
+    numOfMixedCriticReviews: Int
+    numOfNegativeCriticReviews: Int
+  }
+
+  input Album {
+    artist: String!
+    album: String!
+  }
+
+  type MovieInfo {
+    title: String
+    criticScore: Int
+    year: String
+    director: [String]
+    genres: [String]
+    cast: [String]
+    rating: String
+    runtime: String
+    summary: String
+    numOfCriticReviews: Int
+    numOfPositiveCriticReviews: Int
+    numOfMixedCriticReviews: Int
+    numOfNegativeCriticReviews: Int
+  }
+
+  input Movie {
+    title: String!,
+    year: String
+  }
+
+  type TVShowInfo {
+    title: String
+    season: String
+    criticScore: Int
+    genres: [String]
+    summary: String
+    numOfCriticReviews: Int
+    numOfPositiveCriticReviews: Int
+    numOfMixedCriticReviews: Int
+    numOfNegativeCriticReviews: Int
+  }
+
+  input TVShow {
+    title: String!
+    season: String
+  }</code></pre><p id="cf191ab3-f42d-404c-a066-e928eb79ae1e" class="">
+</p><h2 id="e1049478-3c43-4332-8ff9-749dcacf3931" class="">Example Request</h2><p id="7764bb0a-bbd6-41c4-ad47-59da447f8f37" class="">An example query would look like so </p><p id="80e7de74-b09a-4cf7-b481-8198115d24af" class="">
+</p><p id="2f8278f2-07ef-4952-b105-4781a0bff2c7" class=""><strong>The Query</strong></p><pre id="83fc0bcf-d7e8-46fa-8a96-2df5e48bf227" class="code"><code>query ($input: Game!) {
+	game(input: $input) {
+		title
+		platform
+		criticScore
+		developer
+		publisher
+		genres
+		numOfCriticReviews
+		numOfPositiveCriticReviews
+		numOfMixedCriticReviews
+		numOfNegativeCriticReviews
+	}
+}</code></pre><p id="beb83dc0-005b-4101-84a3-63091f42fee4" class="">
+</p><p id="6fb8e3dd-d1e1-4198-b8a2-d5046a9b708e" class=""><strong>The Variables</strong></p><pre id="9c12caba-9bd9-4f06-a49c-e6511f218142" class="code"><code>{
+	&quot;input&quot;: {
+		&quot;title&quot;: &quot;Resident Evil 2&quot;,
+		&quot;platform&quot;: &quot;PlayStation 4&quot;
+	}
+}</code></pre><p id="3700ca3a-396d-49bb-b67b-80f9515e9919" class="">
+</p><p id="c34dadd0-714a-4660-a95a-27d6f12150cf" class=""><strong>The Response</strong></p><pre id="3deb8376-c7e2-4348-bdf8-9e89e4367ccb" class="code"><code>{
+  &quot;data&quot;: {
+    &quot;game&quot;: {
+      &quot;title&quot;: &quot;Resident Evil 2&quot;,
+      &quot;platform&quot;: &quot;PlayStation 4&quot;,
+      &quot;criticScore&quot;: 91,
+      &quot;developer&quot;: &quot;Capcom R&amp;D Division 1&quot;,
+      &quot;publisher&quot;: &quot;Capcom&quot;,
+      &quot;genres&quot;: [
+        &quot;Action Adventure&quot;,
+        &quot;Survival&quot;
+      ],
+      &quot;numOfCriticReviews&quot;: 85,
+      &quot;numOfPositiveCriticReviews&quot;: 84,
+      &quot;numOfMixedCriticReviews&quot;: 1,
+      &quot;numOfNegativeCriticReviews&quot;: 0
+    }
+  }
+}</code></pre><h2 id="75ecb162-3888-4ac1-a465-e864ce0f3138" class="">Caveats</h2>
+</p><h3 id="cb9ecc90-e21c-4a6e-9f14-acfebd09b10c" class="">TV Shows</h3><p id="6b6cf849-c039-40ba-b03e-2b377eebc18d" class="">If you do not provide a season for the TV show, you will get an overview of the series as a whole. This includes an overall series score and reviews for all the seasons.</p><p id="a15c4100-c6ce-449f-b160-8d8a1545ec38" class="">
+</p><h3 id="7fa20556-1e29-4907-adcd-332351084f74" class="">Movies</h3><p id="c703a4ac-72ec-4ded-8ff7-52d26cdf22df" class="">As there are plenty of remakes in the movie space. Any newer versions of a movie should include the year of release to ensure the correct movie is obtained</p><p id="a29bfd65-4c75-43dd-8017-56c6ea4751b0" class="">
+</p><p id="07100256-a29a-4e83-be44-063e34940701" class="">Example:</p><p id="e4f9d16a-92bf-4269-99c9-0ecb89cad17e" class=""><code>Little Women</code> will return the 1994 version</p><p id="b31ab138-67df-4a51-958e-0ff1bb50fd19" class=""><code>Little Women 2019</code> will return the 2019 version </p>
+<h2>Donate</h2>
+<p>Right now, I am paying for the servers out of pocket. If you'd like to pitch a few bucks, please feel free! <strong><a href="paypal.me/jarrodthibodeau">DONATE</a></strong></p>
+  </div>
+  </article>
+  </body>
+</html>
