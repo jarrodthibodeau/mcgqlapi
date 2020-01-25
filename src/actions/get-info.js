@@ -12,7 +12,7 @@ module.exports = async function getInfo(url, input, type) {
   console.log('Getting info for: ', input, type);
 
   try {
-    if (process.env.SAVE_TO_DB == 'true') {
+    if (process.env.SAVE_TO_DB == 'true' && process.env.ENVIRONMENT !== 'test') {
       const item = await getItem(input, type);
 
       if (item) {
@@ -44,7 +44,7 @@ module.exports = async function getInfo(url, input, type) {
       throw new Error(`Product not found for: ${JSON.stringify(input, 2)}, ${type}`);
     }
 
-    if (process.env.SAVE_TO_DB == 'true') {
+    if (process.env.SAVE_TO_DB == 'true' && process.env.ENVIRONMENT !== 'test') {
       if (isTitleSafeToSave) {
         await saveItem(details, type);
       }
