@@ -10,7 +10,7 @@ const TVShowDetails = require('../details/tvshow');
 
 module.exports = async function getInfo(url, input, type) {
   console.log('Getting info for: ', input, type);
-
+  
   try {
     if (process.env.SAVE_TO_DB == 'true') {
       const item = await getItem(input, type);
@@ -20,6 +20,7 @@ module.exports = async function getInfo(url, input, type) {
         return item;
       }
     }
+
 
     const html = await get(url, 1);
     const $ = cheerio.load(html);
