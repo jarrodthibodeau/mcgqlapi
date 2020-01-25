@@ -67,7 +67,7 @@ function slugItem (item, collectionName) {
         item.season = 'all';
       }
 
-      return item.season !== 'all' ? slugify(`${item.title}`).toLowerCase() : slugify(`${item.title}-all`).toLowerCase();
+      return item.season !== 'all' ? slugify(`${item.title}-${item.season}`).toLowerCase() : slugify(`${item.title}-all`).toLowerCase();
     case 'movie':
       return item.year ? slugify(`${item.title}-${item.year}`).toLowerCase() : slugify(`${item.title}`).toLowerCase();
   }
