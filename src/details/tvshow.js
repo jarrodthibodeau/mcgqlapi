@@ -1,5 +1,5 @@
 module.exports = function TVShowDetails($, setDetails) {
-  const title = $('.product_page_title h1').text();
+  const title = $('.product_page_title h1 a').text();
   const genreList = $('.genres span:last-child');
   const genres = [];
   const numOfEachReview = $('.count.fr');

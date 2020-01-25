@@ -20,7 +20,7 @@ describe('TV Show', () => {
       query: tvShowQuery,
       variables: {
         input: {
-          title: `Genndy Tartakovsky's Primal: Season 1`,
+          title: `Genndy Tartakovsky's Primal`,
           season: '1'
         }
       }
