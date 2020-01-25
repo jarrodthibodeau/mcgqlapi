@@ -4,10 +4,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Metacritic GraphQL API</title>
   </head><body>
-    <article id="b8c72a35-05fd-49f4-baaa-cd64a80cb638" class="page sans"><header><h1 class="page-title">Metacritic GraphQL API</h1></header><div class="page-body"><p id="bce5297c-f068-4a13-8855-89200a5ffb39" class="">An unofficial GraphQL API for <a href="https://www.metacritic.com">Metacritic!</a> 
+    <article id="b8c72a35-05fd-49f4-baaa-cd64a80cb638" class="page sans"><header><h1 class="page-title">Metacritic GraphQL API</h1> </header><div class="page-body"><p id="bce5297c-f068-4a13-8855-89200a5ffb39" class="">An unofficial GraphQL API for <a href="https://www.metacritic.com">Metacritic!</a>
+<span><strong>THIS IS AN ALPHA, PLEASE EXPECT BUGS ALONG THE WAY</strong></span> 
 
 The API as of right now currently supports </p><ul id="15817837-979d-4094-9716-40fd62156d0c" class="bulleted-list"><li>Getting any game(s)</li></ul><ul id="5c7ded8c-3e65-4b7d-8811-af93e8eff98b" class="bulleted-list"><li>Getting any movie(s)</li></ul><ul id="6675a428-3f31-41dc-8f14-503861c02a9c" class="bulleted-list"><li>Getting any TV season(s)</li></ul><ul id="1950c487-3626-4f05-aae1-609a5334f117" class="bulleted-list"><li>Getting any album(s)</li></ul><p id="063eb361-d1b6-4e74-a77a-95059edab20b" class="">
-</p><p id="e5f651b9-4a42-4ebf-8794-5aad4f13e20c" class="">In the future, the API will support</p><ul id="3bf48824-2050-46ab-9e62-38183a4280aa" class="bulleted-list"><li>Person <ul id="3757c22b-9283-4c69-8a1a-f8b0debc191d" class="bulleted-list"><li>Any information regarding a person (actor, musician, etc)&#x27;s projects</li></ul></li></ul><ul id="0bb907eb-8917-4746-8dfa-98408f39d0a2" class="bulleted-list"><li>Company<ul id="f143c9c8-4ff5-4ed0-85b9-a6450000ce68" class="bulleted-list"><li>Any information regarding a company&#x27;s projects</li></ul></li></ul><ul id="61c93793-804f-4727-bafb-1103c5fe280c" class="bulleted-list"><li>Reviews<ul id="9b9a3dcb-760c-4fb7-a576-aba9b3c229d9" class="bulleted-list"><li>Being able to access the reviews on a particular product</li></ul></li></ul><h2 id="6f587549-97ae-4399-a85c-ff924c2506dd" class="">Endpoint</h2><p id="9041b760-8bc9-435d-a3ec-f7864a0b4a52" class="">All requests should go to the <code>/graphql</code> </p><h2 id="8d2ad182-99e1-4d4e-8d00-a87a48f6b4f3" class="">Schema </h2><p id="d1e88222-7dd4-4e2b-a65d-6b70111c5af9" class="">The schema is outlined as such.</p><pre id="e7c58fbf-ff6c-492d-af0f-06a6b3163133" class="code"><code>type Query {
+</p><p id="e5f651b9-4a42-4ebf-8794-5aad4f13e20c" class="">In the future, the API will support</p><ul id="3bf48824-2050-46ab-9e62-38183a4280aa" class="bulleted-list"><li>Person <ul id="3757c22b-9283-4c69-8a1a-f8b0debc191d" class="bulleted-list"><li>Any information regarding a person (actor, musician, etc)&#x27;s projects</li></ul></li></ul><ul id="0bb907eb-8917-4746-8dfa-98408f39d0a2" class="bulleted-list"><li>Company<ul id="f143c9c8-4ff5-4ed0-85b9-a6450000ce68" class="bulleted-list"><li>Any information regarding a company&#x27;s projects</li></ul></li></ul><ul id="61c93793-804f-4727-bafb-1103c5fe280c" class="bulleted-list"><li>Reviews<ul id="9b9a3dcb-760c-4fb7-a576-aba9b3c229d9" class="bulleted-list"><li>Being able to access the reviews on a particular product</li></ul></li></ul><h2 id="6f587549-97ae-4399-a85c-ff924c2506dd" class="">Endpoint</h2><p id="9041b760-8bc9-435d-a3ec-f7864a0b4a52" class="">All requests should go to the <code>/graphql</code> </p><h2 id="8d2ad182-99e1-4d4e-8d00-a87a48f6b4f3" class="">Schema </h2><p id="d1e88222-7dd4-4e2b-a65d-6b70111c5af9" class="">The schema is outlined as such.</p><pre id="e7c58fbf-ff6c-492d-af0f-06a6b3163133" class="code"><code>
+  type Query {
     game(input: Game!): GameInfo
     games(input: [Game!]): [GameInfo]
     album(input: Album!): AlbumInfo
@@ -135,6 +137,9 @@ The API as of right now currently supports </p><ul id="15817837-979d-4094-9716-4
 </p><p id="07100256-a29a-4e83-be44-063e34940701" class="">Example:</p><p id="e4f9d16a-92bf-4269-99c9-0ecb89cad17e" class=""><code>Little Women</code> will return the 1994 version</p><p id="b31ab138-67df-4a51-958e-0ff1bb50fd19" class=""><code>Little Women 2019</code> will return the 2019 version </p>
 <h2>Donate</h2>
 <p>Right now, I am paying for the servers out of pocket. If you'd like to pitch a few bucks, please feel free! <strong><a href="paypal.me/jarrodthibodeau">DONATE</a></strong></p>
+
+<h2>Bugs</h2>
+<p>Bugs are to be expected right now since this is an alpha release. If there is anything you notice, please feel free to email me at <a href="mailto:thibodeaujz@gmail.com">thibodeaujz@gmail.com</a></p>
   </div>
   </article>
   </body>
