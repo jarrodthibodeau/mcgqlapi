@@ -19,23 +19,23 @@ describe('TV Shows', () => {
 
     const testTVShows = [
       {
-        title: 'Game of Thrones',
+        title: 'Game of Thrones: Season 1',
         season: '1'
       },
       {
-        title: 'Breaking Bad',
+        title: 'Breaking Bad: Season 2',
         season: '2'
       },
       {
-        title: 'Hannibal',
+        title: 'Hannibal: Season 3',
         season: '3'
       },
       {
-        title: 'Fleabag',
+        title: 'Fleabag: Season 2',
         season: '2'
       },
       {
-        title: 'Broad City',
+        title: 'Broad City: Season 4',
         season: '4'
       }
     ];
