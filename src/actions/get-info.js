@@ -1,5 +1,5 @@
 const cheerio = require('cheerio');
-const { isTitleSafeToWrite, stripTitle } = require('../helpers/helpers');
+const { isTitleSafeToSave } = require('../helpers/helpers');
 const { getItem, saveItem } = require('../helpers/mongo');
 const { get } = require('../helpers/request');
 
@@ -9,8 +9,10 @@ const MovieDetails = require('../details/movie');
 const TVShowDetails = require('../details/tvshow');
 
 module.exports = async function getInfo(url, input, type) {
+  console.log('Getting info for: ', input, type);
+
   try {
-    if (process.env.SAVE_TO_DB === true) {
+    if (process.env.SAVE_TO_DB == 'true') {
       const item = await getItem(input, type);
 
       if (item) {
@@ -37,11 +39,13 @@ module.exports = async function getInfo(url, input, type) {
         break;
     }
 
-    if (process.env.SAVE_TO_DB === true) {
-      if (isTitleSafeToSave) {
+    if (process.env.SAVE_TO_DB == 'true') {
+      if (isTitleSafeTo) {
         await saveItem(details, type);
       }
     }
+
+    console.log('Getting info succeeded for: ', input, type);
     
     return details;
   } catch (err) {
