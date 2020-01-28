@@ -13,6 +13,7 @@ module.exports = gql`
   }
 
   type GameInfo {
+    url: String!
     title: String
     platform: String
     criticScore: Int
@@ -31,6 +32,7 @@ module.exports = gql`
   }
 
   type AlbumInfo {
+    url: String!
     album: String
     artist: String
     criticScore: Int
@@ -48,6 +50,7 @@ module.exports = gql`
   }
 
   type MovieInfo {
+    url: String!
     title: String
     criticScore: Int
     year: String
@@ -69,6 +72,7 @@ module.exports = gql`
   }
 
   type TVShowInfo {
+    url: String!
     title: String
     season: String
     criticScore: Int

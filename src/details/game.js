@@ -1,4 +1,4 @@
-module.exports = function GameDetails($) {
+module.exports = function GameDetails($, url) {
   const title = $('.product_title a h1').text();
   const platform = $('.platform').text().trim();
   const criticScore = parseInt($('.metascore_w.game > span').text());
@@ -28,6 +28,7 @@ module.exports = function GameDetails($) {
   }
 
   return {
+    url,
     title,
     platform,
     criticScore,
