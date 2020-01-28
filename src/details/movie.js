@@ -1,4 +1,4 @@
-module.exports = function MovieDetails($) {
+module.exports = function MovieDetails($, url) {
   const title = $('.product_page_title h1').text();
   const year = $('.release_year').text();
   const genreList = $('.genres span:last-child');
@@ -31,6 +31,7 @@ module.exports = function MovieDetails($) {
   }
 
   return {
+    url,
     title,
     year,
     criticScore: parseInt(

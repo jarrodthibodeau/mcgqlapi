@@ -1,5 +1,4 @@
 const { differenceInDays } = require('date-fns');
-const slugify = require('slugify');
 
 const BASE_URL = 'https://www.metacritic.com';
 
@@ -56,26 +55,8 @@ function setUrl(type, input) {
   }
 }
 
-function slugItem (item, collectionName) {
-  switch (collectionName) {
-    case 'game':
-      return slugify(`${item.title} ${item.platform}`).toLowerCase();
-    case 'album':
-      return slugify(`${item.artist} ${item.album}`).toLowerCase();
-    case 'tvshow':
-      if (!item.season) {
-        item.season = 'all';
-      }
-
-      return item.season !== 'all' ? slugify(`${item.title}-${item.season}`).toLowerCase() : slugify(`${item.title}-all`).toLowerCase();
-    case 'movie':
-      return item.year ? slugify(`${item.title}-${item.year}`).toLowerCase() : slugify(`${item.title}`).toLowerCase();
-  }
-}
-
 module.exports = {
   isTitleSafeToSave,
   stripTitle,
-  setUrl,
-  slugItem
+  setUrl
 };

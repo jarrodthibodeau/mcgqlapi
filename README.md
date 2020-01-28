@@ -2,7 +2,6 @@
 
 Major Bugs
 
-Fix slugify issue
 - Fix issue with movie and years (big ole issue)
   - maybe make year required? 
 - Better errors

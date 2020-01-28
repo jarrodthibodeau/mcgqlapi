@@ -1,4 +1,4 @@
-module.exports = function AlbumDetails($) {
+module.exports = function AlbumDetails($, url) {
   const artist = $('.product_artist .band_name').text();
   const album = $('.product_title a span h1')
     .text()
@@ -22,6 +22,7 @@ module.exports = function AlbumDetails($) {
   }
 
   return {
+    url,
     artist,
     album,
     criticScore,

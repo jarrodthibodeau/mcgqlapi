@@ -13,7 +13,7 @@ module.exports = async function getInfo(url, input, type) {
 
   try {
     if (process.env.SAVE_TO_DB == 'true' && process.env.ENVIRONMENT !== 'test') {
-      const item = await getItem(input, type);
+      const item = await getItem({ url }, type);
 
       if (item) {
         console.log('Item found in db for: ', input, type);
@@ -27,16 +27,16 @@ module.exports = async function getInfo(url, input, type) {
 
     switch (type) {
       case 'album':
-        details = AlbumDetails($);
+        details = AlbumDetails($, url);
         break;
       case 'game':
-        details = GameDetails($);
+        details = GameDetails($, url);
         break;
       case 'movie':
-        details = MovieDetails($);
+        details = MovieDetails($, url);
         break;
       case 'tvshow':
-        details = TVShowDetails($, { season: input.season });
+        details = TVShowDetails($, url, { season: input.season });
         break;
     }
 
