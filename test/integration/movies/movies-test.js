@@ -1,4 +1,4 @@
-const { query } = require('../index');
+const { query } = require('../../index');
 const { gql } = require('apollo-server-express');
 const { should } = require('chai');
 

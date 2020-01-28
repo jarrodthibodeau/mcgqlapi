@@ -9,13 +9,13 @@ async function getItem(query, collectionName) {
       .db('metacritic-graphql-api')
       .collection(collectionName);
 
-    console.log('Finding product for:', query, collectionName);
+    logger.info('Finding product for:', query, collectionName);
 
     const item = await collection.findOne(query);
     await connection.close();
     return item;
   } catch (e) {
-    console.log(e);
+    logger.error('Getting item from MongoDB failed', e);
     return e;
   }
 }
@@ -31,11 +31,11 @@ async function saveItem(item, collectionName) {
 
     await collection.insertOne(item);
 
-    console.log('Product has been saved', item, collectionName);
+    logger.info('Product has been saved', item, collectionName);
 
     return connection.close();
   } catch (e) {
-    console.log(e);
+    logger.error('Saving item to MongoDB failed', e);
     return e;
   }
 }

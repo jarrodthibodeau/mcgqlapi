@@ -2,6 +2,7 @@ const cheerio = require('cheerio');
 const { isTitleSafeToSave } = require('../helpers/helpers');
 const { getItem, saveItem } = require('../helpers/mongo');
 const { get } = require('../helpers/request');
+const logger = require('../helpers/logger');
 
 const AlbumDetails = require('../details/album');
 const GameDetails = require('../details/game');
@@ -9,14 +10,14 @@ const MovieDetails = require('../details/movie');
 const TVShowDetails = require('../details/tvshow');
 
 module.exports = async function getInfo(url, input, type) {
-  console.log('Getting info for: ', input, type);
+  logger.info('Getting info for: ', input, type);
 
   try {
     if (process.env.SAVE_TO_DB == 'true' && process.env.ENVIRONMENT !== 'test') {
       const item = await getItem({ url }, type);
 
       if (item) {
-        console.log('Item found in db for: ', input, type);
+        logger.info('Item found in db for: ', input, type);
         return item;
       }
     }
@@ -50,7 +51,7 @@ module.exports = async function getInfo(url, input, type) {
       }
     }
 
-    console.log('Getting info succeeded for: ', input, type);
+    logger.info('Getting info succeeded for: ', input, type);
     
     return details;
   } catch (err) {
