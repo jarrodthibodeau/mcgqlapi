@@ -1,5 +1,6 @@
 const getInfo = require('./actions/get-info');
 const { setUrl } = require('./helpers/helpers');
+const { isGamePlatformValid } = require('./helpers/validation');
 
 module.exports = {
   Query: {
@@ -7,10 +8,26 @@ module.exports = {
       const type = 'game';
       const url = setUrl(type, input);
 
+      const isPlatformValid = isGamePlatformValid(input.platform);
+
+      if (!isPlatformValid) {
+        throw new Error(`${input.platform} is not valid for ${input.title}.`);
+      }
+
+
       return getInfo(url, input, type);
     },
     games: async (_, { input }) => {
       const type = 'game';
+
+      input.forEach(game => {
+        const isPlatformValid = isGamePlatformValid(game.platform);
+
+        if (!isPlatformValid) {
+          throw new Error(`${game.platform} is not valid for ${game.title}.`);
+        }
+      });
+
       return Promise.all(
         input.map(game => getInfo(setUrl(type, game), game, type))
       );
