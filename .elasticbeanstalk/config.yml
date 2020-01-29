@@ -3,6 +3,5 @@ branch-defaults:
     environment: mcgqlapi-env 
 global:
   application_name: mcgqlapi
-  default_ec2_keyname: XXXXXX
   default_region: us-east-1
   sc: git

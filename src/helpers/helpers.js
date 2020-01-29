@@ -1,4 +1,5 @@
 const { differenceInDays } = require('date-fns');
+const cheerio = require('cheerio');
 
 const BASE_URL = 'https://www.metacritic.com';
 
@@ -11,7 +12,7 @@ function isTitleSafeToSave(titleReleaseDate) {
 }
 
 function stripTitle(title) {
-  return title.replace(/:|'|!|"|¿/g, '');
+  return title.replace(/:|'|!|"|¿|\?|,/g, '');
 }
 
 function setUrl(type, input) {
@@ -49,14 +50,28 @@ function setUrl(type, input) {
       const tvShowUrl = `${BASE_URL}/tv/${stripTitle(showTitle)
         .split(' ')
         .join('-')
-        .toLowerCase()}/`;
+        .toLowerCase()}`;
 
-      return season ? tvShowUrl + `season-${season}` : tvShowUrl
+      return season ? tvShowUrl + `/season-${season}` : tvShowUrl
+  }
+}
+
+function determineMoviePage(pages, releaseYear) {  
+  const $$ = [
+    cheerio.load(pages[0].content),
+    cheerio.load(pages[1].content)
+  ];
+
+  for (let  i = 0; i < $$.length; i++) {
+    if ($$[i]('.release_year').text() === releaseYear) {;
+      return { ...pages[i], parsedContent: $$[i] };
+    }
   }
 }
 
 module.exports = {
   isTitleSafeToSave,
   stripTitle,
-  setUrl
+  setUrl,
+  determineMoviePage
 };
