@@ -39,7 +39,8 @@ describe('Game', () => {
     game.platform.should.equal('Xbox One');
     game.criticScore.should.be.a('number');
     game.developer.should.equal('The Coalition');
-    game.publisher.should.equal('Microsoft Game Studios, Xbox Game Studios');
+    game.publisher[0].should.equal('Microsoft Game Studios');
+    game.publisher[1].should.equal('Xbox Game Studios');
     game.genres.should.be.a('array');
     game.numOfCriticReviews.should.be.a('number');
     game.numOfPositiveCriticReviews.should.be.a('number');
@@ -80,7 +81,8 @@ describe('Game', () => {
     game.platform.should.equal('Switch');
     game.criticScore.should.be.a('number');
     game.developer.should.equal('Square Enix');
-    game.publisher.should.equal('Square Enix, Nintendo');
+    game.publisher[0].should.equal('Square Enix');
+    game.publisher[1].should.equal('Nintendo');
     game.genres.should.be.a('array');
   });
 });

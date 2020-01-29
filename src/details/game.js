@@ -12,6 +12,7 @@ module.exports = function GameDetails($, url) {
   const releaseDate = $('.release_data > .data').text();
   const numOfEachReview = $('.total > .count');
   const reviewCount = [];
+  const productImage = $('.product_image.large_image').find('img').attr('src');
 
   for (let i = 0; i < numOfEachReview.length; i++) {
     reviewCount.push(
@@ -33,12 +34,13 @@ module.exports = function GameDetails($, url) {
     platform,
     criticScore,
     developer,
-    publisher: publishers.join(', '),
+    publisher: publishers,
     genres,
     releaseDate,
     numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
     numOfPositiveCriticReviews: reviewCount[0],
     numOfMixedCriticReviews: reviewCount[1],
-    numOfNegativeCriticReviews: reviewCount[2]
+    numOfNegativeCriticReviews: reviewCount[2],
+    productImage
   };
 };
