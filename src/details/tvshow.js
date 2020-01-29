@@ -1,4 +1,4 @@
-module.exports = function TVShowDetails($, url, setDetails) {
+module.exports = function TVShowDetails($, url, details) {
   // a tag when it's a season and no a tag when it's just the show overview
   const title = $('.product_page_title h1 a').text() || $('.product_page_title h1').text() ;
   const genreList = $('.genres span:last-child');
@@ -29,7 +29,7 @@ module.exports = function TVShowDetails($, url, setDetails) {
   return {
     url,
     title,
-    season: setDetails.season ? setDetails.season : 'all',
+    season: details.season ? details.season : 'all',
     criticScore,
     releaseDate,
     genres,

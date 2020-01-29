@@ -1,5 +1,5 @@
 const cheerio = require('cheerio');
-const { isTitleSafeToSave } = require('../helpers/helpers');
+const { isTitleSafeToSave, determineMoviePage } = require('../helpers/helpers');
 const { getItem, saveItem } = require('../helpers/mongo');
 const { get } = require('../helpers/request');
 const logger = require('../helpers/logger');
@@ -8,19 +8,6 @@ const AlbumDetails = require('../details/album');
 const GameDetails = require('../details/game');
 const MovieDetails = require('../details/movie');
 const TVShowDetails = require('../details/tvshow');
-
-function loadMoviePages(pages, releaseYear) {  
-  const $$ = [
-    cheerio.load(pages[0].content),
-    cheerio.load(pages[1].content)
-  ];
-
-  for (let  i = 0; i < $$.length; i++) {
-    if ($$[i]('.release_year').text() === releaseYear) {;
-      return { ...pages[i], parsedContent: $$[i] };
-    }
-  }
-}
 
 module.exports = async function getInfo(url, input, type) {
   logger.info('Getting info', input, type);
@@ -46,7 +33,7 @@ module.exports = async function getInfo(url, input, type) {
         { url: url[1], content: await get(url[1], 1) }
       ];
       
-      const { parsedContent, url: correctUrl } = loadMoviePages(pages, input.year);
+      const { parsedContent, url: correctUrl } = determineMoviePage(pages, input.year);
       $ = parsedContent;
       url = correctUrl;
     }
