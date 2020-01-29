@@ -21,7 +21,8 @@ describe('Movie', () => {
       query: movieQuery,
       variables: {
         input: {
-          title: 'Parasite'
+          title: 'Parasite',
+          year: '2019'
         }
       }
     });

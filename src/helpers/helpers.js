@@ -38,12 +38,12 @@ function setUrl(type, input) {
         .toLowerCase()}`;
     case 'movie':
       const { title, year } = input;
-      const movieTitle = year ? `${title} ${year}` : title;
+      const movieTitles = [title, `${title} ${year}`];
 
-      return `${BASE_URL}/movie/${stripTitle(movieTitle)
+      return movieTitles.map(movieTitle =>  `${BASE_URL}/movie/${stripTitle(movieTitle)
         .split(' ')
         .join('-')
-        .toLowerCase()}`;
+        .toLowerCase()}`);
     case 'tvshow':
       const { title: showTitle, season } = input;
       const tvShowUrl = `${BASE_URL}/tv/${stripTitle(showTitle)

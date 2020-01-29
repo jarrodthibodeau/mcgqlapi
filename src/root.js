@@ -46,9 +46,9 @@ module.exports = {
     },
     movie: (_, { input }) => {
       const type = 'movie';
-      const url = setUrl(type, input);
+      const urls = setUrl(type, input);
 
-      return getInfo(url, input, type);
+      return getInfo(urls, input, type);
     },
     movies: async (_, { input }) => {
       const type = 'movie';
