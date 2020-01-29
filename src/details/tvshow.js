@@ -14,6 +14,7 @@ module.exports = function TVShowDetails($, url, details) {
       .text()
       .substr(0, 2)
   );
+  const productImage = $('.summary_img').attr('src');
 
   for (let i = 0; i < numOfEachReview.length; i++) {
     reviewCount.push(
@@ -37,6 +38,7 @@ module.exports = function TVShowDetails($, url, details) {
     numOfCriticReviews: reviewCount[0] + reviewCount[1] + reviewCount[2],
     numOfPositiveCriticReviews: reviewCount[0],
     numOfMixedCriticReviews: reviewCount[1],
-    numOfNegativeCriticReviews: reviewCount[2]
+    numOfNegativeCriticReviews: reviewCount[2],
+    productImage
   };
 };

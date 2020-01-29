@@ -18,12 +18,13 @@ module.exports = gql`
     platform: String
     criticScore: Int
     developer: String
-    publisher: String
+    publisher: [String]
     genres: [String]
     numOfCriticReviews: Int
     numOfPositiveCriticReviews: Int
     numOfMixedCriticReviews: Int
     numOfNegativeCriticReviews: Int
+    productImage: String
   }
 
   input Game {
@@ -42,6 +43,7 @@ module.exports = gql`
     numOfPositiveCriticReviews: Int
     numOfMixedCriticReviews: Int
     numOfNegativeCriticReviews: Int
+    productImage: String
   }
 
   input Album {
@@ -64,6 +66,7 @@ module.exports = gql`
     numOfPositiveCriticReviews: Int
     numOfMixedCriticReviews: Int
     numOfNegativeCriticReviews: Int
+    productImage: String
   }
 
   input Movie {
@@ -82,6 +85,7 @@ module.exports = gql`
     numOfPositiveCriticReviews: Int
     numOfMixedCriticReviews: Int
     numOfNegativeCriticReviews: Int
+    productImage: String
   }
 
   input TVShow {
