@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+const logger = require('../helpers/logger');
 
 async function getItem(query, collectionName) {
   try {
@@ -9,9 +10,23 @@ async function getItem(query, collectionName) {
       .db('metacritic-graphql-api')
       .collection(collectionName);
 
-    logger.info('Finding product for:', query, collectionName);
+    logger.info('Finding product', query, collectionName);
 
-    const item = await collection.findOne(query);
+    let item;
+
+    if (collectionName !== 'movie') {
+      item = await collection.findOne(query);
+    } else {
+      const { url: urls } = query;
+      const urlWithYearSplit = urls[1].split('-');
+      const yearInURL = urlWithYearSplit[urlWithYearSplit.length - 1];
+      
+      item = await collection.findOne({
+        $or: [{url: urls[0]}, {url: urls[1]}],
+        year: yearInURL
+      });
+    }
+
     await connection.close();
     return item;
   } catch (e) {

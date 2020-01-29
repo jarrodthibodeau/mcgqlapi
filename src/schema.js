@@ -67,8 +67,8 @@ module.exports = gql`
   }
 
   input Movie {
-    title: String!,
-    year: String
+    title: String!
+    year: String!
   }
 
   type TVShowInfo {
