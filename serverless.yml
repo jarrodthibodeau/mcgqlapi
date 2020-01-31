@@ -9,7 +9,7 @@ functions:
   graphql:
     handler: index.graphqlHandler
     environment:
-      MONGODB_URI: ${param:mcgqlapi-mongodb-uri}
+      MONGODB_URI: ${ssm:/path/to/service/MCGQLAPI_MONGODB_URI}
       DAYS_TIL_SAVE_TO_DB: 30
       SAVE_TO_DB: true
     events:
