@@ -13,7 +13,7 @@ module.exports = async function getInfo(url, input, type) {
   logger.info('Getting info', input, type);
 
   try {
-    if (process.env.SAVE_TO_DB == 'true' && process.env.ENVIRONMENT !== 'test') {
+    if (process.env.SAVE_TO_DB == 'true') {
       const item = await getItem({ url }, type);
 
       if (item) {
@@ -60,7 +60,7 @@ module.exports = async function getInfo(url, input, type) {
       throw new Error(`Product not found for: ${JSON.stringify(input, 2)}, ${type}`);
     }
 
-    if (process.env.SAVE_TO_DB == 'true' && process.env.ENVIRONMENT !== 'test') {
+    if (process.env.SAVE_TO_DB == 'true') {
       if (isTitleSafeToSave) {
         await saveItem(details, type);
       }

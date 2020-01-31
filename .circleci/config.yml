@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  cli: sbc-orbs/awsebcli@0.0.3
 jobs:
   build:
     docker:
@@ -14,16 +12,20 @@ jobs:
          name: Run the tests
          command: npm test
   deploy:
-    executor: cli/default
     steps: 
-      - checkout 
-      - cli/install
+      - checkout
       - run:
-          name: Set environment configuration
-          command: eb setenv SAVE_TO_DB=$SAVE_TO_DB MONGODB_URI=$MONGODB_URI DAYS_TIL_SAVE_TO_DB=$DAYS_TIL_SAVE_TO_DB
+          name: Installing prod specific dependencies
+          command: npm i --production
+      - run:
+          name: Installing serverless
+          command: npm i -g serverless
+      - run:
+          name: Set AWS creds
+          command: export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} && export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - run:
           name: Deploying
-          command: eb deploy mcgqlapi-env
+          command: serverless deploy --stage prod
 
 workflows:
   version: 2
