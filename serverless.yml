@@ -14,6 +14,10 @@ functions:
       SAVE_TO_DB: true
     events:
     - http:
-        path: /
+        path: graphql
         method: post
+        cors: true
+    - http:
+        path: graphql
+        method: get
         cors: true
