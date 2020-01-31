@@ -1,7 +1,0 @@
-branch-defaults:
-  master:
-    environment: mcgqlapi-env 
-global:
-  application_name: mcgqlapi
-  default_region: us-east-1
-  sc: git

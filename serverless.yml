@@ -1,0 +1,19 @@
+plugins:
+  serverless-offline
+
+service: mcgqlapi
+provider:
+  name: aws
+  runtime: nodejs12.x
+functions:
+  graphql:
+    handler: index.graphqlHandler
+    environment:
+      MONGODB_URI: $(ssm:/aws/reference/secretsmanager/mcgqlapi-mongo-uri~true)
+      DAYS_TIL_SAVE_TO_DB: 30
+      SAVE_TO_DB: true
+    events:
+    - http:
+        path: /
+        method: post
+        cors: true
