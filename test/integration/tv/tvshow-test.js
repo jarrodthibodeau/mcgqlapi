@@ -50,7 +50,7 @@ describe('TV Show', () => {
         input: {
           title: 'Bojack Horseman',
           season: '6.5'
-	}
+        }
       }
     });
 
@@ -64,28 +64,28 @@ describe('TV Show', () => {
   it('should rertieve an overview of a tv season if a season is not passed in', async () => {
     const tvShowQuery = gql`
       query($input: TVShow!) {
-	tvshow(input: $input) {
-	  title
-	  season
-	  criticScore
-	}
+        tvshow(input: $input) {
+          title
+          season
+          criticScore
+        }
       }
     `;
 
     const tvShowQueryResult = await query({
       query: tvShowQuery,
       variables: {
-	input: {
-	  title: 'GLOW'
-	}
+        input: {
+          title: 'GLOW'
+        }
       }
     });
-    
+
     const { tvshow } = tvShowQueryResult.data;
 
     tvshow.title.should.equal('GLOW');
     tvshow.season.should.equal('all');
     tvshow.criticScore.should.be.a('number');
-  }); 
+  });
 });
 
