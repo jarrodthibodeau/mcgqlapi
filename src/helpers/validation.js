@@ -3,6 +3,7 @@ function isGamePlatformValid(platform) {
         'pc',
         'ios',
         'dreamcast',
+        'gameboy advance',
         'ds',
         '3ds',
         'nintendo 64',
