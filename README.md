@@ -4,6 +4,7 @@ The unofficial API for [Metacritic](https://metacritic.com)
 
 ## Table of Contents 
 - [Endpoint](#endpoint)
+- [Example](#example)
 - [Queries](#queries)
     - [game](#game)
     - [games](#games)
@@ -25,6 +26,62 @@ All queries need to be directed to `https://mcgqlapi.com`.
 You can mess around with the API [here](https://mcgqlapi.com) to get a feel for things.
 
 If you do not want to use the playground above, I recommend using something like [Altair](https://altair.sirmuel.design/)
+
+## Example
+Here is what an example request would look like.
+
+What if I wanted to get all the available information the API provides about Resident Evil 2 (2019) for the PlayStation 4?
+This is what it would look like 
+
+```
+query {
+  game(input: {
+    title: "Resident Evil 2",
+    platform: "PlayStation 4"
+  }) {
+    url
+    title
+    platform
+    criticScore
+    developer
+    publisher
+    genres
+    numOfCriticReviews
+    numOfPositiveCriticReviews
+    numOfMixedCriticReviews
+    numOfNegativeCriticReviews
+    productImage
+  }
+}
+```
+
+the above request will return this response 
+
+```
+{
+  "data": {
+    "game": {
+      "url": "https://www.metacritic.com/game/playstation-4/resident-evil-2",
+      "title": "Resident Evil 2",
+      "platform": "PlayStation 4",
+      "criticScore": 91,
+      "developer": "Capcom R&D Division 1",
+      "publisher": [
+        "Capcom"
+      ],
+      "genres": [
+        "Action Adventure",
+        "Survival"
+      ],
+      "numOfCriticReviews": 85,
+      "numOfPositiveCriticReviews": 84,
+      "numOfMixedCriticReviews": 1,
+      "numOfNegativeCriticReviews": 0,
+      "productImage": "https://static.metacritic.com/images/products/games/6/fb1f200c3315a838e3ae1aa4f1f77045-98.jpg"
+    }
+  }
+}
+```
 
 ## Queries
 ### game 
