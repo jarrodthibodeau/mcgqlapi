@@ -70,7 +70,7 @@ module.exports = async function getInfo(url, input, type) {
     
     return details;
   } catch (err) {
-    logger.error('Error getting info', err);
+    logger.error('Error getting info ', err);
     throw new Error(err);
   }
 };
