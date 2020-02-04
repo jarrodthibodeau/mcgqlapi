@@ -1,6 +1,6 @@
 # mcgqlapi
 
-The unofficial API for [Metacritic](https://metacritic.com)
+The unofficial GraphQL API for [Metacritic](https://metacritic.com)
 
 ## Table of Contents 
 - [Endpoint](#endpoint)
