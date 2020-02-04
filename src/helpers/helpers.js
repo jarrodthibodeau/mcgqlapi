@@ -52,7 +52,7 @@ function setUrl(type, input) {
         .join('-')
         .toLowerCase()}`;
 
-      return season ? tvShowUrl + `/season-${season}` : tvShowUrl
+      return season ? tvShowUrl + `/season-${season.replace('.', '-')}` : tvShowUrl
   }
 }
 

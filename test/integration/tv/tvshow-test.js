@@ -32,4 +32,60 @@ describe('TV Show', () => {
     tvshow.season.should.equal('1');
     tvshow.criticScore.should.be.a('number');
   });
+
+  it('should retrieve information about a TV show whose season is a half season', async () => {
+    const tvShowQuery = gql`
+      query($input: TVShow!) {
+        tvshow(input: $input) {
+          title
+          season
+          criticScore
+        }
+      }
+    `;
+
+    const tvShowQueryResult = await query({
+      query: tvShowQuery,
+      variables: {
+        input: {
+          title: 'Bojack Horseman',
+          season: '6.5'
+	}
+      }
+    });
+
+    const { tvshow } = tvShowQueryResult.data;
+
+    tvshow.title.should.equal('BoJack Horseman');
+    tvshow.season.should.equal('6.5');
+    tvshow.criticScore.should.be.a('number');
+  });
+
+  it('should rertieve an overview of a tv season if a season is not passed in', async () => {
+    const tvShowQuery = gql`
+      query($input: TVShow!) {
+	tvshow(input: $input) {
+	  title
+	  season
+	  criticScore
+	}
+      }
+    `;
+
+    const tvShowQueryResult = await query({
+      query: tvShowQuery,
+      variables: {
+	input: {
+	  title: 'GLOW'
+	}
+      }
+    });
+    
+    const { tvshow } = tvShowQueryResult.data;
+
+    tvshow.title.should.equal('GLOW');
+    tvshow.season.should.equal('all');
+    tvshow.criticScore.should.be.a('number');
+  }); 
 });
+

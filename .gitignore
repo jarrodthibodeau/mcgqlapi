@@ -1,4 +1,4 @@
 node_modules
 prod.env
+.serverless
 *.log
-./.serverless
