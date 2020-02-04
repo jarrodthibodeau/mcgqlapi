@@ -17,6 +17,7 @@ module.exports = gql`
     title: String!
     platform: String!
     criticScore: Int!
+    releaseDate: String!
     developer: String!
     publisher: [String!]
     genres: [String!]
@@ -36,6 +37,7 @@ module.exports = gql`
     url: String!
     album: String!
     artist: String!
+    releaseDate: String!
     criticScore: Int!
     publisher: String!
     genres: [String!]
@@ -57,6 +59,7 @@ module.exports = gql`
     criticScore: Int!
     year: String!
     director: [String!]
+    releaseDate: String!
     genres: [String!]
     cast: [String!]
     rating: String!
@@ -79,6 +82,7 @@ module.exports = gql`
     title: String!
     season: String!
     criticScore: Int!
+    releaseDate: String!
     genres: [String!]
     summary: String!
     numOfCriticReviews: Int!
