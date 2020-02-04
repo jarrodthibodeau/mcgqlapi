@@ -43,6 +43,7 @@ query {
     title
     platform
     criticScore
+    releaseDate
     developer
     publisher
     genres
@@ -65,6 +66,7 @@ the above request will return this response
       "title": "Resident Evil 2",
       "platform": "PlayStation 4",
       "criticScore": 91,
+      "releaseDate": "Jan 25, 2019",
       "developer": "Capcom R&D Division 1",
       "publisher": [
         "Capcom"
