@@ -61,7 +61,7 @@ describe('TV Show', () => {
     tvshow.criticScore.should.be.a('number');
   });
 
-  it('should rertieve an overview of a tv season if a season is not passed in', async () => {
+  it('should retrieve an overview of a tv season if a season is not passed in', async () => {
     const tvShowQuery = gql`
       query($input: TVShow!) {
         tvshow(input: $input) {

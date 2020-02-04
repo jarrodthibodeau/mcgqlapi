@@ -14,17 +14,17 @@ module.exports = gql`
 
   type GameInfo {
     url: String!
-    title: String
-    platform: String
-    criticScore: Int
-    developer: String
-    publisher: [String]
-    genres: [String]
-    numOfCriticReviews: Int
-    numOfPositiveCriticReviews: Int
-    numOfMixedCriticReviews: Int
-    numOfNegativeCriticReviews: Int
-    productImage: String
+    title: String!
+    platform: String!
+    criticScore: Int!
+    developer: String!
+    publisher: [String!]
+    genres: [String!]
+    numOfCriticReviews: Int!
+    numOfPositiveCriticReviews: Int!
+    numOfMixedCriticReviews: Int!
+    numOfNegativeCriticReviews: Int!
+    productImage: String!
   }
 
   input Game {
@@ -34,16 +34,16 @@ module.exports = gql`
 
   type AlbumInfo {
     url: String!
-    album: String
-    artist: String
-    criticScore: Int
-    publisher: String
-    genres: [String]
-    numOfCriticReviews: Int
-    numOfPositiveCriticReviews: Int
-    numOfMixedCriticReviews: Int
-    numOfNegativeCriticReviews: Int
-    productImage: String
+    album: String!
+    artist: String!
+    criticScore: Int!
+    publisher: String!
+    genres: [String!]
+    numOfCriticReviews: Int!
+    numOfPositiveCriticReviews: Int!
+    numOfMixedCriticReviews: Int!
+    numOfNegativeCriticReviews: Int!
+    productImage: String!
   }
 
   input Album {
@@ -53,20 +53,20 @@ module.exports = gql`
 
   type MovieInfo {
     url: String!
-    title: String
-    criticScore: Int
-    year: String
-    director: [String]
-    genres: [String]
-    cast: [String]
-    rating: String
-    runtime: String
-    summary: String
-    numOfCriticReviews: Int
-    numOfPositiveCriticReviews: Int
-    numOfMixedCriticReviews: Int
-    numOfNegativeCriticReviews: Int
-    productImage: String
+    title: String!
+    criticScore: Int!
+    year: String!
+    director: [String!]
+    genres: [String!]
+    cast: [String!]
+    rating: String!
+    runtime: String!
+    summary: String!
+    numOfCriticReviews: Int!
+    numOfPositiveCriticReviews: Int!
+    numOfMixedCriticReviews: Int!
+    numOfNegativeCriticReviews: Int!
+    productImage: String!
   }
 
   input Movie {
@@ -76,16 +76,16 @@ module.exports = gql`
 
   type TVShowInfo {
     url: String!
-    title: String
-    season: String
-    criticScore: Int
-    genres: [String]
-    summary: String
-    numOfCriticReviews: Int
-    numOfPositiveCriticReviews: Int
-    numOfMixedCriticReviews: Int
-    numOfNegativeCriticReviews: Int
-    productImage: String
+    title: String!
+    season: String!
+    criticScore: Int!
+    genres: [String!]
+    summary: String!
+    numOfCriticReviews: Int!
+    numOfPositiveCriticReviews: Int!
+    numOfMixedCriticReviews: Int!
+    numOfNegativeCriticReviews: Int!
+    productImage: String!
   }
 
   input TVShow {

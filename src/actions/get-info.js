@@ -56,8 +56,8 @@ module.exports = async function getInfo(url, input, type) {
     }
 
     if (isNaN(details.criticScore)) {
-      logger.error(`Product not found`, input);
-      throw new Error(`Product not found for: ${JSON.stringify(input, 2)}, ${type}`);
+      logger.error(`Product has no reviews or does not exist`, input);
+      throw new Error(`Product has no reviews or does not exist for: ${JSON.stringify(input, 2)}, ${type}`);
     }
 
     if (process.env.SAVE_TO_DB == 'true') {
@@ -70,7 +70,7 @@ module.exports = async function getInfo(url, input, type) {
     
     return details;
   } catch (err) {
-    logger.error('Error getting info', err);
+    logger.error('Error getting info ', err);
     throw new Error(err);
   }
 };
