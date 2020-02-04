@@ -158,6 +158,11 @@ the above request will return this response
         <td>The Metacritic score of the product</td>
     </tr>
     <tr>
+        <td>releaseDate</td>
+        <td>String</td>
+        <td>The release date of the product</td>
+    </tr>
+    <tr>
         <td>developer</td>
         <td>String</td>
         <td>The developer of the game</td>
@@ -270,6 +275,11 @@ the above request will return this response
         <td>criticScore</td>
         <td>Int</td>
         <td>The Metacritic score of the product</td>
+    </tr>
+    <tr>
+        <td>releaseDate</td>
+        <td>String</td>
+        <td>The release date of the product</td>
     </tr>
     <tr>
         <td>year</td>
@@ -405,6 +415,11 @@ the above request will return this response
         <td>The Metacritic score of the product</td>
     </tr>
     <tr>
+        <td>releaseDate</td>
+        <td>String</td>
+        <td>The release date of the product</td>
+    </tr>
+    <tr>
         <td>genres</td>
         <td>[String]</td>
         <td>The genres of the product</td>
@@ -511,6 +526,11 @@ the above request will return this response
         <td>criticScore</td>
         <td>Int</td>
         <td>The Metacritic score of the product</td>
+    </tr>
+    <tr>
+        <td>releaseDate</td>
+        <td>String</td>
+        <td>The release date of the product</td>
     </tr>
     <tr>
         <td>publisher</td>
