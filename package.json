@@ -11,6 +11,7 @@
   "author": "Jarrod Thibodeau",
   "license": "ISC",
   "dependencies": {
+    "apollo-server": "^2.16.0",
     "apollo-server-lambda": "^2.9.16",
     "cheerio": "^1.0.0-rc.3",
     "date-fns": "^2.8.1",
@@ -21,7 +22,6 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "apollo-server": "^2.9.16",
     "apollo-server-testing": "^2.9.16",
     "chai": "^4.2.0",
     "i": "^0.3.6",
