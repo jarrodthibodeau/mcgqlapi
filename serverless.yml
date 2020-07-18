@@ -12,6 +12,7 @@ functions:
       MONGODB_URI: ${ssm:MCGQLAPI_MONGODB_URI}
       DAYS_TIL_SAVE_TO_DB: 30
       SAVE_TO_DB: true
+      ENVIRONMENT: prod
     events:
     - http:
         path: /
