@@ -21,7 +21,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "apollo-server": "^2.9.16",
+    "apollo-server": "^2.14.2",
     "apollo-server-testing": "^2.9.16",
     "chai": "^4.2.0",
     "i": "^0.3.6",
