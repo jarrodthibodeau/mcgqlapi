@@ -6,9 +6,16 @@ require('dotenv').config({
     path: path.resolve(__dirname, `./${process.env.ENVIRONMENT}.env`)
 });
 
-exports.graphqlHandler = server.createHandler({
-  cors: {
-    origin: '*',
-    credentials: true
-  }
-});
+if (process.env.ENVIRONMENT === 'prod') {
+  exports.graphqlHandler = server.createHandler({
+    cors: {
+      origin: '*',
+      credentials: true
+    }
+  });  
+} else {
+  server.listen().then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`);
+  });
+}
+
