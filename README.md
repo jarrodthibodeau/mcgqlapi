@@ -122,11 +122,14 @@ the above request will return this response
                 <li>playstation 2</li>
                 <li>playstation 3</li>
                 <li>playstation 4</li>
+                <li>playstation 5</li>
                 <li>psp</li>
                 <li>playstation vita</li>
                 <li>xbox</li>
                 <li>xbox 360</li>
                 <li>xbox one</li>
+                <li>xbox series x</li>
+                <li>stadia</li>
             <ul>
         </td>
     </tr>
