@@ -41,6 +41,18 @@ describe('Games', () => {
       {
         title: 'Sayonara Wild Hearts',
         platform: 'iOS'
+      },
+      {
+        title: 'GYLT',
+        platform: 'Stadia'
+      },
+      {
+        title: `Demon's Souls`,
+        platform: 'PlayStation 5',
+      },
+      {
+        title: 'Call of the Sea',
+        platform: 'Xbox Series X'
       }
     ];
     
