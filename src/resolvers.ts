@@ -1,6 +1,6 @@
-const getInfo = require('./actions/get-info');
-const { setUrl } = require('./helpers/helpers');
-const { isGamePlatformValid } = require('./helpers/validation');
+import { getInfo } from './actions/get-info';
+import { setUrl } from './helpers/helpers';
+import { isGamePlatformValid } from './helpers/validation';
 
 export const resolvers =  {
   Query: {

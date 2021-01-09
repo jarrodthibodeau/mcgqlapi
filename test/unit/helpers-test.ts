@@ -1,9 +1,9 @@
-const { should } = require('chai');
-const {
+import { should } from 'chai';
+import  {
     isTitleSafeToSave,
     setUrl,
     stripTitle
-} = require('../../src/helpers/helpers');
+} from '../../src/helpers/helpers';
 
 should();
 

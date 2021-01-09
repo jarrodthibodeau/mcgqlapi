@@ -1,12 +1,12 @@
-const { query } = require('../../index');
-const { gql } = require('apollo-server-lambda');
-const { should } = require('chai');
+import { should } from 'chai';
+import { post } from '../../../src/helpers/request';
+import { API_URL } from '../config';
 
 should();
 
 describe('Game', () => {
   it('should retrieve the information of a game when a title and console are received', async () => {
-    const gameQuery = gql`
+    const gameQuery = `
       query($input: Game!) {
         game(input: $input) {
           title
@@ -23,7 +23,7 @@ describe('Game', () => {
       }
     `;
 
-    const gameQueryResult = await query({
+    const gameQueryResult = await post(API_URL,{
       query: gameQuery,
       variables: {
         input: {
@@ -49,7 +49,7 @@ describe('Game', () => {
   });
 
   it('should retrieve the information for a game with a weird title', async () => {
-    const gameQuery = gql`
+    const gameQuery = `
       query($input: Game!) {
         game(input: $input) {
           title
@@ -62,7 +62,7 @@ describe('Game', () => {
       }
     `;
 
-    const gameQueryResult = await query({
+    const gameQueryResult = await post(API_URL, {
       query: gameQuery,
       variables: {
         input: {

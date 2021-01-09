@@ -8,8 +8,9 @@ export function isTitleSafeToSave(titleReleaseDate) {
     Date.now(),
     new Date(titleReleaseDate)
   );
+  const daysTilSaveToDb = Number(process.env.DAYS_TIL_SAVE_TO_DB) || 30;
 
-  return daysSinceRelease >= Number(process.env.DAYS_TIL_SAVE_TO_DB);
+  return daysSinceRelease >= daysTilSaveToDb;
 }
 
 export function stripTitle(title) {

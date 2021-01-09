@@ -1,10 +1,10 @@
-import winston from 'winston';
+import { createLogger, transports } from 'winston';
 
-export const logger = winston.createLogger({
+export const logger = createLogger({
     level: 'info',
     transports: [
-        new winston.transports.Console(),
-        new winston.transports.File({ filename: 'error.log', level: 'error' }),
-        new winston.transports.File({ filename: 'combined.log'})
+        new transports.Console(),
+        new transports.File({ filename: 'error.log', level: 'error' }),
+        new transports.File({ filename: 'combined.log'})
     ]
 });
