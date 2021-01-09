@@ -1,8 +1,8 @@
-const getInfo = require('./actions/get-info');
-const { setUrl } = require('./helpers/helpers');
-const { isGamePlatformValid } = require('./helpers/validation');
+import { getInfo } from './actions/get-info';
+import { setUrl } from './helpers/helpers';
+import { isGamePlatformValid } from './helpers/validation';
 
-module.exports = {
+export const resolvers = {
   Query: {
     game: (_, { input }) => {
       const type = 'game';
@@ -14,13 +14,12 @@ module.exports = {
         throw new Error(`${input.platform} is not valid for ${input.title}.`);
       }
 
-
       return getInfo(url, input, type);
     },
     games: async (_, { input }) => {
       const type = 'game';
 
-      input.forEach(game => {
+      input.forEach((game) => {
         const isPlatformValid = isGamePlatformValid(game.platform);
 
         if (!isPlatformValid) {
@@ -29,7 +28,7 @@ module.exports = {
       });
 
       return Promise.all(
-        input.map(game => getInfo(setUrl(type, game), game, type))
+        input.map((game) => getInfo(setUrl(type, game), game, type))
       );
     },
     album: (_, { input }) => {
@@ -41,7 +40,7 @@ module.exports = {
     albums: async (_, { input }) => {
       const type = 'album';
       return Promise.all(
-        input.map(album => getInfo(setUrl(type, album), album, type))
+        input.map((album) => getInfo(setUrl(type, album), album, type))
       );
     },
     movie: (_, { input }) => {
@@ -53,7 +52,7 @@ module.exports = {
     movies: async (_, { input }) => {
       const type = 'movie';
       return Promise.all(
-        input.map(movie => getInfo(setUrl(type, movie), movie, type))
+        input.map((movie) => getInfo(setUrl(type, movie), movie, type))
       );
     },
     tvshow: (_, { input }) => {
@@ -65,8 +64,8 @@ module.exports = {
     tvshows: async (_, { input }) => {
       const type = 'tvshow';
       return Promise.all(
-        input.map(tvshow => getInfo(setUrl(type, tvshow), tvshow, type))
+        input.map((tvshow) => getInfo(setUrl(type, tvshow), tvshow, type))
       );
-    }
-  }
+    },
+  },
 };

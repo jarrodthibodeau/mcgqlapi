@@ -1,10 +1,10 @@
-const { MongoClient } = require('mongodb');
-const logger = require('../helpers/logger');
+import { MongoClient } from 'mongodb';
+import { logger } from '../helpers/logger';
 
-async function getItem(query, collectionName) {
+export async function getItem(query, collectionName) {
   try {
     const connection = await new MongoClient(process.env.MONGODB_URI, {
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     }).connect();
     const collection = await connection
       .db('metacritic-graphql-api')
@@ -20,10 +20,10 @@ async function getItem(query, collectionName) {
       const { url: urls } = query;
       const urlWithYearSplit = urls[1].split('-');
       const yearInURL = urlWithYearSplit[urlWithYearSplit.length - 1];
-      
+
       item = await collection.findOne({
-        $or: [{url: urls[0]}, {url: urls[1]}],
-        year: yearInURL
+        $or: [{ url: urls[0] }, { url: urls[1] }],
+        year: yearInURL,
       });
     }
 
@@ -35,10 +35,10 @@ async function getItem(query, collectionName) {
   }
 }
 
-async function saveItem(item, collectionName) {
+export async function saveItem(item, collectionName) {
   try {
     const connection = await new MongoClient(process.env.MONGODB_URI, {
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     }).connect();
     const collection = await connection
       .db('metacritic-graphql-api')
@@ -54,8 +54,3 @@ async function saveItem(item, collectionName) {
     return e;
   }
 }
-
-module.exports = {
-  getItem,
-  saveItem
-};

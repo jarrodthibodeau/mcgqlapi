@@ -1,12 +1,12 @@
-const { query } = require('../../index');
-const { gql } = require('apollo-server-lambda');
-const { should } = require('chai');
+import { should } from 'chai';
+import { post } from '../../../src/helpers/request';
+import { API_URL } from '../config';
 
 should();
 
 describe('Album', () => {
   it('should retrieve information about an album when provided a artist and album title', async () => {
-    const albumQuery = gql`
+    const albumQuery = `
       query($input: Album!) {
         album(input: $input) {
           album
@@ -21,14 +21,14 @@ describe('Album', () => {
       }
     `;
 
-    const albumQueryResult = await query({
+    const albumQueryResult = await post(API_URL, {
       query: albumQuery,
       variables: {
         input: {
           artist: 'Danny Brown',
-          album: 'uknowhatimsayin¿'
-        }
-      }
+          album: 'uknowhatimsayin¿',
+        },
+      },
     });
 
     const { album } = albumQueryResult.data;

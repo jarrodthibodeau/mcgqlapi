@@ -4,15 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ENVIRONMENT=prod npx nodemon ./index.js",
-    "start-dev": "ENVIRONMENT=dev npx nodemon ./index.js",
-    "test": "ENVIRONMENT=test npx mocha --opts .mocharc ./test"
+    "test": "npx mocha --opts .mocharc -r ts-node/register 'test/**/*.ts'"
   },
   "author": "Jarrod Thibodeau",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.16.0",
-    "apollo-server-lambda": "^2.14.2",
+    "apollo-server-micro": "^2.19.1",
     "cheerio": "^1.0.0-rc.3",
     "date-fns": "^2.8.1",
     "dotenv": "^8.2.0",
@@ -22,12 +19,14 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "apollo-server-testing": "^2.9.16",
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.2.0",
     "chai": "^4.2.0",
-    "i": "^0.3.6",
     "mocha": "^6.2.1",
     "nodemon": "^1.19.2",
     "npm": "^6.14.6",
-    "serverless-offline": "^5.12.1"
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
   }
 }

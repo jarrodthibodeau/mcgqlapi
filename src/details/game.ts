@@ -2,9 +2,7 @@ module.exports = function GameDetails($, url) {
   const title = $('.product_title a h1').text();
   const platform = $('.platform').text().trim();
   const criticScore = parseInt($('.metascore_w.game > span').text());
-  const developer = $('.developer > .data')
-    .text()
-    .trim();
+  const developer = $('.developer > .data').text().trim();
   const genreList = $('.product_genre > .data');
   const genres = [];
   const publisher = $('.publisher > .data > a');
@@ -41,6 +39,6 @@ module.exports = function GameDetails($, url) {
     numOfPositiveCriticReviews: reviewCount[0],
     numOfMixedCriticReviews: reviewCount[1],
     numOfNegativeCriticReviews: reviewCount[2],
-    productImage
+    productImage,
   };
 };

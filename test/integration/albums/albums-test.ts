@@ -1,12 +1,12 @@
-const { query } = require('../../index');
-const { gql } = require('apollo-server-lambda');
-const { should } = require('chai');
+import { should } from 'chai';
+import { post } from '../../../src/helpers/request';
+import { API_URL } from '../config';
 
 should();
 
 describe('Albums', () => {
   it('should successfully retrieve information on multiple albums', async () => {
-    const albumsQuery = gql`
+    const albumsQuery = `
       query($input: [Album!]) {
         albums(input: $input) {
           album
@@ -24,31 +24,31 @@ describe('Albums', () => {
     const testAlbums = [
       {
         artist: 'Idles',
-        album: 'Joy As an Act of Resistance'
+        album: 'Joy As an Act of Resistance',
       },
       {
         artist: 'Carly Rae Jepsen',
-        album: 'E-MO-TION'
+        album: 'E-MO-TION',
       },
       {
         artist: 'Lizzo',
-        album: 'Cuz I Love You'
+        album: 'Cuz I Love You',
       },
       {
         artist: 'Kacey Musgraves',
-        album: 'Golden Hour'
+        album: 'Golden Hour',
       },
       {
         artist: 'Run the Jewels',
-        album: 'Run the Jewels 3'
-      }
+        album: 'Run the Jewels 3',
+      },
     ];
-    
-    const albumsQueryResult = await query({
+
+    const albumsQueryResult = await post(API_URL, {
       query: albumsQuery,
       variables: {
-        input: testAlbums
-      }
+        input: testAlbums,
+      },
     });
 
     const { albums } = albumsQueryResult.data;

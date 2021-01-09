@@ -2,22 +2,16 @@ module.exports = function MovieDetails($, url) {
   const title = $('.product_page_title h1').text();
   const year = $('.release_year').text();
   const criticScore = parseInt(
-    $('.metascore_w.larger.movie')
-      .text()
-      .substr(0, 2)
+    $('.metascore_w.larger.movie').text().substr(0, 2)
   );
   const genreList = $('.genres span:last-child');
   const genres = [];
-  const summary = $('.summary_deck .blurb.blurb_expanded')
-    .text()
-    .trim();
+  const summary = $('.summary_deck .blurb.blurb_expanded').text().trim();
   const numOfEachReview = $('.count.fr');
   const reviewCount = [];
   const releaseDate = $('.release_date span:last-child').text();
   const runtime = $('.runtime span:last-child').text();
-  const rating = $('.rating span:last-child')
-    .text()
-    .trim();
+  const rating = $('.rating span:last-child').text().trim();
   const directorList = $('.director > a');
   const director = [];
   const castList = $('.summary_cast.details_section span:last-child a');
@@ -59,6 +53,6 @@ module.exports = function MovieDetails($, url) {
     numOfPositiveCriticReviews: reviewCount[0],
     numOfMixedCriticReviews: reviewCount[1],
     numOfNegativeCriticReviews: reviewCount[2],
-    productImage
+    productImage,
   };
 };

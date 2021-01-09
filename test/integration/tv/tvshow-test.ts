@@ -1,12 +1,12 @@
-const { query } = require('../../index');
-const { gql } = require('apollo-server-lambda');
-const { should } = require('chai');
+import { should } from 'chai';
+import { post } from '../../../src/helpers/request';
+import { API_URL } from '../config';
 
 should();
 
 describe('TV Show', () => {
   it('should retrieve information about a TV show when a show title and season is provided', async () => {
-    const tvShowQuery = gql`
+    const tvShowQuery = `
       query($input: TVShow!) {
         tvshow(input: $input) {
           title
@@ -16,14 +16,14 @@ describe('TV Show', () => {
       }
     `;
 
-    const tvShowQueryResult = await query({
+    const tvShowQueryResult = await post(API_URL, {
       query: tvShowQuery,
       variables: {
         input: {
           title: `Genndy Tartakovsky's Primal`,
-          season: '1'
-        }
-      }
+          season: '1',
+        },
+      },
     });
 
     const { tvshow } = tvShowQueryResult.data;
@@ -34,7 +34,7 @@ describe('TV Show', () => {
   });
 
   it('should retrieve information about a TV show whose season is a half season', async () => {
-    const tvShowQuery = gql`
+    const tvShowQuery = `
       query($input: TVShow!) {
         tvshow(input: $input) {
           title
@@ -44,14 +44,14 @@ describe('TV Show', () => {
       }
     `;
 
-    const tvShowQueryResult = await query({
+    const tvShowQueryResult = await post(API_URL, {
       query: tvShowQuery,
       variables: {
         input: {
           title: 'Bojack Horseman',
-          season: '6.5'
-        }
-      }
+          season: '6.5',
+        },
+      },
     });
 
     const { tvshow } = tvShowQueryResult.data;
@@ -62,7 +62,7 @@ describe('TV Show', () => {
   });
 
   it('should retrieve an overview of a tv season if a season is not passed in', async () => {
-    const tvShowQuery = gql`
+    const tvShowQuery = `
       query($input: TVShow!) {
         tvshow(input: $input) {
           title
@@ -72,13 +72,13 @@ describe('TV Show', () => {
       }
     `;
 
-    const tvShowQueryResult = await query({
+    const tvShowQueryResult = await post(API_URL, {
       query: tvShowQuery,
       variables: {
         input: {
-          title: 'GLOW'
-        }
-      }
+          title: 'GLOW',
+        },
+      },
     });
 
     const { tvshow } = tvShowQueryResult.data;
@@ -88,4 +88,3 @@ describe('TV Show', () => {
     tvshow.criticScore.should.be.a('number');
   });
 });
-

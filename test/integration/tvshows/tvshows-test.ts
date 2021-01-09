@@ -1,12 +1,12 @@
-const { query } = require('../../index');
-const { gql } = require('apollo-server-lambda');
-const { should } = require('chai');
+import { should } from 'chai';
+import { post } from '../../../src/helpers/request';
+import { API_URL } from '../config';
 
 should();
 
 describe('TV Shows', () => {
   it('should successfully retrieve information on multiple TV Shows', async () => {
-    const tvShowsQuery = gql`
+    const tvShowsQuery = `
       query($input: [TVShow!]) {
         tvshows(input: $input) {
           title
@@ -20,31 +20,31 @@ describe('TV Shows', () => {
     const testTVShows = [
       {
         title: 'Game of Thrones',
-        season: '1'
+        season: '1',
       },
       {
         title: 'Breaking Bad',
-        season: '2'
+        season: '2',
       },
       {
         title: 'Hannibal',
-        season: '3'
+        season: '3',
       },
       {
         title: 'Fleabag',
-        season: '2'
+        season: '2',
       },
       {
         title: 'Broad City',
-        season: '4'
-      }
+        season: '4',
+      },
     ];
 
-    const tvShowsQueryResult = await query({
+    const tvShowsQueryResult = await post(API_URL, {
       query: tvShowsQuery,
       variables: {
-        input: testTVShows
-      }
+        input: testTVShows,
+      },
     });
 
     const { tvshows: tvShows } = tvShowsQueryResult.data;

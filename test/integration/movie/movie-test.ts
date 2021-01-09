@@ -1,12 +1,12 @@
-const { query } = require('../../index');
-const { gql } = require('apollo-server-lambda');
-const { should } = require('chai');
+import { should } from 'chai';
+import { post } from '../../../src/helpers/request';
+import { API_URL } from '../config';
 
 should();
 
 describe('Movie', () => {
   it('should get information about a movie if a title is provided', async () => {
-    const movieQuery = gql`
+    const movieQuery = `
       query($input: Movie!) {
         movie(input: $input) {
           title
@@ -17,14 +17,14 @@ describe('Movie', () => {
       }
     `;
 
-    const movieQueryResult = await query({
+    const movieQueryResult = await post(API_URL, {
       query: movieQuery,
       variables: {
         input: {
           title: 'Parasite',
-          year: '2019'
-        }
-      }
+          year: '2019',
+        },
+      },
     });
 
     const { movie } = movieQueryResult.data;

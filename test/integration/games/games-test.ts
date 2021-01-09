@@ -1,12 +1,12 @@
-const { query } = require('../../index');
-const { gql } = require('apollo-server-lambda');
-const { should } = require('chai');
+import { should } from 'chai';
+import { post } from '../../../src/helpers/request';
+import { API_URL } from '../config';
 
 should();
 
 describe('Games', () => {
   it('should successfully retrieve information on multiple games', async () => {
-    const gamesQuery = gql`
+    const gamesQuery = `
       query($input: [Game!]) {
         games(input: $input) {
           title
@@ -24,27 +24,27 @@ describe('Games', () => {
     const testGames = [
       {
         title: 'Ape Out',
-        platform: 'Switch'
+        platform: 'Switch',
       },
       {
         title: 'Outer Wilds',
-        platform: 'Xbox One'
+        platform: 'Xbox One',
       },
       {
         title: 'Death Stranding',
-        platform: 'PlayStation 4'
+        platform: 'PlayStation 4',
       },
       {
         title: 'Disco Elysium',
-        platform: 'PC'
+        platform: 'PC',
       },
       {
         title: 'Sayonara Wild Hearts',
-        platform: 'iOS'
+        platform: 'iOS',
       },
       {
         title: 'GYLT',
-        platform: 'Stadia'
+        platform: 'Stadia',
       },
       {
         title: `Demon's Souls`,
@@ -52,15 +52,15 @@ describe('Games', () => {
       },
       {
         title: 'Call of the Sea',
-        platform: 'Xbox Series X'
-      }
+        platform: 'Xbox Series X',
+      },
     ];
-    
-    const gamesQueryResult = await query({
+
+    const gamesQueryResult = await post(API_URL, {
       query: gamesQuery,
       variables: {
-        input: testGames
-      }
+        input: testGames,
+      },
     });
 
     const { games } = gamesQueryResult.data;

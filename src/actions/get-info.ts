@@ -1,15 +1,15 @@
-const cheerio = require('cheerio');
-const { isTitleSafeToSave, determineMoviePage } = require('../helpers/helpers');
-const { getItem, saveItem } = require('../helpers/mongo');
-const { get } = require('../helpers/request');
-const logger = require('../helpers/logger');
+import cheerio from 'cheerio';
+import { isTitleSafeToSave, determineMoviePage } from '../helpers/helpers';
+import { getItem, saveItem } from '../helpers/mongo';
+import { get } from '../helpers/request';
+import { logger } from '../helpers/logger';
 
 const AlbumDetails = require('../details/album');
 const GameDetails = require('../details/game');
 const MovieDetails = require('../details/movie');
 const TVShowDetails = require('../details/tvshow');
 
-module.exports = async function getInfo(url, input, type) {
+export async function getInfo(url, input, type) {
   logger.info('Getting info', input, type);
 
   try {
@@ -30,10 +30,13 @@ module.exports = async function getInfo(url, input, type) {
     } else {
       const pages = [
         { url: url[0], content: await get(url[0], 1) },
-        { url: url[1], content: await get(url[1], 1) }
+        { url: url[1], content: await get(url[1], 1) },
       ];
-      
-      const { parsedContent, url: correctUrl } = determineMoviePage(pages, input.year);
+
+      const { parsedContent, url: correctUrl } = determineMoviePage(
+        pages,
+        input.year
+      );
       $ = parsedContent;
       url = correctUrl;
     }
@@ -57,7 +60,13 @@ module.exports = async function getInfo(url, input, type) {
 
     if (isNaN(details.criticScore)) {
       logger.error(`Product has no reviews or does not exist`, input);
-      throw new Error(`Product has no reviews or does not exist for: ${JSON.stringify(input, 2)}, ${type}`);
+      throw new Error(
+        `Product has no reviews or does not exist for: ${JSON.stringify(
+          input,
+          null,
+          2
+        )}, ${type}`
+      );
     }
 
     if (process.env.SAVE_TO_DB == 'true') {
@@ -67,10 +76,10 @@ module.exports = async function getInfo(url, input, type) {
     }
 
     logger.info('Getting info succeeded', input, type);
-    
+
     return details;
   } catch (err) {
     logger.error('Error getting info ', err);
     throw new Error(err);
   }
-};
+}

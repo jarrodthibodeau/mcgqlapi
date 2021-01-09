@@ -1,8 +1,6 @@
 module.exports = function AlbumDetails($, url) {
   const artist = $('.product_artist .band_name').text();
-  const album = $('.product_title a span h1')
-    .text()
-    .trim();
+  const album = $('.product_title a span h1').text().trim();
   const criticScore = parseInt($('.metascore_w.album > span').text());
   const genreList = $('.product_genre > .data');
   const genres = [];
@@ -34,6 +32,6 @@ module.exports = function AlbumDetails($, url) {
     numOfPositiveCriticReviews: reviewCount[0],
     numOfMixedCriticReviews: reviewCount[1],
     numOfNegativeCriticReviews: reviewCount[2],
-    productImage
+    productImage,
   };
 };

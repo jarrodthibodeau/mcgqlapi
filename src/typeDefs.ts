@@ -1,6 +1,6 @@
-const { gql } = require('apollo-server-lambda');
+import { gql } from 'apollo-server-micro';
 
-module.exports = gql`
+export const typeDefs = gql`
   type Query {
     """
     Retrieves a single game based on title and platform
@@ -98,9 +98,9 @@ module.exports = gql`
     title: String!
     """
     The platform of which the game is on.
-    
+
     Here are the supported options
-    
+
       - pc
       - ios
       - dreamcast
@@ -263,7 +263,7 @@ module.exports = gql`
     """
     title: String!
     """
-    The year that the movie was released. 
+    The year that the movie was released.
 
     This is needed because there are multiple versions/remake of a film so the year is required
     """
@@ -327,8 +327,8 @@ module.exports = gql`
     """
     title: String!
     """
-    The particular season of the show. 
-    
+    The particular season of the show.
+
     If no season is provided, then an overview of the show (all seasons) will be grabbed
     """
     season: String

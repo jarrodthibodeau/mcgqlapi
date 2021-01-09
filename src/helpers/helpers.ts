@@ -1,21 +1,23 @@
-const { differenceInDays } = require('date-fns');
-const cheerio = require('cheerio');
+import { differenceInDays } from 'date-fns';
+import cheerio from 'cheerio';
 
 const BASE_URL = 'https://www.metacritic.com';
 
-function isTitleSafeToSave(titleReleaseDate) {
+export function isTitleSafeToSave(titleReleaseDate) {
   const daysSinceRelease = differenceInDays(
     Date.now(),
     new Date(titleReleaseDate)
   );
-  return daysSinceRelease >= process.env.DAYS_TIL_SAVE_TO_DB;
+  const daysTilSaveToDb = Number(process.env.DAYS_TIL_SAVE_TO_DB) || 30;
+
+  return daysSinceRelease >= daysTilSaveToDb;
 }
 
-function stripTitle(title) {
+export function stripTitle(title) {
   return title.replace(/:|'|!|"|¿|\?|,/g, '');
 }
 
-function setUrl(type, input) {
+export function setUrl(type, input) {
   switch (type) {
     case 'album':
       const { album, artist } = input;
@@ -23,10 +25,7 @@ function setUrl(type, input) {
       return `${BASE_URL}/music/${stripTitle(album)
         .split(' ')
         .join('-')
-        .toLowerCase()}/${artist
-        .split(' ')
-        .join('-')
-        .toLowerCase()}`;
+        .toLowerCase()}/${artist.split(' ').join('-').toLowerCase()}`;
     case 'game':
       const { platform, title: gameTitle } = input;
 
@@ -41,10 +40,13 @@ function setUrl(type, input) {
       const { title, year } = input;
       const movieTitles = [title, `${title} ${year}`];
 
-      return movieTitles.map(movieTitle =>  `${BASE_URL}/movie/${stripTitle(movieTitle)
-        .split(' ')
-        .join('-')
-        .toLowerCase()}`);
+      return movieTitles.map(
+        (movieTitle) =>
+          `${BASE_URL}/movie/${stripTitle(movieTitle)
+            .split(' ')
+            .join('-')
+            .toLowerCase()}`
+      );
     case 'tvshow':
       const { title: showTitle, season } = input;
       const tvShowUrl = `${BASE_URL}/tv/${stripTitle(showTitle)
@@ -52,26 +54,18 @@ function setUrl(type, input) {
         .join('-')
         .toLowerCase()}`;
 
-      return season ? tvShowUrl + `/season-${season.replace('.', '-')}` : tvShowUrl
+      return season
+        ? tvShowUrl + `/season-${season.replace('.', '-')}`
+        : tvShowUrl;
   }
 }
 
-function determineMoviePage(pages, releaseYear) {  
-  const $$ = [
-    cheerio.load(pages[0].content),
-    cheerio.load(pages[1].content)
-  ];
+export function determineMoviePage(pages, releaseYear) {
+  const $$ = [cheerio.load(pages[0].content), cheerio.load(pages[1].content)];
 
-  for (let  i = 0; i < $$.length; i++) {
-    if ($$[i]('.release_year').text() === releaseYear) {;
+  for (let i = 0; i < $$.length; i++) {
+    if ($$[i]('.release_year').text() === releaseYear) {
       return { ...pages[i], parsedContent: $$[i] };
     }
   }
 }
-
-module.exports = {
-  isTitleSafeToSave,
-  stripTitle,
-  setUrl,
-  determineMoviePage
-};

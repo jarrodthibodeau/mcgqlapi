@@ -1,12 +1,12 @@
-const { query } = require('../../index');
-const { gql } = require('apollo-server-lambda');
-const { should } = require('chai');
+import { should } from 'chai';
+import { post } from '../../../src/helpers/request';
+import { API_URL } from '../config';
 
 should();
 
 describe('Game', () => {
   it('should retrieve the information of a game when a title and console are received', async () => {
-    const gameQuery = gql`
+    const gameQuery = `
       query($input: Game!) {
         game(input: $input) {
           title
@@ -23,14 +23,14 @@ describe('Game', () => {
       }
     `;
 
-    const gameQueryResult = await query({
+    const gameQueryResult = await post(API_URL, {
       query: gameQuery,
       variables: {
         input: {
           title: 'Gears 5',
-          platform: 'xbox one'
-        }
-      }
+          platform: 'xbox one',
+        },
+      },
     });
 
     const { game } = gameQueryResult.data;
@@ -49,7 +49,7 @@ describe('Game', () => {
   });
 
   it('should retrieve the information for a game with a weird title', async () => {
-    const gameQuery = gql`
+    const gameQuery = `
       query($input: Game!) {
         game(input: $input) {
           title
@@ -62,15 +62,15 @@ describe('Game', () => {
       }
     `;
 
-    const gameQueryResult = await query({
+    const gameQueryResult = await post(API_URL, {
       query: gameQuery,
       variables: {
         input: {
           title:
             'Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition',
-          platform: 'switch'
-        }
-      }
+          platform: 'switch',
+        },
+      },
     });
 
     const { game } = gameQueryResult.data;
