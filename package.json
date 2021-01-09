@@ -21,6 +21,8 @@
   "devDependencies": {
     "@types/chai": "^4.2.14",
     "@types/mocha": "^8.2.0",
+    "@types/mongodb": "^3.6.3",
+    "@types/node-fetch": "^2.5.7",
     "chai": "^4.2.0",
     "mocha": "^6.2.1",
     "nodemon": "^1.19.2",

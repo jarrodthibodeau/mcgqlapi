@@ -1,13 +1,23 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, Db } from 'mongodb';
 import { logger } from '../helpers/logger';
 
-export async function getItem(query, collectionName) {
+export async function getDb(): Promise<Db | void> {
+  if (!process.env.MONGODB_URI) {
+    return;
+  }
+
+  const connection = await new MongoClient(process.env.MONGODB_URI, {
+    useUnifiedTopology: true,
+  }).connect();
+
+
+  return connection.db('metacritic-graphql-api');
+}
+
+export async function getItem(query, db, collectionName) {
   try {
-    const connection = await new MongoClient(process.env.MONGODB_URI, {
-      useUnifiedTopology: true,
-    }).connect();
-    const collection = await connection
-      .db('metacritic-graphql-api')
+
+    const collection = await db
       .collection(collectionName);
 
     logger.info('Finding product', query, collectionName);
@@ -26,8 +36,6 @@ export async function getItem(query, collectionName) {
         year: yearInURL,
       });
     }
-
-    await connection.close();
     return item;
   } catch (e) {
     logger.error('Getting item from MongoDB failed', e);
@@ -35,20 +43,14 @@ export async function getItem(query, collectionName) {
   }
 }
 
-export async function saveItem(item, collectionName) {
+export async function saveItem(item, db, collectionName) {
   try {
-    const connection = await new MongoClient(process.env.MONGODB_URI, {
-      useUnifiedTopology: true,
-    }).connect();
-    const collection = await connection
-      .db('metacritic-graphql-api')
+    const collection = await db
       .collection(collectionName);
 
     await collection.insertOne(item);
 
     logger.info('Product has been saved', item, collectionName);
-
-    return connection.close();
   } catch (e) {
     logger.error('Saving item to MongoDB failed', e);
     return e;
