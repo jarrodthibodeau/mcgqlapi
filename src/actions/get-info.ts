@@ -9,12 +9,12 @@ const GameDetails = require('../details/game');
 const MovieDetails = require('../details/movie');
 const TVShowDetails = require('../details/tvshow');
 
-export async function getInfo(url, input, type) {
+export async function getInfo(url, db, input, type) {
   logger.info('Getting info', input, type);
 
   try {
     if (process.env.SAVE_TO_DB == 'true') {
-      const item = await getItem({ url }, type);
+      const item = await getItem({ url }, db,  type);
 
       if (item) {
         logger.info('Item found in DB', input, type);
@@ -71,7 +71,7 @@ export async function getInfo(url, input, type) {
 
     if (process.env.SAVE_TO_DB == 'true') {
       if (isTitleSafeToSave) {
-        await saveItem(details, type);
+        await saveItem(details, db, type);
       }
     }
 
