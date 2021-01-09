@@ -2,7 +2,7 @@ const getInfo = require('./actions/get-info');
 const { setUrl } = require('./helpers/helpers');
 const { isGamePlatformValid } = require('./helpers/validation');
 
-module.exports = {
+export const resolvers =  {
   Query: {
     game: (_, { input }) => {
       const type = 'game';

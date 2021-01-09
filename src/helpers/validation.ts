@@ -1,4 +1,4 @@
-function isGamePlatformValid(platform) {
+export function isGamePlatformValid(platform) {
     const validPlatforms = [
         'pc',
         'ios',
@@ -27,7 +27,3 @@ function isGamePlatformValid(platform) {
 
     return validPlatforms.find(p => p === platform.toLowerCase()); 
 }
-
-module.exports = {
-    isGamePlatformValid
-};

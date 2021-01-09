@@ -1,7 +1,7 @@
-const { MongoClient } = require('mongodb');
-const logger = require('../helpers/logger');
+import { MongoClient } from 'mongodb';
+import { logger } from '../helpers/logger';
 
-async function getItem(query, collectionName) {
+export async function getItem(query, collectionName) {
   try {
     const connection = await new MongoClient(process.env.MONGODB_URI, {
       useUnifiedTopology: true
@@ -35,7 +35,7 @@ async function getItem(query, collectionName) {
   }
 }
 
-async function saveItem(item, collectionName) {
+export async function saveItem(item, collectionName) {
   try {
     const connection = await new MongoClient(process.env.MONGODB_URI, {
       useUnifiedTopology: true
@@ -54,8 +54,3 @@ async function saveItem(item, collectionName) {
     return e;
   }
 }
-
-module.exports = {
-  getItem,
-  saveItem
-};

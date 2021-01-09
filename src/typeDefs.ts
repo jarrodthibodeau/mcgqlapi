@@ -1,6 +1,6 @@
-const { gql } = require('apollo-server-lambda');
+import { gql } from 'apollo-server-micro';
 
-module.exports = gql`
+export const typeDefs = gql`
   type Query {
     """
     Retrieves a single game based on title and platform

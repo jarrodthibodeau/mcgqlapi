@@ -1,7 +1,7 @@
-const fetch = require('node-fetch');
-const logger = require('../helpers/logger');
+import { fetch } from 'node-fetch';
+import { logger } from '../helpers/logger';
 
-async function get(url, attemptNumber = 1) {
+export async function get(url, attemptNumber = 1) {
   try {
     const response = await fetch(url);
     return response.text();
@@ -15,7 +15,3 @@ async function get(url, attemptNumber = 1) {
     return get(url, attemptNumber += 1);
   }
 }
-
-module.exports = {
-  get
-};

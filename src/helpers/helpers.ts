@@ -1,21 +1,22 @@
-const { differenceInDays } = require('date-fns');
-const cheerio = require('cheerio');
+import { differenceInDays } from 'date-fns';
+import cheerio  from 'cheerio';
 
 const BASE_URL = 'https://www.metacritic.com';
 
-function isTitleSafeToSave(titleReleaseDate) {
+export function isTitleSafeToSave(titleReleaseDate) {
   const daysSinceRelease = differenceInDays(
     Date.now(),
     new Date(titleReleaseDate)
   );
-  return daysSinceRelease >= process.env.DAYS_TIL_SAVE_TO_DB;
+
+  return daysSinceRelease >= Number(process.env.DAYS_TIL_SAVE_TO_DB);
 }
 
-function stripTitle(title) {
+export function stripTitle(title) {
   return title.replace(/:|'|!|"|¿|\?|,/g, '');
 }
 
-function setUrl(type, input) {
+export function setUrl(type, input) {
   switch (type) {
     case 'album':
       const { album, artist } = input;
@@ -56,7 +57,7 @@ function setUrl(type, input) {
   }
 }
 
-function determineMoviePage(pages, releaseYear) {  
+export function determineMoviePage(pages, releaseYear) {  
   const $$ = [
     cheerio.load(pages[0].content),
     cheerio.load(pages[1].content)
@@ -68,10 +69,3 @@ function determineMoviePage(pages, releaseYear) {
     }
   }
 }
-
-module.exports = {
-  isTitleSafeToSave,
-  stripTitle,
-  setUrl,
-  determineMoviePage
-};
