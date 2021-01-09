@@ -81,8 +81,10 @@ the above request will return this response
 ```
 ## Soon to be added
 Features to be added down the road
-- Support to get information based on a person/company
-- Support getting the individual reviews for a specific product
+- Adding actual types to the repo
+- Adding enums to make console searches easier
+- Adding more fields to each of the main entities
+- Adding a search capability
 
 ## FAQ
 **Why is the first request slow?**
