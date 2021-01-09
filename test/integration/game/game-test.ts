@@ -23,14 +23,14 @@ describe('Game', () => {
       }
     `;
 
-    const gameQueryResult = await post(API_URL,{
+    const gameQueryResult = await post(API_URL, {
       query: gameQuery,
       variables: {
         input: {
           title: 'Gears 5',
-          platform: 'xbox one'
-        }
-      }
+          platform: 'xbox one',
+        },
+      },
     });
 
     const { game } = gameQueryResult.data;
@@ -68,9 +68,9 @@ describe('Game', () => {
         input: {
           title:
             'Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition',
-          platform: 'switch'
-        }
-      }
+          platform: 'switch',
+        },
+      },
     });
 
     const { game } = gameQueryResult.data;

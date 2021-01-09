@@ -24,27 +24,27 @@ describe('Games', () => {
     const testGames = [
       {
         title: 'Ape Out',
-        platform: 'Switch'
+        platform: 'Switch',
       },
       {
         title: 'Outer Wilds',
-        platform: 'Xbox One'
+        platform: 'Xbox One',
       },
       {
         title: 'Death Stranding',
-        platform: 'PlayStation 4'
+        platform: 'PlayStation 4',
       },
       {
         title: 'Disco Elysium',
-        platform: 'PC'
+        platform: 'PC',
       },
       {
         title: 'Sayonara Wild Hearts',
-        platform: 'iOS'
+        platform: 'iOS',
       },
       {
         title: 'GYLT',
-        platform: 'Stadia'
+        platform: 'Stadia',
       },
       {
         title: `Demon's Souls`,
@@ -52,15 +52,15 @@ describe('Games', () => {
       },
       {
         title: 'Call of the Sea',
-        platform: 'Xbox Series X'
-      }
+        platform: 'Xbox Series X',
+      },
     ];
-    
+
     const gamesQueryResult = await post(API_URL, {
       query: gamesQuery,
       variables: {
-        input: testGames
-      }
+        input: testGames,
+      },
     });
 
     const { games } = gamesQueryResult.data;

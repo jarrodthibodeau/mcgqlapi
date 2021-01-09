@@ -4,7 +4,7 @@ import { logger } from '../helpers/logger';
 export async function getItem(query, collectionName) {
   try {
     const connection = await new MongoClient(process.env.MONGODB_URI, {
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     }).connect();
     const collection = await connection
       .db('metacritic-graphql-api')
@@ -20,10 +20,10 @@ export async function getItem(query, collectionName) {
       const { url: urls } = query;
       const urlWithYearSplit = urls[1].split('-');
       const yearInURL = urlWithYearSplit[urlWithYearSplit.length - 1];
-      
+
       item = await collection.findOne({
-        $or: [{url: urls[0]}, {url: urls[1]}],
-        year: yearInURL
+        $or: [{ url: urls[0] }, { url: urls[1] }],
+        year: yearInURL,
       });
     }
 
@@ -38,7 +38,7 @@ export async function getItem(query, collectionName) {
 export async function saveItem(item, collectionName) {
   try {
     const connection = await new MongoClient(process.env.MONGODB_URI, {
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     }).connect();
     const collection = await connection
       .db('metacritic-graphql-api')

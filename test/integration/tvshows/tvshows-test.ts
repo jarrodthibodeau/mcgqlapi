@@ -20,31 +20,31 @@ describe('TV Shows', () => {
     const testTVShows = [
       {
         title: 'Game of Thrones',
-        season: '1'
+        season: '1',
       },
       {
         title: 'Breaking Bad',
-        season: '2'
+        season: '2',
       },
       {
         title: 'Hannibal',
-        season: '3'
+        season: '3',
       },
       {
         title: 'Fleabag',
-        season: '2'
+        season: '2',
       },
       {
         title: 'Broad City',
-        season: '4'
-      }
+        season: '4',
+      },
     ];
 
-    const tvShowsQueryResult = await post(API_URL,{
+    const tvShowsQueryResult = await post(API_URL, {
       query: tvShowsQuery,
       variables: {
-        input: testTVShows
-      }
+        input: testTVShows,
+      },
     });
 
     const { tvshows: tvShows } = tvShowsQueryResult.data;

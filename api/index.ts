@@ -6,7 +6,7 @@ const apolloServer = new ApolloServer({
   resolvers,
   typeDefs,
   introspection: true,
-  playground: true
+  playground: true,
 });
 
-export default apolloServer.createHandler({path: '/api'});
+export default apolloServer.createHandler({ path: '/api' });

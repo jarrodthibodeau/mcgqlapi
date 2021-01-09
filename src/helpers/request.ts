@@ -12,11 +12,15 @@ export async function get(url, attemptNumber = 1) {
       throw new Error('Attempt to get information failed');
     }
 
-    return get(url, attemptNumber += 1);
+    return get(url, (attemptNumber += 1));
   }
 }
 
 export async function post(url: string, payload) {
-  const response = await fetch(url, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type' : 'application/json'} });
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+    headers: { 'Content-Type': 'application/json' },
+  });
   return response.json();
 }

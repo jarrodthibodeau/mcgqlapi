@@ -2,7 +2,7 @@ import { getInfo } from './actions/get-info';
 import { setUrl } from './helpers/helpers';
 import { isGamePlatformValid } from './helpers/validation';
 
-export const resolvers =  {
+export const resolvers = {
   Query: {
     game: (_, { input }) => {
       const type = 'game';
@@ -14,13 +14,12 @@ export const resolvers =  {
         throw new Error(`${input.platform} is not valid for ${input.title}.`);
       }
 
-
       return getInfo(url, input, type);
     },
     games: async (_, { input }) => {
       const type = 'game';
 
-      input.forEach(game => {
+      input.forEach((game) => {
         const isPlatformValid = isGamePlatformValid(game.platform);
 
         if (!isPlatformValid) {
@@ -29,7 +28,7 @@ export const resolvers =  {
       });
 
       return Promise.all(
-        input.map(game => getInfo(setUrl(type, game), game, type))
+        input.map((game) => getInfo(setUrl(type, game), game, type))
       );
     },
     album: (_, { input }) => {
@@ -41,7 +40,7 @@ export const resolvers =  {
     albums: async (_, { input }) => {
       const type = 'album';
       return Promise.all(
-        input.map(album => getInfo(setUrl(type, album), album, type))
+        input.map((album) => getInfo(setUrl(type, album), album, type))
       );
     },
     movie: (_, { input }) => {
@@ -53,7 +52,7 @@ export const resolvers =  {
     movies: async (_, { input }) => {
       const type = 'movie';
       return Promise.all(
-        input.map(movie => getInfo(setUrl(type, movie), movie, type))
+        input.map((movie) => getInfo(setUrl(type, movie), movie, type))
       );
     },
     tvshow: (_, { input }) => {
@@ -65,8 +64,8 @@ export const resolvers =  {
     tvshows: async (_, { input }) => {
       const type = 'tvshow';
       return Promise.all(
-        input.map(tvshow => getInfo(setUrl(type, tvshow), tvshow, type))
+        input.map((tvshow) => getInfo(setUrl(type, tvshow), tvshow, type))
       );
-    }
-  }
+    },
+  },
 };

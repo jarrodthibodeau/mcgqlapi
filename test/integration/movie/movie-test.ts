@@ -17,14 +17,14 @@ describe('Movie', () => {
       }
     `;
 
-    const movieQueryResult = await post(API_URL,{
+    const movieQueryResult = await post(API_URL, {
       query: movieQuery,
       variables: {
         input: {
           title: 'Parasite',
-          year: '2019'
-        }
-      }
+          year: '2019',
+        },
+      },
     });
 
     const { movie } = movieQueryResult.data;

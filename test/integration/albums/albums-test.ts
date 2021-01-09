@@ -24,31 +24,31 @@ describe('Albums', () => {
     const testAlbums = [
       {
         artist: 'Idles',
-        album: 'Joy As an Act of Resistance'
+        album: 'Joy As an Act of Resistance',
       },
       {
         artist: 'Carly Rae Jepsen',
-        album: 'E-MO-TION'
+        album: 'E-MO-TION',
       },
       {
         artist: 'Lizzo',
-        album: 'Cuz I Love You'
+        album: 'Cuz I Love You',
       },
       {
         artist: 'Kacey Musgraves',
-        album: 'Golden Hour'
+        album: 'Golden Hour',
       },
       {
         artist: 'Run the Jewels',
-        album: 'Run the Jewels 3'
-      }
+        album: 'Run the Jewels 3',
+      },
     ];
-    
-    const albumsQueryResult = await post(API_URL,{
+
+    const albumsQueryResult = await post(API_URL, {
       query: albumsQuery,
       variables: {
-        input: testAlbums
-      }
+        input: testAlbums,
+      },
     });
 
     const { albums } = albumsQueryResult.data;
