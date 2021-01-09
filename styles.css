@@ -1,0 +1,49 @@
+html, body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #0f2027, #203a43, #2c5364); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+}
+
+.link-container {
+  border: 2px solid white;
+  height: 120px;
+  width: 320px;
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-container img {
+  width: 100px;
+  height: 100px;
+}
+
+.link-container span {
+  display: block;
+  font-size: 2em;
+  text-decoration: none;
+}
+
+.link-container a {
+  color: white;
+  text-decoration: none;
+}
+
+.link-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row wrap;
+  width: 290px;
+}
+
