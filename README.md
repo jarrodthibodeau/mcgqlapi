@@ -21,9 +21,9 @@ The unofficial GraphQL API for [Metacritic](https://metacritic.com)
 - [Donate](#donate)
 
 ## Endpoint
-All queries need to be directed to `https://mcgqlapi.com/api`.
+All queries need to be directed to `https://mcgqlapi.vercel.app/api`.
 
-You can mess around with the API [here](https://mcgqlapi.com/api) to get a feel for things.
+You can mess around with the API [here](https://mcgqlapi.vercel.app/api) to get a feel for things.
 
 If you do not want to use the playground above, I recommend using something like [Altair](https://altair.sirmuel.design/)
 
