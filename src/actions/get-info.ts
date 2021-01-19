@@ -1,15 +1,18 @@
-import cheerio from 'cheerio';
+import { load }  from 'cheerio';
 import { isTitleSafeToSave, determineMoviePage } from '../helpers/helpers';
 import { getItem, saveItem } from '../helpers/mongo';
 import { get } from '../helpers/request';
 import { logger } from '../helpers/logger';
+import { Db } from 'mongodb';
+import { MediaType } from '../types/enums';
+import { AlbumInput, GameInput, MovieInput, TVShowInput } from '../types/inputs';
 
 const AlbumDetails = require('../details/album');
 const GameDetails = require('../details/game');
 const MovieDetails = require('../details/movie');
 const TVShowDetails = require('../details/tvshow');
 
-export async function getInfo(url, db, input, type) {
+export async function getInfo(url: string | string[], db: Db, input: AlbumInput | GameInput | MovieInput | TVShowInput, type: MediaType) {
   logger.info('Getting info', input, type);
 
   try {
@@ -24,9 +27,9 @@ export async function getInfo(url, db, input, type) {
 
     let $;
 
-    if (type !== 'movie') {
+    if (type !== MediaType.Movie && typeof url === 'string') {
       const html = await get(url, 1);
-      $ = cheerio.load(html);
+      $ = load(html);
     } else {
       const pages = [
         { url: url[0], content: await get(url[0], 1) },
@@ -44,16 +47,16 @@ export async function getInfo(url, db, input, type) {
     let details;
 
     switch (type) {
-      case 'album':
+      case MediaType.Album:
         details = AlbumDetails($, url);
         break;
-      case 'game':
+      case MediaType.Game:
         details = GameDetails($, url);
         break;
-      case 'movie':
+      case MediaType.Movie:
         details = MovieDetails($, url);
         break;
-      case 'tvshow':
+      case MediaType.TVShow:
         details = TVShowDetails($, url, { season: input.season });
         break;
     }

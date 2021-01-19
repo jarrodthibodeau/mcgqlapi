@@ -1,11 +1,22 @@
 import { getInfo } from './actions/get-info';
 import { setUrl } from './helpers/helpers';
 import { isGamePlatformValid } from './helpers/validation';
+import { MediaType } from './types/enums';
+import {
+  QueryAlbumInput,
+  QueryAlbumsInput,
+  QueryGameInput,
+  QueryGamesInput,
+  QueryMovieInput,
+  QueryMoviesInput,
+  QueryTVShowInput,
+  QueryTVShowsInput
+} from './types/inputs';
 
 export const resolvers = {
   Query: {
-    game: (_, { input }, { db }) => {
-      const type = 'game';
+    game: (_, { input }: QueryGameInput, { db }) => {
+      const type = MediaType.Game;
       const url = setUrl(type, input);
 
       const isPlatformValid = isGamePlatformValid(input.platform);
@@ -16,8 +27,8 @@ export const resolvers = {
 
       return getInfo(url, db, input, type);
     },
-    games: async (_, { input }, { db }) => {
-      const type = 'game';
+    games: async (_, { input }: QueryGamesInput, { db }) => 
+      const type = MediaType.Game;
 
       input.forEach((game) => {
         const isPlatformValid = isGamePlatformValid(game.platform);
@@ -31,41 +42,41 @@ export const resolvers = {
         input.map((game) => getInfo(setUrl(type, game), db, game, type))
       );
     },
-    album: (_, { input }, { db }) => {
-      const type = 'album';
+    album: (_, { input }: QueryAlbumInput, { db }) => {
+      const type = MediaType.Album;
       const url = setUrl(type, input);
 
       return getInfo(url, db, input, type);
     },
-    albums: async (_, { input }, { db }) => {
-      const type = 'album';
+    albums: async (_, { input }: QueryAlbumsInput, { db }) => {
+      const type = MediaType.Album;
       return Promise.all(
         input.map((album) => getInfo(setUrl(type, album), db, album, type))
       );
     },
-    movie: (_, { input }, { db }) => {
-      const type = 'movie';
+    movie: (_, { input }: QueryMovieInput, { db }) => {
+      const type = MediaType.Movie;
       const urls = setUrl(type, input);
 
       return getInfo(urls, db, input, type);
     },
-    movies: async (_, { input }, { db }) => {
-      const type = 'movie';
+    movies: async (_, { input }: QueryMoviesInput, { db }) => {
+      const type = MediaType.Movie;
       return Promise.all(
         input.map((movie) => getInfo(setUrl(type, movie), db, movie, type))
       );
     },
-    tvshow: (_, { input }, { db }) => {
-      const type = 'tvshow';
+    tvshow: (_, { input }: QueryTVShowInput, { db }) => {
+      const type = MediaType.TVShow;
       const url = setUrl(type, input);
 
       return getInfo(url, db, input, type);
     },
-    tvshows: async (_, { input }, { db }) => {
-      const type = 'tvshow';
+    tvshows: async (_, { input }: QueryTVShowsInput, { db }) => {
+      const type = MediaType.TVShow;
       return Promise.all(
         input.map((tvshow) => getInfo(setUrl(type, tvshow), db, tvshow, type))
       );
-    },
-  },
+    }
+  }
 };

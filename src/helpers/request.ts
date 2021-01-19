@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { logger } from '../helpers/logger';
 
-export async function get(url, attemptNumber = 1) {
+export async function get(url: string, attemptNumber = 1) {
   try {
     const response = await fetch(url);
     return response.text();

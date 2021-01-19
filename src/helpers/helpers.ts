@@ -1,5 +1,5 @@
 import { differenceInDays } from 'date-fns';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 
 const BASE_URL = 'https://www.metacritic.com';
 
@@ -61,7 +61,7 @@ export function setUrl(type, input) {
 }
 
 export function determineMoviePage(pages, releaseYear) {
-  const $$ = [cheerio.load(pages[0].content), cheerio.load(pages[1].content)];
+  const $$ = [load(pages[0].content), load(pages[1].content)];
 
   for (let i = 0; i < $$.length; i++) {
     if ($$[i]('.release_year').text() === releaseYear) {

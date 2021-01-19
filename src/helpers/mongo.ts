@@ -1,4 +1,4 @@
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient, Db, FilterQuery, OptionalId } from 'mongodb';
 import { logger } from '../helpers/logger';
 
 export async function getDb(): Promise<Db | void> {
@@ -7,18 +7,19 @@ export async function getDb(): Promise<Db | void> {
   }
 
   const connection = await new MongoClient(process.env.MONGODB_URI, {
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   }).connect();
-
 
   return connection.db('metacritic-graphql-api');
 }
 
-export async function getItem(query, db, collectionName) {
+export async function getItem<T>(
+  query: FilterQuery<T>,
+  db: Db,
+  collectionName: string
+) {
   try {
-
-    const collection = await db
-      .collection(collectionName);
+    const collection = await db.collection(collectionName);
 
     logger.info('Finding product', query, collectionName);
 
@@ -33,7 +34,7 @@ export async function getItem(query, db, collectionName) {
 
       item = await collection.findOne({
         $or: [{ url: urls[0] }, { url: urls[1] }],
-        year: yearInURL,
+        year: yearInURL
       });
     }
     return item;
@@ -43,10 +44,13 @@ export async function getItem(query, db, collectionName) {
   }
 }
 
-export async function saveItem(item, db, collectionName) {
+export async function saveItem<T>(
+  item: OptionalId<T>,
+  db: Db,
+  collectionName: string
+) {
   try {
-    const collection = await db
-      .collection(collectionName);
+    const collection = await db.collection(collectionName);
 
     await collection.insertOne(item);
 
