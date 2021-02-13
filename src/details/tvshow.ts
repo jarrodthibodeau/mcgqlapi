@@ -1,4 +1,10 @@
-module.exports = function TVShowDetails($, url, details) {
+import { ShowDetails, TVShowDetails } from '../types/types';
+
+export function TVShow(
+  $: cheerio.Root,
+  url: string,
+  details: ShowDetails
+): TVShowDetails {
   // a tag when it's a season and no a tag when it's just the show overview
   const title =
     $('.product_page_title h1 a').text() || $('.product_page_title h1').text();
@@ -14,14 +20,14 @@ module.exports = function TVShowDetails($, url, details) {
   const productImage = $('.summary_img').attr('src');
 
   for (let i = 0; i < numOfEachReview.length; i++) {
-    reviewCount.push(
-      parseInt(numOfEachReview[i].children[0].data.replace(',', ''))
-    );
+    const el = numOfEachReview[i] as cheerio.TagElement;
+    reviewCount.push(parseInt(el.children[0].data.replace(',', '')));
   }
 
   // [0] is \n
   for (let i = 1; i < genreList.length; i++) {
-    genres.push(genreList[i].children[0].data);
+    const el = genreList[i] as cheerio.TagElement;
+    genres.push(el.children[0].data);
   }
 
   return {
@@ -36,6 +42,6 @@ module.exports = function TVShowDetails($, url, details) {
     numOfPositiveCriticReviews: reviewCount[0],
     numOfMixedCriticReviews: reviewCount[1],
     numOfNegativeCriticReviews: reviewCount[2],
-    productImage,
+    productImage
   };
-};
+}

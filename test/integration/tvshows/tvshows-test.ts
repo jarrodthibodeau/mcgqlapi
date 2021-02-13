@@ -1,12 +1,14 @@
 import { should } from 'chai';
-import { post } from '../../../src/helpers/request';
+import { post } from '../../../src/helpers/';
 import { API_URL } from '../config';
+import { gql } from 'apollo-server-micro';
+import { TVShowDetails } from '../../../src/types';
 
 should();
 
 describe('TV Shows', () => {
   it('should successfully retrieve information on multiple TV Shows', async () => {
-    const tvShowsQuery = `
+    const tvShowsQuery = gql`
       query($input: [TVShow!]) {
         tvshows(input: $input) {
           title
@@ -20,36 +22,36 @@ describe('TV Shows', () => {
     const testTVShows = [
       {
         title: 'Game of Thrones',
-        season: '1',
+        season: '1'
       },
       {
         title: 'Breaking Bad',
-        season: '2',
+        season: '2'
       },
       {
         title: 'Hannibal',
-        season: '3',
+        season: '3'
       },
       {
         title: 'Fleabag',
-        season: '2',
+        season: '2'
       },
       {
         title: 'Broad City',
-        season: '4',
-      },
+        season: '4'
+      }
     ];
 
     const tvShowsQueryResult = await post(API_URL, {
-      query: tvShowsQuery,
+      document: tvShowsQuery,
       variables: {
-        input: testTVShows,
-      },
+        input: testTVShows
+      }
     });
 
     const { tvshows: tvShows } = tvShowsQueryResult.data;
 
-    tvShows.forEach((tvShow, index) => {
+    tvShows.forEach((tvShow: TVShowDetails, index: number) => {
       tvShow.title.should.equal(testTVShows[index].title);
       tvShow.season.should.equal(testTVShows[index].season);
       tvShow.criticScore.should.be.a('number');

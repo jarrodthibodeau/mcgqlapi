@@ -1,12 +1,13 @@
 import { should } from 'chai';
 import { post } from '../../../src/helpers/request';
 import { API_URL } from '../config';
+import { gql } from 'apollo-server-micro';
 
 should();
 
 describe('Album', () => {
   it('should retrieve information about an album when provided a artist and album title', async () => {
-    const albumQuery = `
+    const albumQuery = gql`
       query($input: Album!) {
         album(input: $input) {
           album
@@ -22,13 +23,13 @@ describe('Album', () => {
     `;
 
     const albumQueryResult = await post(API_URL, {
-      query: albumQuery,
+      document: albumQuery,
       variables: {
         input: {
           artist: 'Danny Brown',
-          album: 'uknowhatimsayin¿',
-        },
-      },
+          album: 'uknowhatimsayin¿'
+        }
+      }
     });
 
     const { album } = albumQueryResult.data;

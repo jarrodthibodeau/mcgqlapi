@@ -11,7 +11,7 @@ const apolloServer = new ApolloServer({
     return { db };
   },
   introspection: true,
-  playground: true,
+  playground: true
 });
 
 export default apolloServer.createHandler({ path: '/api' });

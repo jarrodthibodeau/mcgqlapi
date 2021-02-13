@@ -1,4 +1,4 @@
-export function isGamePlatformValid(platform) {
+export function isGamePlatformValid(platform: string): Boolean {
   const validPlatforms = [
     'pc',
     'ios',
@@ -22,8 +22,8 @@ export function isGamePlatformValid(platform) {
     'xbox 360',
     'xbox one',
     'xbox series x',
-    'stadia',
+    'stadia'
   ];
 
-  return validPlatforms.find((p) => p === platform.toLowerCase());
+  return validPlatforms.some((p) => p === platform.toLowerCase());
 }

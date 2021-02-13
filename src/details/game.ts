@@ -1,4 +1,6 @@
-module.exports = function GameDetails($, url) {
+import { GameDetails } from '../types';
+
+export function Game($: cheerio.Root, url: string): GameDetails {
   const title = $('.product_title a h1').text();
   const platform = $('.platform').text().trim();
   const criticScore = parseInt($('.metascore_w.game > span').text());
@@ -13,17 +15,18 @@ module.exports = function GameDetails($, url) {
   const productImage = $('.product_image.large_image').find('img').attr('src');
 
   for (let i = 0; i < numOfEachReview.length; i++) {
-    reviewCount.push(
-      parseInt(numOfEachReview[i].children[0].data.replace(',', ''))
-    );
+    const el = numOfEachReview[i] as cheerio.TagElement;
+    reviewCount.push(parseInt(el.children[0].data.replace(',', '')));
   }
 
   for (let i = 0; i < genreList.length; i++) {
-    genres.push(genreList[i].children[0].data);
+    const el = genreList[i] as cheerio.TagElement;
+    genres.push(el.children[0].data);
   }
 
   for (let i = 0; i < publisher.length; i++) {
-    publishers.push(publisher[i].children[0].data.trim());
+    const el = publisher[i] as cheerio.TagElement;
+    publishers.push(el.children[0].data.trim());
   }
 
   return {
@@ -39,6 +42,6 @@ module.exports = function GameDetails($, url) {
     numOfPositiveCriticReviews: reviewCount[0],
     numOfMixedCriticReviews: reviewCount[1],
     numOfNegativeCriticReviews: reviewCount[2],
-    productImage,
+    productImage
   };
-};
+}

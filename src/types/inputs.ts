@@ -1,53 +1,57 @@
 export type MediaInput = {
   title: string;
-}
+};
 
 //TODO: Add PlatformEnum here
 export type GameInput = MediaInput & {
-  platform: string
-}
+  platform: string;
+  type: 'game';
+};
 
 export type AlbumInput = MediaInput & {
-  artist: string
-}
+  artist: string;
+  album: string;
+  type: 'album';
+};
 
 export type MovieInput = MediaInput & {
-  year: string
-}
+  year: string;
+  type: 'movie';
+};
 
 export type TVShowInput = MediaInput & {
-  season?: string
-}
+  season?: string;
+  type: 'tvshow';
+};
 
 export type QueryAlbumInput = {
-  input: AlbumInput
-}
+  input: AlbumInput;
+};
 
 export type QueryAlbumsInput = {
-  input: [AlbumInput]
-}
+  input: [AlbumInput];
+};
 
 export type QueryGameInput = {
-  input: GameInput
-}
+  input: GameInput;
+};
 
 export type QueryGamesInput = {
-  input: [GameInput]
-}
+  input: [GameInput];
+};
 
 export type QueryMovieInput = {
-  input: MovieInput
-}
+  input: MovieInput;
+};
 
 export type QueryMoviesInput = {
-  input: [MovieInput]
-}
+  input: [MovieInput];
+};
 
 export type QueryTVShowInput = {
-  input: TVShowInput
-}
+  input: TVShowInput;
+};
 
 export type QueryTVShowsInput = {
-  input: [TVShowInput]
-}
-
+  input: [TVShowInput];
+};

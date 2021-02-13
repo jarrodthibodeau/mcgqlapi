@@ -1,5 +1,5 @@
 import { MongoClient, Db, FilterQuery, OptionalId } from 'mongodb';
-import { logger } from '../helpers/logger';
+import { logger } from '../helpers/';
 
 export async function getDb(): Promise<Db | void> {
   if (!process.env.MONGODB_URI) {
