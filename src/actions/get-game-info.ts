@@ -1,11 +1,8 @@
 import { load } from 'cheerio';
-import { isTitleSafeToSave, determineMoviePage } from '../helpers/helpers';
-import { getItem, saveItem } from '../helpers/mongo';
-import { get } from '../helpers/request';
-import { logger } from '../helpers/logger';
+import { isTitleSafeToSave, getItem, saveItem, get, logger } from '../helpers';
 import { Db } from 'mongodb';
-import { Game } from '../details/game';
-import { GameInput } from '../types/inputs';
+import { Game } from '../details';
+import { GameInput } from '../types';
 
 export async function getGameInfo(url: string, db: Db, input: GameInput) {
   const { type } = input;

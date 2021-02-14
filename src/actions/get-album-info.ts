@@ -1,11 +1,8 @@
 import { load } from 'cheerio';
-import { isTitleSafeToSave, determineMoviePage } from '../helpers/helpers';
-import { getItem, saveItem } from '../helpers/mongo';
-import { get } from '../helpers/request';
-import { logger } from '../helpers/logger';
+import { isTitleSafeToSave, getItem, saveItem, get, logger } from '../helpers';
 import { Db } from 'mongodb';
-import { Album } from '../details/album';
-import { AlbumInput } from '../types/inputs';
+import { Album } from '../details';
+import { AlbumInput } from '../types';
 
 export async function getAlbumInfo(url: string, db: Db, input: AlbumInput) {
   const { type } = input;

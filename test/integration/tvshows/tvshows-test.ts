@@ -1,14 +1,13 @@
 import { should } from 'chai';
 import { post } from '../../../src/helpers/';
 import { API_URL } from '../config';
-import { gql } from 'apollo-server-micro';
 import { TVShowDetails } from '../../../src/types';
 
 should();
 
 describe('TV Shows', () => {
   it('should successfully retrieve information on multiple TV Shows', async () => {
-    const tvShowsQuery = gql`
+    const tvShowsQuery = `
       query($input: [TVShow!]) {
         tvshows(input: $input) {
           title
@@ -43,7 +42,7 @@ describe('TV Shows', () => {
     ];
 
     const tvShowsQueryResult = await post(API_URL, {
-      document: tvShowsQuery,
+      query: tvShowsQuery,
       variables: {
         input: testTVShows
       }

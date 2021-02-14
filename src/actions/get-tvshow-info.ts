@@ -1,11 +1,8 @@
 import { load } from 'cheerio';
-import { isTitleSafeToSave, determineMoviePage } from '../helpers/helpers';
-import { getItem, saveItem } from '../helpers/mongo';
-import { get } from '../helpers/request';
-import { logger } from '../helpers/logger';
+import { isTitleSafeToSave, getItem, saveItem, get, logger } from '../helpers';
 import { Db } from 'mongodb';
-import { TVShow } from '../details/tvshow';
-import { TVShowInput } from '../types/inputs';
+import { TVShow } from '../details';
+import { TVShowInput } from '../types';
 
 export async function getTVShowInfo(url: string, db: Db, input: TVShowInput) {
   const { type } = input;

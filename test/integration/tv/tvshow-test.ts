@@ -1,13 +1,12 @@
 import { should } from 'chai';
 import { post } from '../../../src/helpers/request';
 import { API_URL } from '../config';
-import { gql } from 'apollo-server-micro';
 
 should();
 
 describe('TV Show', () => {
   it('should retrieve information about a TV show when a show title and season is provided', async () => {
-    const tvShowQuery = gql`
+    const tvShowQuery = `
       query($input: TVShow!) {
         tvshow(input: $input) {
           title
@@ -18,7 +17,7 @@ describe('TV Show', () => {
     `;
 
     const tvShowQueryResult = await post(API_URL, {
-      document: tvShowQuery,
+      query: tvShowQuery,
       variables: {
         input: {
           title: `Genndy Tartakovsky's Primal`,
@@ -35,7 +34,7 @@ describe('TV Show', () => {
   });
 
   it('should retrieve information about a TV show whose season is a half season', async () => {
-    const tvShowQuery = gql`
+    const tvShowQuery = `
       query($input: TVShow!) {
         tvshow(input: $input) {
           title
@@ -46,7 +45,7 @@ describe('TV Show', () => {
     `;
 
     const tvShowQueryResult = await post(API_URL, {
-      document: tvShowQuery,
+      query: tvShowQuery,
       variables: {
         input: {
           title: 'Bojack Horseman',
@@ -63,7 +62,7 @@ describe('TV Show', () => {
   });
 
   it('should retrieve an overview of a tv season if a season is not passed in', async () => {
-    const tvShowQuery = gql`
+    const tvShowQuery = `
       query($input: TVShow!) {
         tvshow(input: $input) {
           title
@@ -74,7 +73,7 @@ describe('TV Show', () => {
     `;
 
     const tvShowQueryResult = await post(API_URL, {
-      document: tvShowQuery,
+      query: tvShowQuery,
       variables: {
         input: {
           title: 'GLOW'

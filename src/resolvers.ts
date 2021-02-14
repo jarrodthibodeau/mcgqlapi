@@ -20,7 +20,7 @@ import {
 
 export const resolvers = {
   Query: {
-    game: (_: any, { input }: QueryGameInput, { db }: APIContext) => {
+    game: (_: object, { input }: QueryGameInput, { db }: APIContext) => {
       const type = MediaType.Game;
       const url = setUrl({ type, ...input });
 
@@ -35,7 +35,11 @@ export const resolvers = {
         type
       });
     },
-    games: async (_: any, { input }: QueryGamesInput, { db }: APIContext) => {
+    games: async (
+      _: object,
+      { input }: QueryGamesInput,
+      { db }: APIContext
+    ) => {
       const type = MediaType.Game;
 
       input.forEach((game) => {
@@ -56,7 +60,7 @@ export const resolvers = {
         })
       );
     },
-    album: (_: any, { input }: QueryAlbumInput, { db }: APIContext) => {
+    album: (_: object, { input }: QueryAlbumInput, { db }: APIContext) => {
       const type = MediaType.Album;
       const url = setUrl({ type, ...input });
 
@@ -65,25 +69,33 @@ export const resolvers = {
         type
       });
     },
-    albums: async (_: any, { input }: QueryAlbumsInput, { db }: APIContext) => {
+    albums: async (
+      _: object,
+      { input }: QueryAlbumsInput,
+      { db }: APIContext
+    ) => {
       const type = MediaType.Album;
       return Promise.all(
         input.map((album) => {
           const url = setUrl({ type, ...album });
-          getAlbumInfo(typeof url === 'string' ? url : null, db, {
+          return getAlbumInfo(typeof url === 'string' ? url : null, db, {
             ...album,
             type
           });
         })
       );
     },
-    movie: (_: any, { input }: QueryMovieInput, { db }: APIContext) => {
+    movie: (_: object, { input }: QueryMovieInput, { db }: APIContext) => {
       const type = MediaType.Movie;
       const urls = setUrl({ type, ...input });
 
       return getMovieInfo(urls, db, { ...input, type });
     },
-    movies: async (_: any, { input }: QueryMoviesInput, { db }: APIContext) => {
+    movies: async (
+      _: object,
+      { input }: QueryMoviesInput,
+      { db }: APIContext
+    ) => {
       const type = MediaType.Movie;
       return Promise.all(
         input.map((movie) =>
@@ -91,7 +103,7 @@ export const resolvers = {
         )
       );
     },
-    tvshow: (_: any, { input }: QueryTVShowInput, { db }: APIContext) => {
+    tvshow: (_: object, { input }: QueryTVShowInput, { db }: APIContext) => {
       const type = MediaType.TVShow;
       const url = setUrl({ type, ...input });
 
@@ -101,7 +113,7 @@ export const resolvers = {
       });
     },
     tvshows: async (
-      _: any,
+      _: object,
       { input }: QueryTVShowsInput,
       { db }: APIContext
     ) => {
@@ -109,7 +121,7 @@ export const resolvers = {
       return Promise.all(
         input.map((tvshow) => {
           const url = setUrl({ type, ...tvshow });
-          getTVShowInfo(typeof url === 'string' ? url : null, db, {
+          return getTVShowInfo(typeof url === 'string' ? url : null, db, {
             ...tvshow,
             type
           });

@@ -1,4 +1,4 @@
-import { ShowDetails, TVShowDetails } from '../types/types';
+import { ShowDetails, TVShowDetails } from '../types';
 
 export function TVShow(
   $: cheerio.Root,

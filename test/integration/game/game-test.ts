@@ -1,13 +1,12 @@
 import { should } from 'chai';
 import { post } from '../../../src/helpers/request';
 import { API_URL } from '../config';
-import { gql } from 'apollo-server-micro';
 
 should();
 
 describe('Game', () => {
   it('should retrieve the information of a game when a title and console are received', async () => {
-    const gameQuery = gql`
+    const gameQuery = `
       query($input: Game!) {
         game(input: $input) {
           title
@@ -25,7 +24,7 @@ describe('Game', () => {
     `;
 
     const gameQueryResult = await post(API_URL, {
-      document: gameQuery,
+      query: gameQuery,
       variables: {
         input: {
           title: 'Gears 5',
@@ -50,7 +49,7 @@ describe('Game', () => {
   });
 
   it('should retrieve the information for a game with a weird title', async () => {
-    const gameQuery = gql`
+    const gameQuery = `
       query($input: Game!) {
         game(input: $input) {
           title
@@ -64,7 +63,7 @@ describe('Game', () => {
     `;
 
     const gameQueryResult = await post(API_URL, {
-      document: gameQuery,
+      query: gameQuery,
       variables: {
         input: {
           title:

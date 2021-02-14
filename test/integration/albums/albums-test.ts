@@ -1,14 +1,13 @@
 import { should } from 'chai';
-import { post } from '../../../src/helpers/request';
+import { post } from '../../../src/helpers';
 import { API_URL } from '../config';
-import { gql } from 'apollo-server-micro';
 import { AlbumDetails } from '../../../src/types';
 
 should();
 
 describe('Albums', () => {
   it('should successfully retrieve information on multiple albums', async () => {
-    const albumsQuery = gql`
+    const albumsQuery = `
       query($input: [Album!]) {
         albums(input: $input) {
           album
@@ -47,7 +46,7 @@ describe('Albums', () => {
     ];
 
     const albumsQueryResult = await post(API_URL, {
-      document: albumsQuery,
+      query: albumsQuery,
       variables: {
         input: testAlbums
       }

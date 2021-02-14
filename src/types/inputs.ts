@@ -8,7 +8,7 @@ export type GameInput = MediaInput & {
   type: 'game';
 };
 
-export type AlbumInput = MediaInput & {
+export type AlbumInput = {
   artist: string;
   album: string;
   type: 'album';

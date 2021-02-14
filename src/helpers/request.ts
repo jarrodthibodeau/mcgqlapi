@@ -1,6 +1,5 @@
 import fetch from 'node-fetch';
 import { logger } from '../helpers';
-import { Request } from 'apollo-server-micro';
 
 export async function get(url: string, attemptNumber = 1): Promise<string> {
   try {
@@ -17,7 +16,7 @@ export async function get(url: string, attemptNumber = 1): Promise<string> {
   }
 }
 
-export async function post(url: string, payload: Request) {
+export async function post(url: string, payload: object) {
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(payload),

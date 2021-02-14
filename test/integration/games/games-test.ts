@@ -1,14 +1,13 @@
 import { should } from 'chai';
 import { post } from '../../../src/helpers/request';
 import { API_URL } from '../config';
-import { gql } from 'apollo-server-micro';
 import { GameDetails } from '../../../src/types/types';
 
 should();
 
 describe('Games', () => {
   it('should successfully retrieve information on multiple games', async () => {
-    const gamesQuery = gql`
+    const gamesQuery = `
       query($input: [Game!]) {
         games(input: $input) {
           title
@@ -59,7 +58,7 @@ describe('Games', () => {
     ];
 
     const gamesQueryResult = await post(API_URL, {
-      document: gamesQuery,
+      query: gamesQuery,
       variables: {
         input: testGames
       }

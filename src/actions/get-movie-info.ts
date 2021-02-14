@@ -1,9 +1,13 @@
-import { isTitleSafeToSave, determineMoviePage } from '../helpers';
-import { getItem, saveItem } from '../helpers';
-import { get } from '../helpers';
-import { logger } from '../helpers';
+import {
+  isTitleSafeToSave,
+  determineMoviePage,
+  getItem,
+  saveItem,
+  get,
+  logger
+} from '../helpers';
 import { Db } from 'mongodb';
-import { Movie } from '../details/movie';
+import { Movie } from '../details';
 import { MoviePage, MovieInput } from '../types';
 
 export async function getMovieInfo(

@@ -2,7 +2,7 @@ import { should } from 'chai';
 import {
   isTitleSafeToSave,
   setUrl,
-  stripTitle,
+  stripTitle
 } from '../../src/helpers/helpers';
 
 should();
@@ -12,7 +12,7 @@ describe('Helpers', () => {
     context(
       'Passing in a date that does not meet the save to db threshold',
       () => {
-        const result = isTitleSafeToSave(new Date());
+        const result = isTitleSafeToSave(new Date().toString());
 
         it('result should equal false', () => {
           result.should.equal(false);
@@ -47,9 +47,10 @@ describe('Helpers', () => {
     const MC_URL = 'https://www.metacritic.com';
 
     context('Properly setting url for a album', () => {
-      const albumUrl = setUrl('album', {
+      const albumUrl = setUrl({
         artist: 'Billie Eilish',
         album: 'When We All Fall Asleep, Where do we go?',
+        type: 'album'
       });
 
       it('should properly format a valid metacritic album URL', () => {
@@ -59,9 +60,10 @@ describe('Helpers', () => {
     });
 
     context('Properly setting a url for a game', () => {
-      const gameUrl = setUrl('game', {
+      const gameUrl = setUrl({
         title: 'Castlevania: Symphony of the Night',
         platform: 'playstation',
+        type: 'game'
       });
 
       it('should properly format a valid metacritic game URL', () => {
@@ -71,15 +73,16 @@ describe('Helpers', () => {
     });
 
     context('Properly setting the urls for a movie', () => {
-      const movieUrls = setUrl('movie', {
+      const movieUrls = setUrl({
         title: 'Oldboy',
         year: '2005',
+        type: 'movie'
       });
 
       it('should return two valid metacritic urls for the movie with and without year', () => {
         const expectedUrls = [
           `${MC_URL}/movie/oldboy`,
-          `${MC_URL}/movie/oldboy-2005`,
+          `${MC_URL}/movie/oldboy-2005`
         ];
 
         movieUrls[0].should.equal(expectedUrls[0]);
@@ -89,9 +92,10 @@ describe('Helpers', () => {
     });
 
     context('Properly setting the url for a tv with a season', () => {
-      const tvShowUrl = setUrl('tvshow', {
+      const tvShowUrl = setUrl({
         title: 'Twin Peaks',
         season: '1',
+        type: 'tvshow'
       });
 
       it('should properly format a valid metacritic url for a tvshow with season', () => {
@@ -101,8 +105,9 @@ describe('Helpers', () => {
     });
 
     context('Properly setting the url for a tv show without a season', () => {
-      const tvShowUrl = setUrl('tvshow', {
+      const tvShowUrl = setUrl({
         title: 'Futurama',
+        type: 'tvshow'
       });
 
       it('should properly format a valid metacritic url for a tvshow without a season', () => {
