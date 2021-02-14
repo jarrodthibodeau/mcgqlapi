@@ -1,6 +1,7 @@
 import { should } from 'chai';
 import { post } from '../../../src/helpers/request';
 import { API_URL } from '../config';
+import { GameDetails } from '../../../src/types/types';
 
 should();
 
@@ -24,48 +25,48 @@ describe('Games', () => {
     const testGames = [
       {
         title: 'Ape Out',
-        platform: 'Switch',
+        platform: 'Switch'
       },
       {
         title: 'Outer Wilds',
-        platform: 'Xbox One',
+        platform: 'Xbox One'
       },
       {
         title: 'Death Stranding',
-        platform: 'PlayStation 4',
+        platform: 'PlayStation 4'
       },
       {
         title: 'Disco Elysium',
-        platform: 'PC',
+        platform: 'PC'
       },
       {
         title: 'Sayonara Wild Hearts',
-        platform: 'iOS',
+        platform: 'iOS'
       },
       {
         title: 'GYLT',
-        platform: 'Stadia',
+        platform: 'Stadia'
       },
       {
         title: `Demon's Souls`,
-        platform: 'PlayStation 5',
+        platform: 'PlayStation 5'
       },
       {
         title: 'Call of the Sea',
-        platform: 'Xbox Series X',
-      },
+        platform: 'Xbox Series X'
+      }
     ];
 
     const gamesQueryResult = await post(API_URL, {
       query: gamesQuery,
       variables: {
-        input: testGames,
-      },
+        input: testGames
+      }
     });
 
     const { games } = gamesQueryResult.data;
 
-    games.forEach((game, index) => {
+    games.forEach((game: GameDetails, index: number) => {
       game.title.should.equal(testGames[index].title);
       game.platform.should.equal(testGames[index].platform);
       game.criticScore.should.be.a('number');

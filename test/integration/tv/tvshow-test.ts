@@ -21,9 +21,9 @@ describe('TV Show', () => {
       variables: {
         input: {
           title: `Genndy Tartakovsky's Primal`,
-          season: '1',
-        },
-      },
+          season: '1'
+        }
+      }
     });
 
     const { tvshow } = tvShowQueryResult.data;
@@ -49,9 +49,9 @@ describe('TV Show', () => {
       variables: {
         input: {
           title: 'Bojack Horseman',
-          season: '6.5',
-        },
-      },
+          season: '6.5'
+        }
+      }
     });
 
     const { tvshow } = tvShowQueryResult.data;
@@ -76,9 +76,9 @@ describe('TV Show', () => {
       query: tvShowQuery,
       variables: {
         input: {
-          title: 'GLOW',
-        },
-      },
+          title: 'GLOW'
+        }
+      }
     });
 
     const { tvshow } = tvShowQueryResult.data;

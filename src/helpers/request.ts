@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
-import { logger } from '../helpers/logger';
+import { logger } from '../helpers';
 
-export async function get(url, attemptNumber = 1) {
+export async function get(url: string, attemptNumber = 1): Promise<string> {
   try {
     const response = await fetch(url);
     return response.text();
@@ -16,11 +16,11 @@ export async function get(url, attemptNumber = 1) {
   }
 }
 
-export async function post(url: string, payload) {
+export async function post(url: string, payload: object) {
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(payload),
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' }
   });
   return response.json();
 }

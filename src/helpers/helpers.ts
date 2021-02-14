@@ -1,9 +1,17 @@
 import { differenceInDays } from 'date-fns';
-import cheerio from 'cheerio';
+import {
+  MoviePage,
+  MediaType,
+  AlbumInput,
+  GameInput,
+  MovieInput,
+  TVShowInput
+} from '../types';
+import { load } from 'cheerio';
 
 const BASE_URL = 'https://www.metacritic.com';
 
-export function isTitleSafeToSave(titleReleaseDate) {
+export function isTitleSafeToSave(titleReleaseDate: string) {
   const daysSinceRelease = differenceInDays(
     Date.now(),
     new Date(titleReleaseDate)
@@ -13,20 +21,22 @@ export function isTitleSafeToSave(titleReleaseDate) {
   return daysSinceRelease >= daysTilSaveToDb;
 }
 
-export function stripTitle(title) {
+export function stripTitle(title: string) {
   return title.replace(/:|'|!|"|¿|\?|,/g, '');
 }
 
-export function setUrl(type, input) {
-  switch (type) {
-    case 'album':
+export function setUrl(
+  input: AlbumInput | GameInput | MovieInput | TVShowInput
+): string | string[] {
+  switch (input.type) {
+    case MediaType.Album:
       const { album, artist } = input;
 
       return `${BASE_URL}/music/${stripTitle(album)
         .split(' ')
         .join('-')
         .toLowerCase()}/${artist.split(' ').join('-').toLowerCase()}`;
-    case 'game':
+    case MediaType.Game:
       const { platform, title: gameTitle } = input;
 
       return `${BASE_URL}/game/${platform
@@ -36,7 +46,7 @@ export function setUrl(type, input) {
         .split(' ')
         .join('-')
         .toLowerCase()}`;
-    case 'movie':
+    case MediaType.Movie:
       const { title, year } = input;
       const movieTitles = [title, `${title} ${year}`];
 
@@ -47,7 +57,7 @@ export function setUrl(type, input) {
             .join('-')
             .toLowerCase()}`
       );
-    case 'tvshow':
+    case MediaType.TVShow:
       const { title: showTitle, season } = input;
       const tvShowUrl = `${BASE_URL}/tv/${stripTitle(showTitle)
         .split(' ')
@@ -60,8 +70,8 @@ export function setUrl(type, input) {
   }
 }
 
-export function determineMoviePage(pages, releaseYear) {
-  const $$ = [cheerio.load(pages[0].content), cheerio.load(pages[1].content)];
+export function determineMoviePage(pages: MoviePage[], releaseYear: string) {
+  const $$ = [load(pages[0].content), load(pages[1].content)];
 
   for (let i = 0; i < $$.length; i++) {
     if ($$[i]('.release_year').text() === releaseYear) {

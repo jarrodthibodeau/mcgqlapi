@@ -1,4 +1,6 @@
-module.exports = function MovieDetails($, url) {
+import { MovieDetails } from '../types';
+
+export function Movie($: cheerio.Root, url: string): MovieDetails {
   const title = $('.product_page_title h1').text();
   const year = $('.release_year').text();
   const criticScore = parseInt(
@@ -19,22 +21,25 @@ module.exports = function MovieDetails($, url) {
   const productImage = $('.summary_img').attr('src');
 
   for (let i = 0; i < numOfEachReview.length; i++) {
-    reviewCount.push(
-      parseInt(numOfEachReview[i].children[0].data.replace(',', ''))
-    );
+    const el = numOfEachReview[i] as cheerio.TagElement;
+    reviewCount.push(parseInt(el.children[0].data.replace(',', '')));
   }
 
   for (let i = 0; i < castList.length; i++) {
-    cast.push(castList[i].children[0].data);
+    const el = castList[i] as cheerio.TagElement;
+    cast.push(el.children[0].data);
   }
 
   // [0] is \n
   for (let i = 1; i < genreList.length; i++) {
-    genres.push(genreList[i].children[0].data);
+    const el = genreList[i] as cheerio.TagElement;
+    genres.push(el.children[0].data);
   }
 
   for (let i = 0; i < directorList.length; i++) {
-    director.push(directorList[i].children[0].children[0].data);
+    const el = directorList[i] as cheerio.TagElement;
+    const childEl = el.children[0] as cheerio.TagElement;
+    director.push(childEl.children[0].data);
   }
 
   return {
@@ -53,6 +58,6 @@ module.exports = function MovieDetails($, url) {
     numOfPositiveCriticReviews: reviewCount[0],
     numOfMixedCriticReviews: reviewCount[1],
     numOfNegativeCriticReviews: reviewCount[2],
-    productImage,
+    productImage
   };
-};
+}

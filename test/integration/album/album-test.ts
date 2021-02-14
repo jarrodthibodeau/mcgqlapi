@@ -26,9 +26,9 @@ describe('Album', () => {
       variables: {
         input: {
           artist: 'Danny Brown',
-          album: 'uknowhatimsayin¿',
-        },
-      },
+          album: 'uknowhatimsayin¿'
+        }
+      }
     });
 
     const { album } = albumQueryResult.data;

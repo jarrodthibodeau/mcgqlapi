@@ -1,12 +1,28 @@
-import { getInfo } from './actions/get-info';
-import { setUrl } from './helpers/helpers';
-import { isGamePlatformValid } from './helpers/validation';
+import {
+  getAlbumInfo,
+  getGameInfo,
+  getMovieInfo,
+  getTVShowInfo
+} from './actions';
+import { isGamePlatformValid, setUrl } from './helpers';
+import {
+  APIContext,
+  MediaType,
+  QueryAlbumInput,
+  QueryAlbumsInput,
+  QueryGameInput,
+  QueryGamesInput,
+  QueryMovieInput,
+  QueryMoviesInput,
+  QueryTVShowInput,
+  QueryTVShowsInput
+} from './types';
 
 export const resolvers = {
   Query: {
-    game: (_, { input }, { db }) => {
-      const type = 'game';
-      const url = setUrl(type, input);
+    game: (_: object, { input }: QueryGameInput, { db }: APIContext) => {
+      const type = MediaType.Game;
+      const url = setUrl({ type, ...input });
 
       const isPlatformValid = isGamePlatformValid(input.platform);
 
@@ -14,10 +30,17 @@ export const resolvers = {
         throw new Error(`${input.platform} is not valid for ${input.title}.`);
       }
 
-      return getInfo(url, db, input, type);
+      return getGameInfo(typeof url === 'string' ? url : null, db, {
+        ...input,
+        type
+      });
     },
-    games: async (_, { input }, { db }) => {
-      const type = 'game';
+    games: async (
+      _: object,
+      { input }: QueryGamesInput,
+      { db }: APIContext
+    ) => {
+      const type = MediaType.Game;
 
       input.forEach((game) => {
         const isPlatformValid = isGamePlatformValid(game.platform);
@@ -28,44 +51,82 @@ export const resolvers = {
       });
 
       return Promise.all(
-        input.map((game) => getInfo(setUrl(type, game), db, game, type))
+        input.map((game) => {
+          const url = setUrl({ type, ...game });
+          return getGameInfo(typeof url === 'string' ? url : null, db, {
+            ...game,
+            type
+          });
+        })
       );
     },
-    album: (_, { input }, { db }) => {
-      const type = 'album';
-      const url = setUrl(type, input);
+    album: (_: object, { input }: QueryAlbumInput, { db }: APIContext) => {
+      const type = MediaType.Album;
+      const url = setUrl({ type, ...input });
 
-      return getInfo(url, db, input, type);
+      return getAlbumInfo(typeof url === 'string' ? url : null, db, {
+        ...input,
+        type
+      });
     },
-    albums: async (_, { input }, { db }) => {
-      const type = 'album';
+    albums: async (
+      _: object,
+      { input }: QueryAlbumsInput,
+      { db }: APIContext
+    ) => {
+      const type = MediaType.Album;
       return Promise.all(
-        input.map((album) => getInfo(setUrl(type, album), db, album, type))
+        input.map((album) => {
+          const url = setUrl({ type, ...album });
+          return getAlbumInfo(typeof url === 'string' ? url : null, db, {
+            ...album,
+            type
+          });
+        })
       );
     },
-    movie: (_, { input }, { db }) => {
-      const type = 'movie';
-      const urls = setUrl(type, input);
+    movie: (_: object, { input }: QueryMovieInput, { db }: APIContext) => {
+      const type = MediaType.Movie;
+      const urls = setUrl({ type, ...input });
 
-      return getInfo(urls, db, input, type);
+      return getMovieInfo(urls, db, { ...input, type });
     },
-    movies: async (_, { input }, { db }) => {
-      const type = 'movie';
+    movies: async (
+      _: object,
+      { input }: QueryMoviesInput,
+      { db }: APIContext
+    ) => {
+      const type = MediaType.Movie;
       return Promise.all(
-        input.map((movie) => getInfo(setUrl(type, movie), db, movie, type))
+        input.map((movie) =>
+          getMovieInfo(setUrl({ type, ...movie }), db, { ...movie, type })
+        )
       );
     },
-    tvshow: (_, { input }, { db }) => {
-      const type = 'tvshow';
-      const url = setUrl(type, input);
+    tvshow: (_: object, { input }: QueryTVShowInput, { db }: APIContext) => {
+      const type = MediaType.TVShow;
+      const url = setUrl({ type, ...input });
 
-      return getInfo(url, db, input, type);
+      return getTVShowInfo(typeof url === 'string' ? url : null, db, {
+        ...input,
+        type
+      });
     },
-    tvshows: async (_, { input }, { db }) => {
-      const type = 'tvshow';
+    tvshows: async (
+      _: object,
+      { input }: QueryTVShowsInput,
+      { db }: APIContext
+    ) => {
+      const type = MediaType.TVShow;
       return Promise.all(
-        input.map((tvshow) => getInfo(setUrl(type, tvshow), db, tvshow, type))
+        input.map((tvshow) => {
+          const url = setUrl({ type, ...tvshow });
+          return getTVShowInfo(typeof url === 'string' ? url : null, db, {
+            ...tvshow,
+            type
+          });
+        })
       );
-    },
-  },
+    }
+  }
 };

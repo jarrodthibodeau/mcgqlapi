@@ -22,9 +22,9 @@ describe('Movie', () => {
       variables: {
         input: {
           title: 'Parasite',
-          year: '2019',
-        },
-      },
+          year: '2019'
+        }
+      }
     });
 
     const { movie } = movieQueryResult.data;
