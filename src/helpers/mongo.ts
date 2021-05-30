@@ -52,7 +52,7 @@ export async function saveItem<T>(
   try {
     const collection = await db.collection(collectionName);
 
-    await collection.insertOne(item);
+    await collection.insertOne({ ...item, createdAt: new Date()});
 
     logger.info('Product has been saved', item, collectionName);
   } catch (e) {
