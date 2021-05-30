@@ -81,8 +81,8 @@ the above request will return this response
 ```
 ## Soon to be added
 Features to be added down the road
-- Adding actual types to the repo
-- Adding enums to make console searches easier
+- ~~Adding actual types to the repo~~
+- ~~Adding enums to make console searches easier~~
 - Adding more fields to each of the main entities
 - Adding a search capability
 
