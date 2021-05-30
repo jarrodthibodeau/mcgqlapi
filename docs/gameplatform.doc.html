@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>cacheControl</title>
+    <title>GamePlatform</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -16,7 +16,7 @@
             <button class="slds-button slds-button--icon slds-float--right js-toggle-navigation less-than-medium">
                 <i class="material-icons">close</i>
             </button>
-                <h3 class="slds-text-heading--medium"><a href="./">GraphQL Schema</a></h3>
+                <h3 class="slds-text-heading--medium"><a href="./docs">GraphQL Schema</a></h3>
             <div class="slds-p-top--small">
                 <input id="type-search" type="text" placeholder="Search a type" autofocus="" class="slds-input" />
             </div>
@@ -63,6 +63,11 @@
         <li  title="CacheControlScope">
             <a href="cachecontrolscope.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 CacheControlScope
+            </a>
+        </li>
+        <li class="slds-is-active" title="GamePlatform">
+            <a href="gameplatform.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                GamePlatform
             </a>
         </li>
         <li  title="__DirectiveLocation">
@@ -160,11 +165,6 @@
 <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
     <h4 class="slds-text-title--caps slds-p-around--medium">Directives</h4>
     <ul>
-        <li class="slds-is-active" title="cacheControl">
-            <a href="cachecontrol.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
-                cacheControl
-            </a>
-        </li>
         <li  title="deprecated">
             <a href="deprecated.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 deprecated
@@ -195,8 +195,8 @@
         </div>
     </div>
     <div class="container">
-        <p class="slds-text-title--caps slds-text-color--weak"></p>
-        <h1 class="slds-text-heading--large">cacheControl</h1>
+        <p class="slds-text-title--caps slds-text-color--weak">ENUM</p>
+        <h1 class="slds-text-heading--large">GamePlatform</h1>
         <div class="slds-text-body--regular"></div>
     </div>
 </section>
@@ -208,7 +208,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">directive</span> <span class="keyword operator ts">@cacheControl</span>(<span class="meta">maxAge</span>: <a class="support type" href="int.doc.html">Int</a>, <span class="meta">scope</span>: <a class="support type" href="cachecontrolscope.doc.html">CacheControlScope</a>) on <span class="keyword operator ts">FIELD_DEFINITION</span> | <span class="keyword operator ts">OBJECT</span> | <span class="keyword operator ts">INTERFACE</span></li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">enum</span> <span class="identifier">GamePlatform</span> {</li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">PC</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">IOS</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">DC</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">GBA</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">DS</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">N3DS</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">N64</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">GC</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">WII</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">WIIU</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">SWITCH</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">PS1</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">PS2</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">PS3</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">PS4</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">PS5</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">PSP</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">VITA</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">XBOX</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">X360</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">XBONE</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">XSX</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">STADIA</span></span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -219,7 +219,7 @@
             </a>
             Require by
         </h2>
-        <div class="require-by anyone">This element is not required by anyone</div>
+        <ul class="require-by"><li><a href="game.doc.html" title="Game - ">Game<em></em></a><li></ul>
     </div>
 </section>
 <footer>

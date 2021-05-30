@@ -16,7 +16,7 @@
             <button class="slds-button slds-button--icon slds-float--right js-toggle-navigation less-than-medium">
                 <i class="material-icons">close</i>
             </button>
-                <h3 class="slds-text-heading--medium"><a href="./">GraphQL Schema</a></h3>
+                <h3 class="slds-text-heading--medium"><a href="./docs">GraphQL Schema</a></h3>
             <div class="slds-p-top--small">
                 <input id="type-search" type="text" placeholder="Search a type" autofocus="" class="slds-input" />
             </div>
@@ -63,6 +63,11 @@
         <li  title="CacheControlScope">
             <a href="cachecontrolscope.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 CacheControlScope
+            </a>
+        </li>
+        <li  title="GamePlatform">
+            <a href="gameplatform.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                GamePlatform
             </a>
         </li>
         <li  title="__DirectiveLocation">
@@ -160,11 +165,6 @@
 <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
     <h4 class="slds-text-title--caps slds-p-around--medium">Directives</h4>
     <ul>
-        <li  title="cacheControl">
-            <a href="cachecontrol.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
-                cacheControl
-            </a>
-        </li>
         <li  title="deprecated">
             <a href="deprecated.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 deprecated
@@ -208,7 +208,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">input</span> <span class="identifier">Game</span> {</li><li><span class="tab"><li><span class="tab"><span class="comment line">#   The title of the video game</span></span></li><li><span class="tab"><span class="meta">title</span>: <a class="support type" href="string.doc.html">String</a>!</span></li></span></li><li><span class="tab"><li><span class="tab"><span class="comment line">#   The platform of which the game is on.</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line">#   Here are the supported options</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - pc</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - ios</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - dreamcast</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - gameboy advance</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - ds</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - 3ds</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - nintendo 64</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - gamecube</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - wii</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - wii u</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - switch</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - playstation</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - playstation 2</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - playstation 3</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - playstation 4</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - playstation 5</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - psp</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - playstation vita</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - xbox</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - xbox 360</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - xbox one</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - xbox series x</span></span></li><li><span class="tab"><span class="comment line">#   </span></span></li><li><span class="tab"><span class="comment line">#   - stadia</span></span></li><li><span class="tab"><span class="meta">platform</span>: <a class="support type" href="string.doc.html">String</a>!</span></li></span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">input</span> <span class="identifier">Game</span> {</li><li><span class="tab"><li><span class="tab"><span class="comment line">#   The title of the video game</span></span></li><li><span class="tab"><span class="meta">title</span>: <a class="support type" href="string.doc.html">String</a>!</span></li></span></li><li><span class="tab"><li><span class="tab"><span class="comment line">#   The platform of which the game is on.</span></span></li><li><span class="tab"><span class="meta">platform</span>: <a class="support type" href="gameplatform.doc.html">GamePlatform</a>!</span></li></span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>

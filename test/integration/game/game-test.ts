@@ -28,7 +28,7 @@ describe('Game', () => {
       variables: {
         input: {
           title: 'Gears 5',
-          platform: 'xbox one'
+          platform: 'XBONE'
         }
       }
     });
@@ -68,7 +68,7 @@ describe('Game', () => {
         input: {
           title:
             'Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition',
-          platform: 'switch'
+          platform: 'SWITCH'
         }
       }
     });

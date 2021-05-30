@@ -1,7 +1,7 @@
 import { should } from 'chai';
 import { post } from '../../../src/helpers/request';
 import { API_URL } from '../config';
-import { GameDetails } from '../../../src/types/types';
+import { GameDetails, GamePlatform } from '../../../src/types';
 
 should();
 
@@ -25,15 +25,15 @@ describe('Games', () => {
     const testGames = [
       {
         title: 'Ape Out',
-        platform: 'Switch'
+        platform: 'SWITCH'
       },
       {
         title: 'Outer Wilds',
-        platform: 'Xbox One'
+        platform: 'XBONE'
       },
       {
         title: 'Death Stranding',
-        platform: 'PlayStation 4'
+        platform: 'PS4'
       },
       {
         title: 'Disco Elysium',
@@ -41,19 +41,19 @@ describe('Games', () => {
       },
       {
         title: 'Sayonara Wild Hearts',
-        platform: 'iOS'
+        platform: 'IOS'
       },
       {
         title: 'GYLT',
-        platform: 'Stadia'
+        platform: 'STADIA'
       },
       {
         title: `Demon's Souls`,
-        platform: 'PlayStation 5'
+        platform: 'PS5'
       },
       {
         title: 'Call of the Sea',
-        platform: 'Xbox Series X'
+        platform: 'XSX'
       }
     ];
 
@@ -68,7 +68,7 @@ describe('Games', () => {
 
     games.forEach((game: GameDetails, index: number) => {
       game.title.should.equal(testGames[index].title);
-      game.platform.should.equal(testGames[index].platform);
+      game.platform.should.equal(GamePlatform[testGames[index].platform as keyof typeof GamePlatform]);
       game.criticScore.should.be.a('number');
       game.genres.should.be.a('array');
       game.numOfCriticReviews.should.be.a('number');
