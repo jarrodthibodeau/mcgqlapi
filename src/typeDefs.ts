@@ -91,6 +91,32 @@ export const typeDefs = gql`
     productImage: String!
   }
 
+  enum GamePlatform {
+    PC 
+    IOS 
+    DC 
+    GBA 
+    DS 
+    N3DS 
+    N64 
+    GC 
+    WII 
+    WIIU 
+    SWITCH 
+    PS1 
+    PS2 
+    PS3 
+    PS4 
+    PS5 
+    PSP 
+    VITA 
+    XBOX 
+    X360 
+    XBONE 
+    XSX 
+    STADIA 
+  }
+
   input Game {
     """
     The title of the video game
@@ -98,34 +124,8 @@ export const typeDefs = gql`
     title: String!
     """
     The platform of which the game is on.
-
-    Here are the supported options
-
-      - pc
-      - ios
-      - dreamcast
-      - gameboy advance
-      - ds
-      - 3ds
-      - nintendo 64
-      - gamecube
-      - wii
-      - wii u
-      - switch
-      - playstation
-      - playstation 2
-      - playstation 3
-      - playstation 4
-      - playstation 5
-      - psp
-      - playstation vita
-      - xbox
-      - xbox 360
-      - xbox one
-      - xbox series x
-      - stadia
     """
-    platform: String!
+    platform: GamePlatform!
   }
 
   type AlbumInfo {

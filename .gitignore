@@ -4,3 +4,4 @@ prod.env
 *.log
 
 .vercel
+*.swp

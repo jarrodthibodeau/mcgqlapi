@@ -7,6 +7,7 @@ import {
 import { isGamePlatformValid, setUrl } from './helpers';
 import {
   APIContext,
+  GamePlatform,
   MediaType,
   QueryAlbumInput,
   QueryAlbumsInput,
@@ -19,6 +20,7 @@ import {
 } from './types';
 
 export const resolvers = {
+  GamePlatform,
   Query: {
     game: (_: object, { input }: QueryGameInput, { db }: APIContext) => {
       const type = MediaType.Game;
